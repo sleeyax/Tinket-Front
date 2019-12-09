@@ -1,0 +1,29 @@
+#logo{
+    background: linear-gradient(#16C1E7, #1E96B0);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 50px;
+}
+
+#homeImage{
+    background-image: url("../../../assets/svg/homeImage.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 280px;
+}
+
+.btn-lg{
+    width: 90%;
+}
+
+#RegistrerButton{
+    background: linear-gradient(-90deg, #16C1E7, #1E96B0);
+    border: none;
+}
+
+#LoginButton{
+    background: transparent;
+    border: 2px solid #1E96B0;
+    color: #1E96B0;
+}

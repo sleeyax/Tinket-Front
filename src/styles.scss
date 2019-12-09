@@ -1,1 +1,12 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Gochi+Hand&display=swap');
+
+body{
+    font-family: 'Muli', sans-serif;
+}
+
+#logo{
+    font-family: 'Gochi Hand', cursive;
+
+}
