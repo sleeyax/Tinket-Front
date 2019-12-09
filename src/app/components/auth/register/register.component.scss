@@ -1,0 +1,31 @@
+.backArrow{
+    transform: rotate(-180deg);
+    margin-top: 7px; 
+    margin-left: 10px;
+    animation: enterScreen .5s;
+}
+
+@keyframes enterScreen {
+    from {transform: translateX(-50px) rotate(-100deg);}
+    to  {transform: translateX(0px) rotate(-180deg);}
+  }
+
+  #LinkedInButton {
+    background: transparent;
+    border: 2px solid #000;
+    color: #000;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  
+.btn-lg {
+    width: 90%;
+  }
+
+  #registerKnop{
+    background: linear-gradient(-90deg, #16C1E7, #1E96B0);
+    border: none;
+    color: white;
+    width: 100%;
+}

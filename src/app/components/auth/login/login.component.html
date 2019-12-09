@@ -1,1 +1,38 @@
-<p>login works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 mt-4 d-flex justify-content-around">
+      <div (click)="Back()" class="flex-grow w-100">
+        <img class="backArrow" src="../../../../assets/svg/Arrow.svg" alt="Pijltje">
+      </div>
+      <div class="flex-grow w-100">
+        <h1 class="text-center" style="font-size: 30px;">Login</h1>
+      </div>
+      <div class="flex-grow w-100"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 text-center mt-4">
+      <button (click)="LinkedIn()" id="LinkedInButton" type="button" class="btn btn-primary btn-lg">Linked <img
+          src="../../../../assets/svg/linkedIn2.svg" alt=""></button>
+    </div>
+  </div>
+  <div class="row" style="margin: 20px 0;">
+    <div class="col-sm-12" style="height: 1px; background-color: black; width: 90%; margin: auto;">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <form style="width: 90%; margin: auto;">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Wachtwoord</label>
+          <input type="password" class="form-control" id="exampleInputPassword1">
+        </div>
+        <button type="submit" id="loginKnop" class="btn-lg">Log in</button>
+      </form>
+    </div>
+  </div>
+</div>

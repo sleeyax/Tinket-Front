@@ -1,29 +1,60 @@
-#logo{
-    background: linear-gradient(#16C1E7, #1E96B0);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 50px;
+#logo {
+  background: linear-gradient(#16C1E7, #1E96B0);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 50px;
+  animation: onEnter 0.6s;
 }
 
-#homeImage{
-    background-image: url("../../../assets/svg/homeImage.svg");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 280px;
+#homeImage {
+  background-image: url("../../../assets/svg/homeImage.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 280px;
+  animation: onEnter 1s;
 }
 
-.btn-lg{
-    width: 90%;
+.btn-lg {
+  width: 90%;
 }
 
-#RegistrerButton{
-    background: linear-gradient(-90deg, #16C1E7, #1E96B0);
-    border: none;
+#RegistrerButton {
+  background: linear-gradient(-90deg, #16C1E7, #1E96B0);
+  border: none;
+  animation: onEnter 1.6s;
 }
 
-#LoginButton{
-    background: transparent;
-    border: 2px solid #1E96B0;
-    color: #1E96B0;
+#LoginButton {
+  background: transparent;
+  border: 2px solid #1E96B0;
+  color: #1E96B0;
+  animation: onEnter 1.6s;
+}
+
+.homeTekst {
+  animation: onEnter 1.4s;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+
+@keyframes onEnter {
+  from {
+    transform: translateX(20px);
+    opacity: 0%;
+  }
+
+  to {
+    transform: translateX(0px);
+    opacity: 100%;
+  }
 }
