@@ -3,7 +3,7 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 50px;
-  animation: onEnter 0.6s;
+  animation: onEnter 0.4s;
 }
 
 #homeImage {
@@ -12,7 +12,7 @@
   background-repeat: no-repeat;
   background-position: center;
   height: 280px;
-  animation: onEnter 1s;
+  animation: onEnter 0.6s;
 }
 
 .btn-lg {
@@ -22,18 +22,18 @@
 #RegistrerButton {
   background: linear-gradient(-90deg, #16C1E7, #1E96B0);
   border: none;
-  animation: onEnter 1.6s;
+  animation: onEnter 1s;
 }
 
 #LoginButton {
   background: transparent;
   border: 2px solid #1E96B0;
   color: #1E96B0;
-  animation: onEnter 1.6s;
+  animation: onEnter 1.2s;
 }
 
 .homeTekst {
-  animation: onEnter 1.4s;
+  animation: onEnter 0.8s;
 }
 
 @keyframes fade-in {

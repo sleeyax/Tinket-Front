@@ -22,24 +22,57 @@
   </div>
   <div class="row">
     <div class="col-sm-12">
-      <form style="width: 90%; margin: auto;">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+          <label class="small" for="lastname">Naam</label>
+          <input type="text" id="lastname" formControlName="lastname" class="form-control form-control-lg text-black"
+            [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+          <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback text-right">
+            <div *ngIf="f.lastname.errors.required">Wat is je achternaam?</div>
+          </div>
         </div>
         <div class="form-group">
-          <label for="gebruikersnaam">Gebruikersnaam</label>
-          <input type="text" class="form-control" id="gebruikersnaam">
+          <label class="small" for="name">Voornaam</label>
+          <input type="text" id="name" formControlName="name" class="form-control form-control-lg text-black"
+            [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+          <div *ngIf="submitted && f.name.errors" class="invalid-feedback text-right">
+            <div *ngIf="f.name.errors.required">Wat is je voornaam?</div>
+          </div>
         </div>
         <div class="form-group">
-          <label for="wachtwoord">Wachtwoord</label>
-          <input type="password" class="form-control" id="wachtwoord">
+          <label class="small" for="email">E-mailadres</label>
+          <input type="text" id="email" formControlName="email" class="form-control form-control-lg text-black"
+            [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback text-right">
+            <div *ngIf="f.email.errors.email">Vul een geldig e-mailadres in</div>
+            <div *ngIf="f.email.errors.required">Vul je e-mailadres in</div>
+          </div>
         </div>
         <div class="form-group">
-          <label for="wachtwoordHerhaal">Herhaal wachtwoord</label>
-          <input type="password" class="form-control" id="wachtwoordHerhaal">
+          <label class="small" for="password">Wachtwoord</label>
+          <input type="password" id="password" formControlName="password"
+            class="form-control form-control-lg text-black"
+            [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback text-right">
+            <div *ngIf="f.password.errors.required">Vul je wachtwoord in</div>
+          </div>
         </div>
-        <button type="submit" id="registerKnop" class="btn-lg">Registreer</button>
+        <div class="form-group">
+          <label class="small" for="password-repeat">Herhaal je wachtwoord</label>
+          <input id="password-repeat" type="password" formControlName="passwordRepeat"
+            class="form-control form-control-lg text-black"
+            [ngClass]="{ 'is-invalid': submitted && f.passwordRepeat.errors }" pattern="{{ f.password.value }}" />
+          <div *ngIf="submitted && f.passwordRepeat.errors" class="invalid-feedback text-right">
+            <div *ngIf="f.passwordRepeat.errors.required">Test je geheugen...</div>
+            <div *ngIf="f.passwordRepeat.errors.pattern">Wachtwoorden komen niet overeen</div>
+          </div>
+        </div>
+        <div class="text-center mt-5">
+          <button id="registerKnop" [disabled]="loading" class="btn btn-primary btn-lg mb-3">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Register
+          </button>
+        </div>
       </form>
     </div>
   </div>

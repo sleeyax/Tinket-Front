@@ -1,6 +1,8 @@
 export class User {
   _id: string;
   email: string;
-  name: string;
+  firstname: string;
+  lastname: string;
+  onboardingCompletedAt?: Date;
   token?: string;
 }

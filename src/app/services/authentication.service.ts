@@ -26,7 +26,9 @@ export class AuthenticationService {
         const user: User = {
           _id: response.user._id,
           email: response.user.email,
-          name: response.user.name,
+          firstname: response.user.firstname,
+          lastname: response.user.lastname,
+          onboardingCompletedAt: response.user.onboardingCompletedAt,
           token: response.token,
         };
         localStorage.setItem('currentUser', JSON.stringify(user));
@@ -35,13 +37,15 @@ export class AuthenticationService {
       }));
   }
 
-  register(name: string, email: string, password: string) {
-    return this.http.post<any>(`${environment.apiUrl}/users/`, { name, email, password })
+  register(firstname: string, lastname: string, email: string, password: string) {
+    return this.http.post<any>(`${environment.apiUrl}/users`, { firstname, lastname, email, password })
       .pipe(map(response => {
         const user: User = {
           _id: response.user._id,
           email: response.user.email,
-          name: response.user.name,
+          firstname: response.user.firstname,
+          lastname: response.user.lastname,
+          onboardingCompletedAt: response.user.onboardingCompletedAt,
           token: response.token,
         };
         localStorage.setItem('currentUser', JSON.stringify(user));
@@ -53,7 +57,7 @@ export class AuthenticationService {
   updateCurrentUserProfile(user : User) {
     const nextUser: User = this.currentUserValue;
 
-    nextUser.name = user.name;
+    nextUser.firstname = user.firstname;
 
     localStorage.setItem('currentUser', JSON.stringify(nextUser));
     this.currentUserSubject.next(nextUser);

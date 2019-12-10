@@ -1,0 +1,9 @@
+<div class="popup-wrapper" [class.show]="open" (click)="closeMe()">
+  <div class="popup">
+    <div class="container" (click)="onContainerClick($event)">
+
+      <ng-content></ng-content>
+
+    </div>
+  </div>
+</div>
