@@ -23,14 +23,13 @@ export class AuthenticationService {
   login(email: string, password: string) {
     return this.http.post<any>(`${environment.apiUrl}/users/login`, { email, password })
       .pipe(map(response => {
-        const user: User = {
+        const user: User = new User({
           _id: response.user._id,
           email: response.user.email,
           firstname: response.user.firstname,
           lastname: response.user.lastname,
           onboardingCompletedAt: response.user.onboardingCompletedAt,
-          token: response.token,
-        };
+        }, response.token);
         localStorage.setItem('currentUser', JSON.stringify(user));
         this.currentUserSubject.next(user);
         return user;
@@ -40,14 +39,13 @@ export class AuthenticationService {
   register(firstname: string, lastname: string, email: string, password: string) {
     return this.http.post<any>(`${environment.apiUrl}/users`, { firstname, lastname, email, password })
       .pipe(map(response => {
-        const user: User = {
+        const user: User = new User({
           _id: response.user._id,
           email: response.user.email,
           firstname: response.user.firstname,
           lastname: response.user.lastname,
           onboardingCompletedAt: response.user.onboardingCompletedAt,
-          token: response.token,
-        };
+        }, response.token);
         localStorage.setItem('currentUser', JSON.stringify(user));
         this.currentUserSubject.next(user);
         return user;
