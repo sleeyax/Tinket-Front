@@ -5,11 +5,13 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './components/auth/auth.module';
 import { OnboardingModule } from './components/onboarding/onboarding.module'
 import { HttpClientModule } from '@angular/common/http';
+import { MenuComponent } from './components/menu/menu.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    MenuComponent,
   ],
   imports: [
     BrowserModule,
