@@ -12,8 +12,15 @@ export class AuthenticationService {
   public currentUser: Observable<User>;
 
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUserSubject = new BehaviorSubject<User>(null);
     this.currentUser = this.currentUserSubject.asObservable();
+
+    const storedUser : any = JSON.parse(localStorage.getItem('currentUser'));
+
+    if(storedUser) {
+      let {token, ...userDetails} = storedUser;
+      this.storeUser(userDetails, token);
+    }
   }
 
   public get currentUserValue(): User {
@@ -22,47 +29,32 @@ export class AuthenticationService {
 
   login(email: string, password: string) {
     return this.http.post<any>(`${environment.apiUrl}/users/login`, { email, password })
-      .pipe(map(response => {
-        const user: User = new User({
-          _id: response.user._id,
-          email: response.user.email,
-          firstname: response.user.firstname,
-          lastname: response.user.lastname,
-          onboardingCompletedAt: response.user.onboardingCompletedAt,
-        }, response.token);
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.currentUserSubject.next(user);
-        return user;
-      }));
+      .pipe(map(response => this.storeUser(response.user, response.token)));
   }
 
   register(firstname: string, lastname: string, email: string, password: string) {
     return this.http.post<any>(`${environment.apiUrl}/users`, { firstname, lastname, email, password })
-      .pipe(map(response => {
-        const user: User = new User({
-          _id: response.user._id,
-          email: response.user.email,
-          firstname: response.user.firstname,
-          lastname: response.user.lastname,
-          onboardingCompletedAt: response.user.onboardingCompletedAt,
-        }, response.token);
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.currentUserSubject.next(user);
-        return user;
-      }));
-  }
-
-  updateCurrentUserProfile(user : User) {
-    const nextUser: User = this.currentUserValue;
-
-    nextUser.firstname = user.firstname;
-
-    localStorage.setItem('currentUser', JSON.stringify(nextUser));
-    this.currentUserSubject.next(nextUser);
+      .pipe(map(response => this.storeUser(response.user, response.token)));
   }
 
   logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
+  }
+
+  storeUser(userDetais, token) {
+    const user: User = new User({
+      _id: userDetais._id,
+      email: userDetais.email,
+      firstname: userDetais.firstname,
+      lastname: userDetais.lastname,
+      onboardingCompletedAt: userDetais.onboardingCompletedAt,
+    }, token);
+
+    localStorage.setItem('currentUser', JSON.stringify(user));
+
+    this.currentUserSubject.next(user);
+
+    return user;
   }
 }
