@@ -5,7 +5,6 @@ import { AuthenticationService } from '@app/services/authentication.service';
 import { Skill } from '@app/models/skill';
 import { ViewChild, ElementRef, NgZone, } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { userInfo } from 'os';
 import { User } from '@app/models/user';
 import { UserService } from '@app/services/user.service';
 import { MakerProfile } from '@app/models/makerProfile';
@@ -80,7 +79,7 @@ export class OnboardingComponent implements OnInit {
           street: "test"
         }
       }
-      
+
       this.userService.createMakerProfile(makerProfile).subscribe(() => {
         this.router.navigate(['discover']);
       })
