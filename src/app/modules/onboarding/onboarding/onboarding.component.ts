@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@app/services/authentication.service';
 import { Skill } from '@app/models/skill';
+import { ViewChild, ElementRef, NgZone, } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-onboarding',
@@ -18,7 +20,6 @@ export class OnboardingComponent implements OnInit {
 
   skills = ["Fotografie", "Webdesign", "Marketing", "Webshops", "Dierenarts", "Technieker", "Loodgieter", "Bouw", "Bakker", "Prog", "Netwerken", "IoT"]
 
-
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private authenticationService: AuthenticationService) { }
@@ -33,12 +34,12 @@ export class OnboardingComponent implements OnInit {
       userType: [false, [Validators.required]]
     });
   }
-  selected :any;
+  selected: any;
 
   nextStep() {
-    if (this.onboardingForm.invalid) {
-      return
-    }
+    // if (this.onboardingForm.invalid) {
+    //   return
+    // }
     this.stepTwo = !this.stepTwo;
   }
 }
