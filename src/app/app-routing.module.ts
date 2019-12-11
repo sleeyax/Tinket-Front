@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './components/auth/login/login.component';
-import { HomeComponent } from './components/home/home.component';
-import { RegisterComponent } from './components/auth/register/register.component';
-import { OnboardingComponent } from './components/onboarding/onboarding/onboarding.component';
+import { LoginComponent } from './modules/security/login/login.component';
+import { HomeComponent } from './components/landing/home.component';
+import { RegisterComponent } from './modules/security/register/register.component';
+import { OnboardingComponent } from './modules/onboarding/onboarding/onboarding.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
