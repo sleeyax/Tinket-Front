@@ -1,4 +1,7 @@
 import { TouchSequence } from 'selenium-webdriver';
+import { MakerProfile } from './makerProfile';
+import { CompanyProfile } from './companyProfile';
+
 export class User {
 
   constructor(user: object, token: string) {
@@ -15,42 +18,9 @@ export class User {
   lastname: string;
   onboardingCompletedAt?: Date;
   isAdmin: Boolean;
+  companyProfile?: CompanyProfile;
+  makerProfile?: MakerProfile;
   token?: string;
-
-  companyProfile?: {
-    name: String,
-    description: String,
-    contactInfo: {
-      email: String,
-      phoneNumber: String,
-      linkedIn: String
-    },
-    location: {
-        country: String,
-        city: String,
-        street: String,
-        postalCode: String,
-    },
-  };
-
-  makerProfile?: {
-    displayName: String,
-    bio: String,
-    experience: String,
-    dateOfBirth: String,
-    skills: any, //TODO: Specify this better.
-    contactInfo: {
-      email: String,
-      phoneNumber: String,
-      linkedIn: String
-    },
-    location: {
-        country: String,
-        city: String,
-        street: String,
-        postalCode: String,
-    },
-  };
 
   get representsCompany() : Boolean {
     return !!(this.companyProfile);
