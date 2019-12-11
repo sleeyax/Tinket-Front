@@ -5,6 +5,10 @@ import { AuthenticationService } from '@app/services/authentication.service';
 import { Skill } from '@app/models/skill';
 import { ViewChild, ElementRef, NgZone, } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { userInfo } from 'os';
+import { User } from '@app/models/user';
+import { UserService } from '@app/services/user.service';
+import { MakerProfile } from '@app/models/makerProfile';
 
 @Component({
   selector: 'app-onboarding',
@@ -23,7 +27,8 @@ export class OnboardingComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private router: Router,
-    private authenticationService: AuthenticationService) { }
+    private authenticationService: AuthenticationService,
+    private userService: UserService) { }
 
   ngOnInit() {
     this.onboardingForm = this.formBuilder.group({
@@ -42,7 +47,7 @@ export class OnboardingComponent implements OnInit {
 
   get f() { return this.onboardingForm.controls; }
 
-  switchUserProfile(){
+  switchUserProfile() {
     this.isMaker = this.f.userType.value;
   }
 
@@ -50,7 +55,36 @@ export class OnboardingComponent implements OnInit {
     // if (this.onboardingForm.invalid) {
     //   return
     // }
-    window.scroll(0,0);
+    window.scroll(0, 0);
     this.stepTwo = !this.stepTwo;
+  }
+
+  onSubmit() {
+    const date = new Date('August 19, 1975');
+
+    if (this.isMaker) {
+      const makerProfile: MakerProfile = {
+        displayName: "test",
+        bio: "test",
+        experience: "test",
+        dateOfBirth: date,
+        skills: "test",
+        contactInfo: {
+          email: "test",
+          linkedIn: "test",
+          phoneNumber: "test"
+        }, 
+        location: {
+          country: "test",
+          city: "test",
+          street: "test"
+        }
+      }
+      
+      this.userService.createMakerProfile(makerProfile).subscribe(() => {
+        this.router.navigate(['discover']);
+      })
+    }
+    console.log("test")
   }
 }

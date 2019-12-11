@@ -2,7 +2,7 @@ export class MakerProfile {
   displayName: String;
   bio: String;
   experience: String;
-  dateOfBirth: String;
+  dateOfBirth: Date;
   skills: any; //TODO: Specify this better.
   contactInfo: {
     email: String,
@@ -12,7 +12,6 @@ export class MakerProfile {
   location: {
       country: String,
       city: String,
-      street: String,
-      postalCode: String,
+      street: String
   };
 }
