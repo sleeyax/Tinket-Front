@@ -58,11 +58,12 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          if (data.onboardingCompletedAt == undefined) {
+          console.log(data)
+          if (!data.representsCompany && !data.isMaker) {
             this.router.navigate(["onboarding"]);
           }
           else {
-            // this.router.navigate([]);
+            this.router.navigate(["register"]);
           }
         },
         error => {

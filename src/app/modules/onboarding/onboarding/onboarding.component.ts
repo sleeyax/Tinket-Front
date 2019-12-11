@@ -51,9 +51,9 @@ export class OnboardingComponent implements OnInit {
   }
 
   nextStep() {
-    // if (this.onboardingForm.invalid) {
-    //   return
-    // }
+    if (this.onboardingForm.invalid) {
+      return
+    }
     window.scroll(0, 0);
     this.stepTwo = !this.stepTwo;
   }
@@ -80,7 +80,7 @@ export class OnboardingComponent implements OnInit {
         }
       }
 
-      this.userService.createMakerProfile(makerProfile).subscribe(() => {
+      this.userService.updateMakerProfile(makerProfile).subscribe(() => {
         this.router.navigate(['discover']);
       })
     }
