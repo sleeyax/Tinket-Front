@@ -1,24 +1,29 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { AuthModule } from './components/auth/auth.module';
 import { OnboardingModule } from './components/onboarding/onboarding.module'
 import { HttpClientModule } from '@angular/common/http';
-import { MenuComponent } from './components/menu/menu.component';
 
+import { AngularSvgIconModule } from 'angular-svg-icon';
+
+import { AppComponent } from './app.component';
+import { MenuMobileComponent } from './components/menu/menu-mobile/menu-mobile.component';
+import { MenuItemComponent } from './components/menu/menu-item/menu-item.component';
+import { AuthModule } from './components/auth/auth.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent,
+    MenuMobileComponent,
+    MenuItemComponent
   ],
   imports: [
     BrowserModule,
-    AuthModule,
     HttpClientModule,
+    AppRoutingModule,
+    AngularSvgIconModule,
+    AuthModule,
     OnboardingModule,
-    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
