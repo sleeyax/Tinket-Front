@@ -11,11 +11,11 @@ import { CompanyProfile } from '@app/models/companyProfile';
 export class UserService {
   constructor(private http: HttpClient) { }
 
-  createMakerProfile(profile: MakerProfile) {
+  updateMakerProfile(profile: MakerProfile) {
     return this.http.put(`${environment.apiUrl}/users/me/maker-profile`, profile);
   }
 
-  createCompanyProfile(profile: CompanyProfile) {
+  updateCompanyProfile(profile: CompanyProfile) {
     return this.http.put(`${environment.apiUrl}/users/me/company-profile`, profile);
   }
 }
