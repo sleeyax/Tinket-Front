@@ -52,11 +52,11 @@ export class User {
     },
   };
 
-  representsCompany() : Boolean {
+  get representsCompany() : Boolean {
     return !!(this.companyProfile);
   }
 
-  isMaker() : Boolean {
+  get isMaker() : Boolean {
     return !!(this.makerProfile);
   }
 }
