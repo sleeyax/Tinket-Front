@@ -4,16 +4,18 @@ import { map, catchError } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
 import { User } from '@app/models/user';
+import { MakerProfile } from '@app/models/makerProfile';
+import { CompanyProfile } from '@app/models/companyProfile';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
   constructor(private http: HttpClient) { }
 
-  createMakerProfile(profile) {
-    return this.http.put<any>(`${environment.apiUrl}/users/me/maker-profile`, profile);
+  createMakerProfile(profile: MakerProfile) {
+    return this.http.put(`${environment.apiUrl}/users/me/maker-profile`, profile);
   }
 
-  createCompanyProfile(profile) {
-    return this.http.put<any>(`${environment.apiUrl}/users/me/company-profile`, profile);
+  createCompanyProfile(profile: CompanyProfile) {
+    return this.http.put(`${environment.apiUrl}/users/me/company-profile`, profile);
   }
 }
