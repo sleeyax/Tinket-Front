@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@app/services/authentication.service';
+import { Skill } from '@app/models/skill';
 
 @Component({
   selector: 'app-onboarding',
@@ -16,6 +17,7 @@ export class OnboardingComponent implements OnInit {
   stepTwo = false;
 
   skills = ["Fotografie", "Webdesign", "Marketing", "Webshops", "Dierenarts", "Technieker", "Loodgieter", "Bouw", "Bakker", "Prog", "Netwerken", "IoT"]
+
 
   constructor(private formBuilder: FormBuilder,
     private router: Router,
@@ -34,9 +36,9 @@ export class OnboardingComponent implements OnInit {
   selected :any;
 
   nextStep() {
-    // if (this.onboardingForm.invalid) {
-    //   return
-    // }
+    if (this.onboardingForm.invalid) {
+      return
+    }
     this.stepTwo = !this.stepTwo;
   }
 }
