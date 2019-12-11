@@ -17,6 +17,7 @@ export class OnboardingComponent implements OnInit {
   submitted = false;
   error = '';
   stepTwo = false;
+  isMaker = true;
 
   skills = ["Fotografie", "Webdesign", "Marketing", "Webshops", "Dierenarts", "Technieker", "Loodgieter", "Bouw", "Bakker", "Prog", "Netwerken", "IoT"]
 
@@ -31,15 +32,25 @@ export class OnboardingComponent implements OnInit {
       mobile: [''],
       bio: [''],
       experience: [''],
+      city: [''],
+      town: [''],
+      country: [''],
       userType: [false, [Validators.required]]
     });
   }
   selected: any;
 
+  get f() { return this.onboardingForm.controls; }
+
+  switchUserProfile(){
+    this.isMaker = this.f.userType.value;
+  }
+
   nextStep() {
     // if (this.onboardingForm.invalid) {
     //   return
     // }
+    window.scroll(0,0);
     this.stepTwo = !this.stepTwo;
   }
 }
