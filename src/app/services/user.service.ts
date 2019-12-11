@@ -10,10 +10,10 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   createMakerProfile(profile) {
-    return this.http.put<any>(`${environment.apiUrl}/users/maker-profile`, profile);
+    return this.http.put<any>(`${environment.apiUrl}/users/me/maker-profile`, profile);
   }
 
   createCompanyProfile(profile) {
-    return this.http.put<any>(`${environment.apiUrl}/users/company-profile`, profile);
+    return this.http.put<any>(`${environment.apiUrl}/users/me/company-profile`, profile);
   }
 }
