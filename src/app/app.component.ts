@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+import { AuthenticationService } from '@app/services/authentication.service';
+import { User } from '@app/models/user';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,4 +10,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Tinket-Front';
+  currentUser: User;
+
+  constructor(
+    private authenticationService: AuthenticationService
+  ) {
+    this.authenticationService.currentUser.subscribe(
+      user => this.currentUser = user
+    );
+  }
 }
