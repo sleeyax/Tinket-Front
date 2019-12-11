@@ -29,11 +29,11 @@ export class LoginComponent implements OnInit {
   get f() { return this.loginForm.controls; }
 
   loginForm = this.fb.group({
-    email: new FormControl('', Validators.compose([
+    email: new FormControl('test@example.com', Validators.compose([
       Validators.required,
       Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
     ])),
-    password: new FormControl('', Validators.compose([
+    password: new FormControl('password', Validators.compose([
       Validators.required
     ]))
   });
@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
           }
         },
         error => {
-          this.error = "Onjuiste inloggegevens!";
+          this.error = error;
           this.loading = false;
         });
   }
