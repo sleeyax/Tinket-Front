@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '@app/models/user';
+import { User } from '@app/shared/models/user';
 
 @Component({
   selector: 'app-landing',
@@ -11,7 +11,7 @@ export class LandingComponent implements OnInit {
 
   user: User;
 
-  constructor(private router: Router) { 
+  constructor(private router: Router) {
 
   }
 

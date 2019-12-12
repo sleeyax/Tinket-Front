@@ -3,36 +3,36 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { OnboardingModule } from './modules/onboarding/onboarding.module'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 import { AngularSvgIconModule } from 'angular-svg-icon';
 
-import { JwtInterceptor } from '@app/helpers/jwt.interceptor';
-import { ErrorInterceptor } from '@app/helpers/error.interceptor';
+import { JwtInterceptor } from '@app/core/interceptors/jwt.interceptor';
+import { ErrorInterceptor } from '@app/core/interceptors/error.interceptor';
 
 import { AppComponent } from './app.component';
-import { MenuMobileComponent } from './components/menu/menu-mobile/menu-mobile.component';
-import { MenuItemComponent } from './components/menu/menu-item/menu-item.component';
-import { AuthModule } from './modules/security/auth.module';
-import { HeaderComponent } from './components/header/header.component';
+import { SharedModule } from './shared/shared.module';
+import { SecurityModule } from './modules/security/security.module';
 import { DiscoverModule } from './modules/discover/discover.module';
 import { ProfileModule } from './modules/profile/profile.module';
+import { MyApplicationsModule } from './modules/my-applications/my-applications.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MenuMobileComponent,
-    MenuItemComponent,
-    HeaderComponent,
   ],
   imports: [
     BrowserModule,
+    RouterModule,
     HttpClientModule,
     AppRoutingModule,
     AngularSvgIconModule,
-    AuthModule,
+    SharedModule,
+    SecurityModule,
     OnboardingModule,
     DiscoverModule,
-    ProfileModule
+    ProfileModule,
+    MyApplicationsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

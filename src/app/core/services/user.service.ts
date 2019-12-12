@@ -3,9 +3,9 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
-import { User } from '@app/models/user';
-import { MakerProfile } from '@app/models/makerProfile';
-import { CompanyProfile } from '@app/models/companyProfile';
+import { User } from '@app/shared/models/user';
+import { MakerProfile } from '@app/shared/models/makerProfile';
+import { CompanyProfile } from '@app/shared/models/companyProfile';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })

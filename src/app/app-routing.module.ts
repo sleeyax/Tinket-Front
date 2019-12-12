@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AuthGuard } from '@app/helpers/auth.guard';
+import { AuthGuard } from '@app/core/guards/auth.guard';
 
 import { LoginComponent } from './modules/security/login/login.component';
-import { LandingComponent } from './components/landing/landing.component';
+import { LandingComponent } from './modules/security/landing/landing.component';
 import { RegisterComponent } from './modules/security/register/register.component';
 import { OnboardingComponent } from './modules/onboarding/onboarding/onboarding.component';
+import { MyApplicationsComponent } from './modules/my-applications/my-applications/my-applications.component';
 import { DiscoverComponent } from './modules/discover/discover/discover.component';
 import { ProfileComponent } from './modules/profile/profile/profile.component';
 
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: 'onboarding', component: OnboardingComponent, canActivate: [AuthGuard]},
 
   { path: 'discover', component: LandingComponent, canActivate: [AuthGuard]},
-  { path: 'interests', component: LandingComponent, canActivate: [AuthGuard]},
+  { path: 'interests', component: MyApplicationsComponent, canActivate: [AuthGuard]},
   { path: 'profile', component: LandingComponent, canActivate: [AuthGuard]},
   { path: 'messages', component: LandingComponent, canActivate: [AuthGuard]}
 ];

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { AuthenticationService } from '@app/services/authentication.service';
-import { User } from '@app/models/user';
+import { AuthenticationService } from '@app/core/services/authentication.service';
+import { User } from '@app/shared/models/user';
 
 @Component({
   selector: 'app-menu-mobile',

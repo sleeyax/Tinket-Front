@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OnboardingComponent} from './onboarding/onboarding.component';
-import { PopupComponent } from '../../components/popup/popup.component';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { SharedModule } from '@app/shared/shared.module';
 
 @NgModule({
-  declarations: [OnboardingComponent, PopupComponent],
+  declarations: [OnboardingComponent],
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class OnboardingModule { }

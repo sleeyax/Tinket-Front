@@ -3,6 +3,10 @@
 @import './styles/variables';
 @import "../node_modules/bootstrap/scss/bootstrap";
 
+body {
+  overflow: hidden;
+}
+
 #app {
   display: flex;
   flex-direction: column;

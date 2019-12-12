@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
-import { User } from '@app/models/user';
+import { User } from '@app/shared/models/user';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
