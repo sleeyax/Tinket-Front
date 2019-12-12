@@ -49,6 +49,9 @@ export class AuthenticationService {
       firstname: userDetais.firstname,
       lastname: userDetais.lastname,
       onboardingCompletedAt: userDetais.onboardingCompletedAt,
+      isAdmin: userDetais.isAdmin,
+      companyProfile: userDetais.companyProfile,
+      makerProfile: userDetais.makerProfile
     }, token);
 
     localStorage.setItem('currentUser', JSON.stringify(user));

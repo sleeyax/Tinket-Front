@@ -7,6 +7,8 @@ import { LoginComponent } from './modules/security/login/login.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { RegisterComponent } from './modules/security/register/register.component';
 import { OnboardingComponent } from './modules/onboarding/onboarding/onboarding.component';
+import { DiscoverComponent } from './modules/discover/discover/discover.component';
+import { ProfileComponent } from './modules/profile/profile/profile.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },

@@ -14,13 +14,15 @@ import { MenuMobileComponent } from './components/menu/menu-mobile/menu-mobile.c
 import { MenuItemComponent } from './components/menu/menu-item/menu-item.component';
 import { AuthModule } from './modules/security/auth.module';
 import { HeaderComponent } from './components/header/header.component';
+import { DiscoverModule } from './modules/discover/discover.module';
+import { ProfileModule } from './modules/profile/profile.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuMobileComponent,
     MenuItemComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +31,8 @@ import { HeaderComponent } from './components/header/header.component';
     AngularSvgIconModule,
     AuthModule,
     OnboardingModule,
+    DiscoverModule,
+    ProfileModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

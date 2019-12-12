@@ -1,8 +1,12 @@
 .container {
-  background: linear-gradient(black, white);
+  background: linear-gradient(-180deg, rgba(3,148,181,1) 0%, rgba(3,137,167,1) 11%, rgba(4,108,131,1) 46%, rgba(5,98,118,1) 73%, rgba(5,98,118,1) 100%);
   color: white;
   height: 100vh;
   z-index: -1;
+}
+
+app-popup{
+  transition:width 1s ease-in-out;
 }
 
 .calendar {

@@ -6,6 +6,7 @@ import { environment } from '@environments/environment';
 import { User } from '@app/models/user';
 import { MakerProfile } from '@app/models/makerProfile';
 import { CompanyProfile } from '@app/models/companyProfile';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -17,5 +18,9 @@ export class UserService {
 
   updateCompanyProfile(profile: CompanyProfile) {
     return this.http.put(`${environment.apiUrl}/users/me/company-profile`, profile);
+  }
+
+  getUser(): Observable<User>{
+    return this.http.get<User>(`${environment.apiUrl}/users/me`);
   }
 }
