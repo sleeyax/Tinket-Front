@@ -2,13 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@app/services/authentication.service';
-import { Skill } from '@app/models/skill';
-import { ViewChild, ElementRef, NgZone, } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { User } from '@app/models/user';
 import { UserService } from '@app/services/user.service';
 import { MakerProfile } from '@app/models/makerProfile';
-import { userInfo } from 'os';
 import { CompanyProfile } from '@app/models/companyProfile';
 
 @Component({
