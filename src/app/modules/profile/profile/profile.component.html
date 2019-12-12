@@ -75,8 +75,8 @@
                 src="../../../../assets/svg/profile/plus.svg" alt="plus sign"></button>
           </div>
         </div>
-        <div class="chip">
-          John Doe
+        <div *ngFor="let skill of mySkills" class="chip">
+          {{skill.name}}
           <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
         </div>
       </div>
