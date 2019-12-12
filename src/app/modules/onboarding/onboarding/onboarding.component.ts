@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { User } from '@app/shared/models/user';
+import { Skill } from '@app/shared/models/skill';
 import { UserService } from '@app/core/services/user.service';
 import { MakerProfile } from '@app/shared/models/makerProfile';
 import { CompanyProfile } from '@app/shared/models/companyProfile';
+import { SkillService } from '@app/core/services/skill.service';
 
 @Component({
   selector: 'app-onboarding',
@@ -20,14 +22,21 @@ export class OnboardingComponent implements OnInit {
   stepTwo = false;
   isMaker = true;
 
-  skills = ["Fotografie", "Webdesign", "Marketing", "Webshops", "Dierenarts", "Technieker", "Loodgieter", "Bouw", "Bakker", "Prog", "Netwerken", "IoT"]
+  skills: Skill[];
+  selectedSkills= [];
+
 
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private userService: UserService) { }
+    private userService: UserService,
+    private skillService: SkillService) { }
 
   ngOnInit() {
+    this.skillService.getSkills().subscribe(res => {
+      this.skills = res;
+    })
+
     this.onboardingForm = this.formBuilder.group({
       username: ['', [Validators.required]],
       geboorteDatum: ['', [Validators.required]],
@@ -39,6 +48,7 @@ export class OnboardingComponent implements OnInit {
       country: [''],
       userType: [false, [Validators.required]]
     });
+
   }
   selected: any;
 
@@ -46,19 +56,32 @@ export class OnboardingComponent implements OnInit {
 
   switchUserProfile() {
     this.isMaker = this.f.userType.value;
+    this.error = "";
   }
 
   nextStep() {
     if (this.onboardingForm.invalid) {
+      this.error = "Vul alle verplichte velden in!"
       return
     }
-    window.scroll(0, 0);
+    this.error = "";
     this.stepTwo = !this.stepTwo;
+  }
+
+  addSkill(skill: Skill){
+    if (this.selectedSkills.includes(skill._id)) {
+      let index = this.selectedSkills.findIndex( record => record === skill._id );
+      console.log(index);
+      this.selectedSkills.splice(index, 1)
+    } else{
+      this.selectedSkills.push(skill._id)
+    }
   }
 
   currentUser: User;
 
   onSubmit() {
+    this.loading = true;
     this.authenticationService.currentUser.subscribe(res => this.currentUser = res)
     if (this.isMaker) {
       const makerProfile: MakerProfile = {
@@ -66,7 +89,7 @@ export class OnboardingComponent implements OnInit {
         bio: this.f.bio.value,
         experience: this.f.experience.value,
         dateOfBirth: this.f.geboorteDatum.value,
-        skills: this.skills,
+        skills: this.selectedSkills,
         contactInfo: {
           email: this.currentUser.email,
           linkedIn: "linkedInAccount",
@@ -82,7 +105,11 @@ export class OnboardingComponent implements OnInit {
       this.userService.updateMakerProfile(makerProfile).subscribe((user) => {
         this.userService.getUser().subscribe(res => this.authenticationService.storeUser(res, res.token));
         this.router.navigate(['discover'])
-      })
+      },
+      error => {
+        this.error = error;
+        this.loading = false;
+      });
     }
     else {
       const companyProfile: CompanyProfile = {
@@ -102,7 +129,11 @@ export class OnboardingComponent implements OnInit {
       this.userService.updateCompanyProfile(companyProfile).subscribe(() => {
         this.userService.getUser().subscribe(res => this.authenticationService.storeUser(res, res.token));
         this.router.navigate(['discover']);
-      })
+      },
+        error => {
+          this.error = error;
+          this.loading = false;
+        });
     }
   }
 }

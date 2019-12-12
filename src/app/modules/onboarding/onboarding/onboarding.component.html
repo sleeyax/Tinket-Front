@@ -21,22 +21,25 @@
     <form [formGroup]="onboardingForm" (ngSubmit)="onSubmit()">
       <ng-container *ngIf="!stepTwo">
         <div class="form-group">
-          <label for="userType" class="small">Soort gebruiker <span style="font-size: 10px; opacity: 75%;">(verplicht)</span></label>
+          <label for="userType" class="small">Soort gebruiker <span
+              style="font-size: 10px; opacity: 75%;">(verplicht)</span></label>
           <div class="can-toggle can-toggle--size-large">
             <input (click)="switchUserProfile()" formControlName="userType" id="c" type="checkbox">
             <label for="c">
               <div class="can-toggle__switch w-100" data-checked="Bedrijf" data-unchecked="Maker"></div>
             </label>
           </div>
-          <label class="small" for="username">{{ isMaker? 'Gebruikersnaam' : 'Bedrijfsnaam' }} <span style="font-size: 10px; opacity: 75%;">(verplicht)</span></label>
+          <label class="small" for="username">{{ isMaker? 'Gebruikersnaam' : 'Bedrijfsnaam' }} <span
+              style="font-size: 10px; opacity: 75%;">(verplicht)</span></label>
           <input type="text" formControlName="username" class="form-control text-black"
-            [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+            [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
           <div *ngIf="submitted && f.username.errors" class="invalid-feedback text-right">
             <div *ngIf="f.username.errors.required">Vul een gebruikersnaam in</div>
           </div>
         </div>
         <div class="form-group" *ngIf="isMaker">
-          <label class="small" for="date">Geboortedatum <span style="font-size: 10px; opacity: 75%;">(verplicht)</span></label>
+          <label class="small" for="date">Geboortedatum <span
+              style="font-size: 10px; opacity: 75%;">(verplicht)</span></label>
           <input type="date" formControlName="geboorteDatum" class="form-control text-black"
             [ngClass]="{ 'is-invalid': submitted && f.date.errors }" />
           <div *ngIf="submitted && f.date.errors" class="invalid-feedback text-right">
@@ -44,19 +47,18 @@
           </div>
         </div>
         <div class="form-group">
-            <label class="small" for="mobile">Telefoonnummer</label>
-            <input type="tel" formControlName="mobile" class="form-control text-black" />
-          </div>
+          <label class="small" for="mobile">Telefoonnummer</label>
+          <input type="tel" formControlName="mobile" class="form-control text-black" />
+        </div>
         <div class="form-group">
           <label for="location" class="small">Adres</label>
-          <input type="text" placeholder="Land" formControlName="country" class="form-control text-black"/>
-          <input type="text" placeholder="Stad" formControlName="city" class="form-control text-black mt-1"/>
-          <input type="text" placeholder="Postcode" formControlName="postalCode" class="form-control text-black mt-1"/>
+          <input type="text" placeholder="Land" formControlName="country" class="form-control text-black" />
+          <input type="text" placeholder="Stad" formControlName="city" class="form-control text-black mt-1" />
+          <input type="text" placeholder="Postcode" formControlName="postalCode" class="form-control text-black mt-1" />
         </div>
         <div class="form-group">
           <label class="small" for="bio">{{isMaker? 'Bio' : 'Beschrijving'}}</label>
-          <textarea name="message" formControlName="bio" rows="4" cols="20"
-            class="form-control text-black"></textarea>
+          <textarea name="message" formControlName="bio" rows="4" cols="20" class="form-control text-black"></textarea>
         </div>
         <div class="form-group" *ngIf="isMaker">
           <label class="small" for="experience">Ervaring</label>
@@ -64,27 +66,33 @@
             class="form-control text-black"></textarea>
         </div>
         <div class="text-center mt-5">
+          <div *ngIf="error" class="text-danger font-weight-bold mb-3 mt-0">{{error}}</div>
           <button *ngIf="isMaker" type="button" (click)="nextStep()" id="nextButton" class="btn-lg">
             Volgende
           </button>
           <button *ngIf="!isMaker" type="submit" id="nextButton" class="btn-lg">
-              Klaar
-            </button>
+            Klaar
+          </button>
         </div>
       </ng-container>
       <ng-container *ngIf="stepTwo">
         <div class="row">
           <div class="col-sm-12">
             <div class="skills">
-              <ng-container *ngFor="let item of skills">
-                <button type="button" (click)="item.selected = true"
-                  style="background-image: url('https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1307&q=80'); background-repeat: no-repeat; background-position: center center; background-size: cover;"
-                  class="skill btn">
-                  <img [class.d-none]="!item.selected" style="margin-left: 60px; margin-top: -5px;"
+              <ng-container *ngFor="let skill of skills">
+                <button (click)="addSkill(skill)" type="button" class="skill btn">
+                  <img *ngIf="selectedSkills.includes(skill._id)" style="position: absolute; right: 5px; top: 5px; z-index: 2;"
                     src="../../../../assets/svg/check.svg" alt="check">
-                  <p class="mt-3">
-                    {{item}}
+                  <p class="mt-4" style="position: absolute;
+                  margin-left: auto;
+                  margin-right: auto;
+                  left: 0;
+                  right: 0; z-index: 1;">
+                    {{skill.name}}
                   </p>
+                  <img
+                    style="position: absolute; top: 0; bottom: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; border-radius: 4px;"
+                    src="{{skill.url}}" alt="{{skill.name}}">
                 </button>
               </ng-container>
             </div>
@@ -92,7 +100,8 @@
         </div>
         <div class="row my-5">
           <div class="col-sm-12">
-            <button type="submit" id="nextButton" class="btn-lg">
+            <button [disabled]="loading && submitted" type="submit" id="nextButton" class="btn-lg">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
               Klaar
             </button>
           </div>

@@ -56,15 +56,12 @@ app-popup{
   padding-bottom: 100%;
   content: '';
   height: 0;
+  position: relative;
 }
 
 .active{
     background-image: none;
     background-color: red;
-}
-
-span img {
-  object-fit: cover;
 }
 
 // toggle switch css

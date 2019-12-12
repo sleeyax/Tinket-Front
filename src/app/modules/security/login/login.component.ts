@@ -59,10 +59,10 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           console.log(data)
-          if (!data.representsCompany && !data.isMaker) {
+          if (!data.representsCompany && !data.isMaker && !data.isAdmin) {
             this.router.navigate(["onboarding"]);
           }
-          else {
+          else{
             this.router.navigate(["discover"]);
           }
         },
