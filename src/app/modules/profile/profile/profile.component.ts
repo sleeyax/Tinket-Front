@@ -22,34 +22,37 @@ export class ProfileComponent implements OnInit {
   mySkills: Skill[] = [];
   mySkillIds: string[] = [];
   currentUser: User;
+
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private authenticationService: AuthenticationService,
     private userService: UserService,
-    private skillService: SkillService) { }
+    private skillService: SkillService) {
+    this.authenticationService.currentUser.subscribe(user => this.currentUser = user)
+  }
+
+
   get f() { return this.profileForm.controls; }
 
   getSkills() {
-    this.userService.getUser().subscribe(res => { // get user
-      this.authenticationService.storeUser(res, res.token) //store user
-      this.authenticationService.currentUser.subscribe(res => { // get current user
-        this.currentUser = res // set current user locally
-        this.skillService.getSkills().subscribe(res => { // get skills from current user
-          this.skills = res
-          this.mySkills = []
-          this.mySkillIds = []
-          this.skills.forEach(skill => { 
-            if (this.currentUser.makerProfile.skills != null) {
-              if (this.currentUser.makerProfile.skills.includes(skill._id)) {
-                this.mySkills.push(skill);
-                this.mySkillIds.push(skill._id);
-              }
+    this.authenticationService.refreshCurrentUser;
+
+    this.authenticationService.currentUser.subscribe(res => { // get current user
+      this.currentUser = res // set current user locally
+      this.skillService.getSkills().subscribe(res => { // get skills from current user
+        this.skills = res
+        this.mySkills = []
+        this.mySkillIds = []
+        this.skills.forEach(skill => {
+          if (this.currentUser.makerProfile.skills != null) {
+            if (this.currentUser.makerProfile.skills.includes(skill._id)) {
+              this.mySkills.push(skill);
+              this.mySkillIds.push(skill._id);
             }
-          });
-        })
+          }
+        });
       })
     });
-
   }
 
 
