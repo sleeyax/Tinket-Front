@@ -70,8 +70,8 @@
         </select>
         <div class="input-group-append">
           <button (click)="addSkill()" class="btn btn-sm" type="button">
-            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-            <img *ngIf="!loading" src="../../../../assets/svg/profile/plus.svg" alt="plus sign"></button>
+            <span *ngIf="loadingSkills" class="spinner-border spinner-border-sm mr-1"></span>
+            <img *ngIf="!loadingSkills" src="../../../../assets/svg/profile/plus.svg" alt="plus sign"></button>
         </div>
       </div>
       <div *ngFor="let skill of mySkills" class="chip">

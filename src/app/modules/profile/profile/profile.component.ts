@@ -15,6 +15,7 @@ import { User } from '@app/shared/models/user';
 export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
   loading = false;
+  loadingSkills = false;
   submitted = false;
   error = '';
   isMaker = true;
@@ -34,17 +35,17 @@ export class ProfileComponent implements OnInit {
   get f() { return this.profileForm.controls; }
 
   getSkills() {
-    this.authenticationService.refreshCurrentUser()
-    this.skillService.getSkills().subscribe(res => {
-      this.skills = res
-      this.mySkills = this.currentUser.makerProfile.skills
-      this.mySkillIds = []
-      this.mySkills.forEach(skill => {
-        this.mySkillIds.push(skill._id)
-      });
-      this.loading = false
-      console.log(this.mySkills)
-    })
+    this.authenticationService.refreshCurrentUser().then(() => {
+      this.skillService.getSkills().subscribe(res => {
+        this.skills = res
+        this.mySkills = this.currentUser.makerProfile.skills
+        this.mySkillIds = []
+        this.mySkills.forEach(skill => {
+          this.mySkillIds.push(skill._id)
+        });
+        this.loadingSkills = false
+      })
+    });
   }
 
 
@@ -64,24 +65,23 @@ export class ProfileComponent implements OnInit {
       experience: [this.currentUser.makerProfile.experience],
       interest: []
     });
-
     this.f.interest.setValue("Kies hier...")
   }
 
   addSkill() {
-    this.loading = true
+    this.loadingSkills = true
     if (this.mySkills == null || !this.mySkillIds.includes(this.f.interest.value)) {
       this.mySkillIds.push(this.f.interest.value)
       this.skillService.updateUserSkills(this.mySkillIds).subscribe(() => {
         this.getSkills()
       })
     } else {
-      this.loading = false;
+      this.loadingSkills = false;
     }
   }
 
   deleteSkill(skill: Skill) {
-    this.loading = true
+    this.loadingSkills = true
     let index = this.mySkillIds.findIndex(id => id === skill._id);
     this.mySkillIds.splice(index, 1);
     this.skillService.updateUserSkills(this.mySkillIds).subscribe(() => {
