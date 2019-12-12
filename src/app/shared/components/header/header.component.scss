@@ -1,0 +1,15 @@
+header.fixed {
+  position: fixed;
+  background: white;
+  border-bottom: 1px solid #E3E9EF;
+  width: 100%;
+}
+
+.navigate-up {
+  font-size: 1.1em;
+  svg-icon {
+    display: inline-block;
+    transform: translateY(-1px);
+    padding-right: 5px;
+  }
+}

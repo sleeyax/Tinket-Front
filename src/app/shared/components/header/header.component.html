@@ -1,1 +1,16 @@
-<p>header works!</p>
+<header [class.fixed]="fixed">
+  <div class="container">
+    <h1 id="logo" class="text-center mt-3 mb-5 colored">Tinket</h1>
+    <p *ngIf="parentRouterLink" class="navigate-up">
+      <a [routerLink]="parentRouterLink" class="text-dark font-weight-bold">
+        <svg-icon src="../../../../assets/svg/arrow-back.svg"></svg-icon>
+        {{ parentTitle }}
+      </a>
+    </p>
+    <h2 class="mb-3"> {{ title }} </h2>
+    <p class="text-muted">
+      <ng-content></ng-content>
+    </p>
+  </div>
+</header>
+

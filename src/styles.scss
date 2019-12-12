@@ -1,10 +1,17 @@
-@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Gochi+Hand&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Gochi+Hand|Muli:400,500,700&display=swap');
 @import './styles/variables';
 @import "../node_modules/bootstrap/scss/bootstrap";
 
 body {
   overflow: hidden;
+}
+
+h2, h3, h4 {
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.6em;
 }
 
 #app {
@@ -28,6 +35,13 @@ a, button {
 }
 
 #logo{
-    font-family: 'Gochi Hand', cursive;
+  font-family: 'Gochi Hand', cursive;
+  font-size: 1.9em;
+
+  &.colored {
+    background: linear-gradient(#16C1E7, #1E96B0);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
 
