@@ -43,7 +43,7 @@ export class AuthenticationService {
   }
 
   async refreshCurrentUser() {
-    const promise = new Promise((resolve) => {
+    return new Promise((resolve) => {
       this.http.get(`${environment.apiUrl}/users/me`)
         .subscribe((user => {
           const currentToken = this.currentUserValue.token;
@@ -54,7 +54,6 @@ export class AuthenticationService {
           resolve(user);
         }));
     });
-    return promise;
   }
 
   storeUser(userDetais, token) {
