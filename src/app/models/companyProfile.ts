@@ -9,7 +9,6 @@ export class CompanyProfile {
   location: {
       country: String,
       city: String,
-      street: String,
       postalCode: String,
   };
 }

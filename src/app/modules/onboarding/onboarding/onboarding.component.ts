@@ -8,6 +8,8 @@ import { FormControl } from '@angular/forms';
 import { User } from '@app/models/user';
 import { UserService } from '@app/services/user.service';
 import { MakerProfile } from '@app/models/makerProfile';
+import { userInfo } from 'os';
+import { CompanyProfile } from '@app/models/companyProfile';
 
 @Component({
   selector: 'app-onboarding',
@@ -32,12 +34,12 @@ export class OnboardingComponent implements OnInit {
   ngOnInit() {
     this.onboardingForm = this.formBuilder.group({
       username: ['', [Validators.required]],
-      date: ['', [Validators.required]],
+      geboorteDatum: ['', [Validators.required]],
       mobile: [''],
       bio: [''],
       experience: [''],
       city: [''],
-      town: [''],
+      postalCode: [''],
       country: [''],
       userType: [false, [Validators.required]]
     });
@@ -58,32 +60,53 @@ export class OnboardingComponent implements OnInit {
     this.stepTwo = !this.stepTwo;
   }
 
-  onSubmit() {
-    const date = new Date('August 19, 1975');
+  currentUser: User;
 
+  onSubmit() {
+    this.authenticationService.currentUser.subscribe(res => this.currentUser = res)
     if (this.isMaker) {
       const makerProfile: MakerProfile = {
-        displayName: "test",
-        bio: "test",
-        experience: "test",
-        dateOfBirth: date,
-        skills: "test",
+        displayName: this.f.username.value,
+        bio: this.f.bio.value,
+        experience: this.f.experience.value,
+        dateOfBirth: this.f.geboorteDatum.value,
+        skills: this.skills,
         contactInfo: {
-          email: "test",
-          linkedIn: "test",
-          phoneNumber: "test"
-        }, 
+          email: this.currentUser.email,
+          linkedIn: "linkedInAccount",
+          phoneNumber: this.f.mobile.value
+        },
         location: {
-          country: "test",
-          city: "test",
-          street: "test"
+          country: this.f.country.value,
+          city: this.f.city.value,
+          postalCode: this.f.postalCode.value
         }
       }
 
-      this.userService.updateMakerProfile(makerProfile).subscribe(() => {
+      this.userService.updateMakerProfile(makerProfile).subscribe((user) => {
+        this.userService.getUser().subscribe(res => this.authenticationService.storeUser(res, res.token));
+        this.router.navigate(['discover'])
+      })
+    }
+    else {
+      const companyProfile: CompanyProfile = {
+        name: this.f.username.value,
+        description: this.f.bio.value,
+        contactInfo: {
+          email: this.currentUser.email,
+          linkedIn: "linkedInAccount",
+          phoneNumber: this.f.mobile.value
+        },
+        location: {
+          country: this.f.country.value,
+          city: this.f.city.value,
+          postalCode: this.f.postalCode.value
+        }
+      }
+      this.userService.updateCompanyProfile(companyProfile).subscribe(() => {
+        this.userService.getUser().subscribe(res => this.authenticationService.storeUser(res, res.token));
         this.router.navigate(['discover']);
       })
     }
-    console.log("test")
   }
 }

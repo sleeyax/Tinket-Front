@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
             this.router.navigate(["onboarding"]);
           }
           else {
-            this.router.navigate(["register"]);
+            this.router.navigate(["discover"]);
           }
         },
         error => {

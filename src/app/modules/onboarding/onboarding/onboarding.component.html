@@ -11,7 +11,7 @@
       </div>
       <div class="flex-grow w-100">
         <h3 class="text-center" style="line-height: .6;">Profiel
-          <span style="font-size: 16px;">{{ stepTwo? '(2/2)' : '(1/2)' }}</span> <br>
+          <span *ngIf="isMaker" style="font-size: 16px;">{{ stepTwo? '(2/2)' : '(1/2)' }}</span> <br>
           <span style="font-size: 12px;">{{ stepTwo? 'Interesses' : 'Meer info' }}</span>
         </h3>
       </div>
@@ -37,7 +37,7 @@
         </div>
         <div class="form-group" *ngIf="isMaker">
           <label class="small" for="date">Geboortedatum <span style="font-size: 10px; opacity: 75%;">(verplicht)</span></label>
-          <input type="date" formControlName="date" class="form-control text-black"
+          <input type="date" formControlName="geboorteDatum" class="form-control text-black"
             [ngClass]="{ 'is-invalid': submitted && f.date.errors }" />
           <div *ngIf="submitted && f.date.errors" class="invalid-feedback text-right">
             <div *ngIf="f.date.errors.required">Selecteer een geboortedatum</div>
@@ -51,7 +51,7 @@
           <label for="location" class="small">Adres</label>
           <input type="text" placeholder="Land" formControlName="country" class="form-control text-black"/>
           <input type="text" placeholder="Stad" formControlName="city" class="form-control text-black mt-1"/>
-          <input type="text" placeholder="Gemeente" formControlName="town" class="form-control text-black mt-1"/>
+          <input type="text" placeholder="Postcode" formControlName="postalCode" class="form-control text-black mt-1"/>
         </div>
         <div class="form-group">
           <label class="small" for="bio">{{isMaker? 'Bio' : 'Beschrijving'}}</label>
