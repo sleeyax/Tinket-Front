@@ -1,5 +1,4 @@
-<app-header
-  title="Je profiel">
+<app-header title="Je profiel">
   Je profielgegevens worden alleen met bedrijven gedeeld waarin je interesse toont.
 </app-header>
 
@@ -15,20 +14,21 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="small" for="lastname">Naam <span style="font-size: 10px; opacity: 75%;">(verplicht)</span></label>
-      <input type="text" id="lastname" formControlName="lastname" class="form-control text-black"
-        [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" />
-      <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback text-right">
-        <div *ngIf="f.lastname.errors.required">Heeft u geen achternaam?</div>
-      </div>
-    </div>
-    <div class="form-group">
       <label class="small" for="firstname">Voornaam <span
           style="font-size: 10px; opacity: 75%;">(verplicht)</span></label>
       <input type="text" id="firstname" formControlName="firstname" class="form-control text-black"
         [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" />
       <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback text-right">
         <div *ngIf="f.firstname.errors.required">Hoe mogen wij u noemen?</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="small" for="lastname">Achternaam <span
+          style="font-size: 10px; opacity: 75%;">(verplicht)</span></label>
+      <input type="text" id="lastname" formControlName="lastname" class="form-control text-black"
+        [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" />
+      <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback text-right">
+        <div *ngIf="f.lastname.errors.required">Heeft u geen achternaam?</div>
       </div>
     </div>
     <div class="form-group">
@@ -42,19 +42,14 @@
     </div>
     <div class="form-group">
       <label class="small" for="mobile">Telefoonnummer</label>
-      <input type="tel" id="mobile" formControlName="mobile" class="form-control text-black" />
-    </div>
-    <div class="form-group">
-      <label class="small" for="birthday">Geboortedatum</label>
-      <input type="date" id="birthday" formControlName="birthday" class="form-control text-black" />
+      <input type="text" id="mobile" formControlName="mobile" class="form-control text-black" />
     </div>
     <div class="form-group">
       <label for="location" class="small">Adres</label>
-      <input type="text" id="location" placeholder="Land" formControlName="country" class="form-control text-black" />
-      <input type="text" id="location" placeholder="Stad" formControlName="city"
-        class="form-control text-black mt-1" />
+      <input type="text" id="location" placeholder="Stad" formControlName="city" class="form-control text-black mt-1" />
       <input type="text" id="location" placeholder="Postcode" formControlName="postalCode"
         class="form-control text-black mt-1" />
+      <input type="text" id="location" placeholder="Land" formControlName="country" class="form-control text-black" />
     </div>
     <div class="form-group">
       <label class="small" for="bio">{{isMaker? 'Bio' : 'Beschrijving'}}</label>
@@ -81,8 +76,19 @@
       </div>
       <div *ngFor="let skill of mySkills" class="chip">
         {{skill.name}}
-        <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+        <span class="closebtn" (click)="deleteSkill(skill)">&times;</span>
       </div>
     </div>
+
+    <button [disabled]="loading && submitted" type="submit" id="submitButton" class="btn">
+      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+      Opslaan <img src="../../../../assets/svg/profile/save.svg" alt="save">
+    </button>
+    <button type="button" id="passwordButton" class="btn mt-1">
+      Wachtwoord wijzigen <img src="../../../../assets/svg/profile/logout.svg" alt="logout">
+    </button>
+    <button type="button" id="logoutButton" class="btn mt-1">
+      Uitloggen <img src="../../../../assets/svg/profile/logout.svg" alt="logout">
+    </button>
   </form>
 </div>
