@@ -30,25 +30,26 @@ export class ProfileComponent implements OnInit {
   get f() { return this.profileForm.controls; }
 
   getSkills() {
-    this.authenticationService.currentUser.subscribe(res => {
-      this.currentUser = res
-      this.skillService.getSkills().subscribe(res => {
-        this.skills = res
-        this.mySkills = []
-        this.mySkillIds = []
-        this.skills.forEach(skill => {
-          if (this.currentUser.makerProfile.skills != null) {
-            if (this.currentUser.makerProfile.skills.includes(skill._id)) {
-              this.mySkills.push(skill);
-              this.mySkillIds.push(skill._id);
+    this.userService.getUser().subscribe(res => { // get user
+      this.authenticationService.storeUser(res, res.token) //store user
+      this.authenticationService.currentUser.subscribe(res => { // get current user
+        this.currentUser = res // set current user locally
+        this.skillService.getSkills().subscribe(res => { // get skills from current user
+          this.skills = res
+          this.mySkills = []
+          this.mySkillIds = []
+          this.skills.forEach(skill => { 
+            if (this.currentUser.makerProfile.skills != null) {
+              if (this.currentUser.makerProfile.skills.includes(skill._id)) {
+                this.mySkills.push(skill);
+                this.mySkillIds.push(skill._id);
+              }
             }
-          }
-        });
-        // console.log(this.mySkillIds)
-        // console.log(this.mySkills)
-        // console.log(this.skills)
+          });
+        })
       })
-    })
+    });
+
   }
 
 
@@ -73,7 +74,7 @@ export class ProfileComponent implements OnInit {
   }
 
   addSkill() {
-    if (this.mySkillIds) {
+    if (this.mySkillIds != null) {
       if (!this.mySkillIds.includes(this.f.interest.value)) {
         this.mySkillIds.push(this.f.interest.value)
         this.skillService.updateUserSkills(this.mySkillIds).subscribe(() => {
