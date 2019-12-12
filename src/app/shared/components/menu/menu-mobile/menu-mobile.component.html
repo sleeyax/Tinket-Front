@@ -1,51 +1,53 @@
-<div class="mobile-menu">
+<div class="container">
+  <div class="mobile-menu">
 
-  <app-menu-item *ngIf="currentUser.isMaker"
-    routerLink="/discover"
-    icon="/assets/svg/menu/discover.svg"
-    label="Ontdekken">
-  </app-menu-item>
+    <app-menu-item *ngIf="currentUser.isMaker"
+      routerLink="/discover"
+      icon="/assets/svg/menu/discover.svg"
+      label="Ontdekken">
+    </app-menu-item>
 
-  <app-menu-item *ngIf="currentUser.isMaker"
-    routerLink="/applications"
-    icon="/assets/svg/menu/applications.svg"
-    label="Inschrijvingen">
-  </app-menu-item>
+    <app-menu-item *ngIf="currentUser.isMaker"
+      routerLink="/applications"
+      icon="/assets/svg/menu/applications.svg"
+      label="Inschrijvingen">
+    </app-menu-item>
 
-  <app-menu-item *ngIf="currentUser.representsCompany"
-    routerLink="/assignments"
-    icon="/assets/svg/menu/assignments.svg"
-    label="Opdrachten">
-  </app-menu-item>
+    <app-menu-item *ngIf="currentUser.representsCompany"
+      routerLink="/assignments"
+      icon="/assets/svg/menu/assignments.svg"
+      label="Opdrachten">
+    </app-menu-item>
 
-  <app-menu-item *ngIf="currentUser.representsCompany"
-    routerLink="/reviews"
-    icon="/assets/svg/menu/reviews.svg"
-    label="Reviews">
-  </app-menu-item>
+    <app-menu-item *ngIf="currentUser.representsCompany"
+      routerLink="/reviews"
+      icon="/assets/svg/menu/reviews.svg"
+      label="Reviews">
+    </app-menu-item>
 
-  <app-menu-item *ngIf="currentUser.isAdmin"
-    routerLink="/mod/users"
-    icon="/assets/svg/menu/users.svg"
-    label="Gebruikers">
-  </app-menu-item>
+    <app-menu-item *ngIf="currentUser.isAdmin"
+      routerLink="/mod/users"
+      icon="/assets/svg/menu/users.svg"
+      label="Gebruikers">
+    </app-menu-item>
 
-  <app-menu-item *ngIf="currentUser.isAdmin"
-    routerLink="/mod/reviews"
-    icon="/assets/svg/menu/reviews.svg"
-    label="Reviews">
-  </app-menu-item>
+    <app-menu-item *ngIf="currentUser.isAdmin"
+      routerLink="/mod/reviews"
+      icon="/assets/svg/menu/reviews.svg"
+      label="Reviews">
+    </app-menu-item>
 
-  <app-menu-item
-    routerLink="/profile"
-    icon="/assets/svg/menu/profile.svg"
-    label="Profiel">
-  </app-menu-item>
+    <app-menu-item
+      routerLink="/profile"
+      icon="/assets/svg/menu/profile.svg"
+      label="Profiel">
+    </app-menu-item>
 
-  <app-menu-item *ngIf="!currentUser.isAdmin"
-    routerLink="/messages"
-    icon="/assets/svg/menu/messages.svg"
-    label="Berichten">
-  </app-menu-item>
+    <app-menu-item *ngIf="!currentUser.isAdmin"
+      routerLink="/messages"
+      icon="/assets/svg/menu/messages.svg"
+      label="Berichten">
+    </app-menu-item>
 
+  </div>
 </div>
