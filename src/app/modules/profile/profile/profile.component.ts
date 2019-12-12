@@ -29,17 +29,21 @@ export class ProfileComponent implements OnInit {
     private skillService: SkillService) { }
   get f() { return this.profileForm.controls; }
 
-  getSkills(){
+  getSkills() {
     this.authenticationService.currentUser.subscribe(res => {
       this.currentUser = res
       this.skillService.getSkills().subscribe(res => {
         this.skills = res
+        this.mySkills = []
+        this.mySkillIds = []
         this.skills.forEach(skill => {
           if (this.currentUser.makerProfile.skills.includes(skill._id)) {
             this.mySkills.push(skill);
             this.mySkillIds.push(skill._id);
           }
         });
+        console.log(this.mySkillIds)
+        console.log(this.mySkills)
       })
     })
   }
@@ -66,11 +70,13 @@ export class ProfileComponent implements OnInit {
   }
 
   addSkill() {
-    if (!this.mySkills.includes(this.f.interest.value)) {
-        this.mySkillIds.push(this.f.interest.value)
-    }
+    if (!this.mySkillIds.includes(this.f.interest.value)) {
+      this.mySkillIds.push(this.f.interest.value)
+      console.log(this.mySkillIds);
+      this.getSkills()
+    } else {
 
-    this.getSkills()
+    }
   }
 
 }
