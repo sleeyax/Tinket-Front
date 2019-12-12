@@ -46,10 +46,9 @@
     </div>
     <div class="form-group">
       <label for="location" class="small">Adres</label>
-      <input type="text" id="location" placeholder="Stad" formControlName="city" class="form-control text-black mt-1" />
-      <input type="text" id="location" placeholder="Postcode" formControlName="postalCode"
-        class="form-control text-black mt-1" />
-      <input type="text" id="location" placeholder="Land" formControlName="country" class="form-control text-black" />
+      <input type="text" id="location" placeholder="Stad" formControlName="city" class="form-control text-black" />
+      <input type="text" placeholder="Postcode" formControlName="postalCode" class="form-control text-black mt-1" />
+      <input type="text" placeholder="Land" formControlName="country" class="form-control text-black mt-1" />
     </div>
     <div class="form-group">
       <label class="small" for="bio">{{isMaker? 'Bio' : 'Beschrijving'}}</label>
@@ -70,8 +69,9 @@
           </ng-container>
         </select>
         <div class="input-group-append">
-          <button (click)="addSkill()" class="btn btn-sm" type="button"><img
-              src="../../../../assets/svg/profile/plus.svg" alt="plus sign"></button>
+          <button (click)="addSkill()" class="btn btn-sm" type="button">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            <img *ngIf="!loading" src="../../../../assets/svg/profile/plus.svg" alt="plus sign"></button>
         </div>
       </div>
       <div *ngFor="let skill of mySkills" class="chip">

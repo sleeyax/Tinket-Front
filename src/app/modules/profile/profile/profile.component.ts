@@ -31,28 +31,20 @@ export class ProfileComponent implements OnInit {
     this.authenticationService.currentUser.subscribe(user => this.currentUser = user)
   }
 
-
   get f() { return this.profileForm.controls; }
 
   getSkills() {
-    this.authenticationService.refreshCurrentUser;
-
-    this.authenticationService.currentUser.subscribe(res => { // get current user
-      this.currentUser = res // set current user locally
-      this.skillService.getSkills().subscribe(res => { // get skills from current user
-        this.skills = res
-        this.mySkills = []
-        this.mySkillIds = []
-        this.skills.forEach(skill => {
-          if (this.currentUser.makerProfile.skills != null) {
-            if (this.currentUser.makerProfile.skills.includes(skill._id)) {
-              this.mySkills.push(skill);
-              this.mySkillIds.push(skill._id);
-            }
-          }
-        });
-      })
-    });
+    this.authenticationService.refreshCurrentUser()
+    this.skillService.getSkills().subscribe(res => {
+      this.skills = res
+      this.mySkills = this.currentUser.makerProfile.skills
+      this.mySkillIds = []
+      this.mySkills.forEach(skill => {
+        this.mySkillIds.push(skill._id)
+      });
+      this.loading = false
+      console.log(this.mySkills)
+    })
   }
 
 
@@ -77,19 +69,19 @@ export class ProfileComponent implements OnInit {
   }
 
   addSkill() {
-    if (this.mySkillIds != null) {
-      if (!this.mySkillIds.includes(this.f.interest.value)) {
-        this.mySkillIds.push(this.f.interest.value)
-        this.skillService.updateUserSkills(this.mySkillIds).subscribe(() => {
-          this.getSkills()
-        })
-      } else {
-
-      }
+    this.loading = true
+    if (this.mySkills == null || !this.mySkillIds.includes(this.f.interest.value)) {
+      this.mySkillIds.push(this.f.interest.value)
+      this.skillService.updateUserSkills(this.mySkillIds).subscribe(() => {
+        this.getSkills()
+      })
+    } else {
+      this.loading = false;
     }
   }
 
   deleteSkill(skill: Skill) {
+    this.loading = true
     let index = this.mySkillIds.findIndex(id => id === skill._id);
     this.mySkillIds.splice(index, 1);
     this.skillService.updateUserSkills(this.mySkillIds).subscribe(() => {
