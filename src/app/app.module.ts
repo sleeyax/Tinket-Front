@@ -16,6 +16,8 @@ import { SecurityModule } from './modules/security/security.module';
 import { DiscoverModule } from './modules/discover/discover.module';
 import { ProfileModule } from './modules/profile/profile.module';
 import { MyApplicationsModule } from './modules/my-applications/my-applications.module';
+import { MyAssignmentsModule } from './modules/my-assignments/my-assignments.module';
+import { MyReviewsModule } from './modules/my-reviews/my-reviews.module';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { MyApplicationsModule } from './modules/my-applications/my-applications.
     OnboardingModule,
     DiscoverModule,
     ProfileModule,
-    MyApplicationsModule
+    MyApplicationsModule,
+    MyAssignmentsModule,
+    MyReviewsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
