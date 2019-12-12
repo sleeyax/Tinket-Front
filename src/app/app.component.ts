@@ -16,12 +16,7 @@ export class AppComponent {
     private authenticationService: AuthenticationService
   ) {
     this.authenticationService.currentUser.subscribe(
-      user => {
-        this.currentUser = user;
-        if(user) { //refresh user data
-          this.authenticationService.refreshCurrentUser();
-        }
-      }
+      user => this.currentUser = user
     );
   }
 }
