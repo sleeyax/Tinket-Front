@@ -15,6 +15,7 @@ export class AppComponent {
   constructor(
     private authenticationService: AuthenticationService
   ) {
+    this.authenticationService.refreshCurrentUser();
     this.authenticationService.currentUser.subscribe(
       user => this.currentUser = user
     );

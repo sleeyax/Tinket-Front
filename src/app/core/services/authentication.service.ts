@@ -42,6 +42,17 @@ export class AuthenticationService {
     this.currentUserSubject.next(null);
   }
 
+  refreshCurrentUser() {
+    return this.http.get(`${environment.apiUrl}/users/me`)
+      .subscribe((user => {
+        const currentToken = this.currentUserValue.token;
+        this.storeUser(
+          user,
+          currentToken
+        );
+      }));
+  }
+
   storeUser(userDetais, token) {
     const user: User = new User({
       _id: userDetais._id,
