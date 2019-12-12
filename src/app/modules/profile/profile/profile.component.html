@@ -1,1 +1,85 @@
-<p>profile works!</p>
+<div class="container">
+  <div class="row">
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="w-100">
+      <div class="form-group">
+        <label class="small" for="username">{{ isMaker? 'Gebruikersnaam' : 'Bedrijfsnaam' }} <span
+            style="font-size: 10px; opacity: 75%;">(verplicht)</span></label>
+        <input type="text" id="username" formControlName="username" class="form-control text-black"
+          [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+        <div *ngIf="submitted && f.username.errors" class="invalid-feedback text-right">
+          <div *ngIf="f.username.errors.required">We hebben een gebruikersnaam nodig :)</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="small" for="lastname">Naam <span style="font-size: 10px; opacity: 75%;">(verplicht)</span></label>
+        <input type="text" id="lastname" formControlName="lastname" class="form-control text-black"
+          [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" />
+        <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback text-right">
+          <div *ngIf="f.lastname.errors.required">Heeft u geen achternaam?</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="small" for="firstname">Voornaam <span
+            style="font-size: 10px; opacity: 75%;">(verplicht)</span></label>
+        <input type="text" id="firstname" formControlName="firstname" class="form-control text-black"
+          [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" />
+        <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback text-right">
+          <div *ngIf="f.firstname.errors.required">Hoe mogen wij u noemen?</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="small" for="email">E-mailadres <span
+            style="font-size: 10px; opacity: 75%;">(verplicht)</span></label>
+        <input type="text" id="email" formControlName="email" class="form-control text-black"
+          [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback text-right">
+          <div *ngIf="f.email.errors.required">Wat is uw E-mailadres?</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="small" for="mobile">Telefoonnummer</label>
+        <input type="tel" id="mobile" formControlName="mobile" class="form-control text-black" />
+      </div>
+      <div class="form-group">
+        <label class="small" for="birthday">Geboortedatum</label>
+        <input type="date" id="birthday" formControlName="birthday" class="form-control text-black" />
+      </div>
+      <div class="form-group">
+        <label for="location" class="small">Adres</label>
+        <input type="text" id="location" placeholder="Land" formControlName="country" class="form-control text-black" />
+        <input type="text" id="location" placeholder="Stad" formControlName="city"
+          class="form-control text-black mt-1" />
+        <input type="text" id="location" placeholder="Postcode" formControlName="postalCode"
+          class="form-control text-black mt-1" />
+      </div>
+      <div class="form-group">
+        <label class="small" for="bio">{{isMaker? 'Bio' : 'Beschrijving'}}</label>
+        <textarea name="message" formControlName="bio" rows="4" cols="20" class="form-control text-black"></textarea>
+      </div>
+      <div class="form-group" *ngIf="isMaker">
+        <label class="small" for="experience">Ervaring</label>
+        <textarea name="message" formControlName="experience" rows="4" cols="20"
+          class="form-control text-black"></textarea>
+      </div>
+      <div class="form-group" *ngIf="isMaker">
+        <label class="small" for="interests">Interesses</label>
+        <div class="input-group">
+          <select formControlName="interest" class="custom-select">
+            <option selected>Kies hier...</option>
+            <ng-container *ngFor="let skill of skills">
+              <option value="{{skill._id}}">{{skill.name}}</option>
+            </ng-container>
+          </select>
+          <div class="input-group-append">
+            <button (click)="addSkill()" class="btn btn-sm" type="button"><img
+                src="../../../../assets/svg/profile/plus.svg" alt="plus sign"></button>
+          </div>
+        </div>
+        <div class="chip">
+          John Doe
+          <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

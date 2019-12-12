@@ -1,6 +1,7 @@
 import { TouchSequence } from 'selenium-webdriver';
 import { MakerProfile } from './makerProfile';
 import { CompanyProfile } from './companyProfile';
+import { Skill } from './skill';
 
 export class User {
 
@@ -18,6 +19,9 @@ export class User {
   lastname: string;
   onboardingCompletedAt?: Date;
   isAdmin: Boolean;
+  skills: [
+    string
+  ]
   companyProfile?: CompanyProfile;
   makerProfile?: MakerProfile;
   token?: string;
