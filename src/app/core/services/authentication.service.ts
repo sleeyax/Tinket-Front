@@ -42,15 +42,19 @@ export class AuthenticationService {
     this.currentUserSubject.next(null);
   }
 
-  refreshCurrentUser() {
-    return this.http.get(`${environment.apiUrl}/users/me`)
-      .subscribe((user => {
-        const currentToken = this.currentUserValue.token;
-        this.storeUser(
-          user,
-          currentToken
-        );
-      }));
+  async refreshCurrentUser() {
+    const promise = new Promise((resolve) => {
+      this.http.get(`${environment.apiUrl}/users/me`)
+        .subscribe((user => {
+          const currentToken = this.currentUserValue.token;
+          this.storeUser(
+            user,
+            currentToken
+          );
+          resolve(user);
+        }));
+    });
+    return promise;
   }
 
   storeUser(userDetais, token) {
