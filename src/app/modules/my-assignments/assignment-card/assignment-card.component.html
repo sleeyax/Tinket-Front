@@ -1,0 +1,12 @@
+<a [routerLink]="routerLink"
+  class="text-decoration-none text-black d-block mb-3">
+
+  <div class="assignment-card rounded bg-light p-3"
+    [class.open]="open"
+    [class.archived]="archived">
+    <p class="status mb-2"><small>Open voor inschrijvingen.</small></p>
+    <h3 class="assignment-title">{{ title }}</h3>
+    <p class="mt-1 mb-0">{{ location }}</p>
+  </div>
+
+</a>

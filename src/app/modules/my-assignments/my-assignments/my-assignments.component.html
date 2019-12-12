@@ -1,1 +1,35 @@
-<p>my-assignments works!</p>
+<app-header
+  title="Mijn opdrachten">
+  Beheer de opdrachten die jouw bedrijf op Tinket wilt delen met makers.
+</app-header>
+
+<div class="container">
+
+  <app-assignment-card
+    title="Op zoek naar freelancers?"
+    location="Brussel, België"
+    routerLink="/test"
+    [open]="true"
+    [archived]="false">
+  </app-assignment-card>
+
+  <app-assignment-card
+    title="Op zoek naar freelancers?"
+    location="Brussel, België"
+    routerLink="/test"
+    [open]="false"
+    [archived]="false">
+  </app-assignment-card>
+
+  <hr class="mt-5">
+  <h3 class="small text-muted text-uppercase text-center mb-4">Gearchiveerd</h3>
+
+  <app-assignment-card
+    title="Op zoek naar freelancers?"
+    location="Brussel, België"
+    routerLink="/test"
+    [open]="false"
+    [archived]="true">
+  </app-assignment-card>
+
+</div>
