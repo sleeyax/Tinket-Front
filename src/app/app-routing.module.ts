@@ -17,9 +17,9 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'onboarding', component: OnboardingComponent, canActivate: [AuthGuard]},
 
-  { path: 'discover', component: LandingComponent, canActivate: [AuthGuard]},
-  { path: 'interests', component: MyApplicationsComponent, canActivate: [AuthGuard]},
-  { path: 'profile', component: LandingComponent, canActivate: [AuthGuard]},
+  { path: 'discover', component: DiscoverComponent, canActivate: [AuthGuard]},
+  { path: 'applications', component: MyApplicationsComponent, canActivate: [AuthGuard]},
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   { path: 'messages', component: LandingComponent, canActivate: [AuthGuard]}
 ];
 
