@@ -82,6 +82,7 @@ export class OnboardingComponent implements OnInit {
 
   onSubmit() {
     this.loading = true;
+    this.submitted = true;
     this.authenticationService.currentUser.subscribe(res => this.currentUser = res)
     if (this.isMaker) {
       const makerProfile: MakerProfile = {

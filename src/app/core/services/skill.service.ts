@@ -11,7 +11,12 @@ export class SkillService {
 
   constructor(private http: HttpClient) { }
 
-  getSkills(): Observable<Skill[]>{
+  getSkills(): Observable<Skill[]> {
     return this.http.get<Skill[]>(`${environment.apiUrl}/skills`);
+  }
+
+
+  updateUserSkills(skills: string[]) {
+    return this.http.put<string[]>(`${environment.apiUrl}/users/me/skills`, skills);
   }
 }

@@ -73,10 +73,20 @@ export class ProfileComponent implements OnInit {
     if (!this.mySkillIds.includes(this.f.interest.value)) {
       this.mySkillIds.push(this.f.interest.value)
       console.log(this.mySkillIds);
-      this.getSkills()
+      this.skillService.updateUserSkills(this.mySkillIds).subscribe(() => {
+        this.getSkills()
+      })
     } else {
 
     }
+  }
+
+  deleteSkill(skill: Skill) {
+    let index = this.mySkillIds.findIndex(id => id === skill._id);
+    this.mySkillIds.splice(index, 1);
+    this.skillService.updateUserSkills(this.mySkillIds).subscribe(() => {
+      this.getSkills()
+    })
   }
 
 }

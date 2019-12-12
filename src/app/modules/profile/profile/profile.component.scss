@@ -17,3 +17,26 @@ button{
   .closebtn:hover {
     color: #000;
   }
+
+  #submitButton{
+    background: linear-gradient(-45deg, #16C1E7, #1E96B0);
+    border: none;
+    color: white;
+    width: 100%;
+  }
+
+  #logoutButton{
+    background: linear-gradient(-90deg, #E7167A, #B01E1E);
+    border: none;
+    color: white;
+    width: 100%;
+  }
+
+  
+
+  #passwordButton{
+    background: #252525;
+    border: none;
+    color: white;
+    width: 100%;
+  }

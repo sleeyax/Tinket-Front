@@ -19,6 +19,7 @@ const routes: Routes = [
 
   { path: 'discover', component: DiscoverComponent, canActivate: [AuthGuard]},
   { path: 'applications', component: MyApplicationsComponent, canActivate: [AuthGuard]},
+  { path: 'interests', component: MyApplicationsComponent, canActivate: [AuthGuard]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   { path: 'messages', component: LandingComponent, canActivate: [AuthGuard]}
 ];

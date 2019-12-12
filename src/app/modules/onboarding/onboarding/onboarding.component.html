@@ -48,7 +48,7 @@
         </div>
         <div class="form-group">
           <label class="small" for="mobile">Telefoonnummer</label>
-          <input type="tel" formControlName="mobile" class="form-control text-black" />
+          <input type="text" formControlName="mobile" class="form-control text-black" />
         </div>
         <div class="form-group">
           <label for="location" class="small">Adres</label>
@@ -81,8 +81,9 @@
             <div class="skills">
               <ng-container *ngFor="let skill of skills">
                 <button (click)="addSkill(skill)" type="button" class="skill btn">
-                  <img *ngIf="selectedSkills.includes(skill._id)" style="position: absolute; right: 5px; top: 5px; z-index: 2;"
-                    src="../../../../assets/svg/check.svg" alt="check">
+                  <img *ngIf="selectedSkills.includes(skill._id)"
+                    style="position: absolute; right: 5px; top: 5px; z-index: 2;" src="../../../../assets/svg/check.svg"
+                    alt="check">
                   <p class="mt-4" style="position: absolute;
                   margin-left: auto;
                   margin-right: auto;
@@ -99,12 +100,10 @@
           </div>
         </div>
         <div class="row my-5">
-          <div class="col-sm-12">
-            <button [disabled]="loading && submitted" type="submit" id="nextButton" class="btn-lg">
-              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-              Klaar
-            </button>
-          </div>
+          <button [disabled]="loading && submitted" type="submit" id="nextButton" class="btn-lg">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Klaar
+          </button>
         </div>
       </ng-container>
     </form>
