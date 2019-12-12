@@ -37,13 +37,16 @@ export class ProfileComponent implements OnInit {
         this.mySkills = []
         this.mySkillIds = []
         this.skills.forEach(skill => {
-          if (this.currentUser.makerProfile.skills.includes(skill._id)) {
-            this.mySkills.push(skill);
-            this.mySkillIds.push(skill._id);
+          if (this.currentUser.makerProfile.skills != null) {
+            if (this.currentUser.makerProfile.skills.includes(skill._id)) {
+              this.mySkills.push(skill);
+              this.mySkillIds.push(skill._id);
+            }
           }
         });
-        console.log(this.mySkillIds)
-        console.log(this.mySkills)
+        // console.log(this.mySkillIds)
+        // console.log(this.mySkills)
+        // console.log(this.skills)
       })
     })
   }
@@ -70,14 +73,15 @@ export class ProfileComponent implements OnInit {
   }
 
   addSkill() {
-    if (!this.mySkillIds.includes(this.f.interest.value)) {
-      this.mySkillIds.push(this.f.interest.value)
-      console.log(this.mySkillIds);
-      this.skillService.updateUserSkills(this.mySkillIds).subscribe(() => {
-        this.getSkills()
-      })
-    } else {
+    if (this.mySkillIds) {
+      if (!this.mySkillIds.includes(this.f.interest.value)) {
+        this.mySkillIds.push(this.f.interest.value)
+        this.skillService.updateUserSkills(this.mySkillIds).subscribe(() => {
+          this.getSkills()
+        })
+      } else {
 
+      }
     }
   }
 
@@ -88,5 +92,4 @@ export class ProfileComponent implements OnInit {
       this.getSkills()
     })
   }
-
 }
