@@ -37,9 +37,14 @@ export class AuthenticationService {
       .pipe(map(response => this.storeUser(response.user, response.token)));
   }
 
+  deteleUserTokens(){
+    return this.http.delete(`${environment.apiUrl}/users/me/tokens`);
+  }
+
+
   changePassword(oldpassword: string, newpassword: string){
     return this.http.put<any>(`${environment.apiUrl}/users/me/change-password`, { password: oldpassword, newPassword: newpassword })
-    .pipe(map(() => this.refreshCurrentUser()));
+    .pipe(map(() => this.deteleUserTokens()));
   }
 
   logout() {

@@ -37,8 +37,10 @@ export class PasswordComponent implements OnInit {
     this.loading = true;
 
     this.authenticationService.changePassword(this.f.oldpassword.value, this.f.password.value).subscribe(() => {
-      this.loading = false;
-      this.submitted = false;
+      this.authenticationService.deteleUserTokens().subscribe(() => {
+        this.loading = false;
+        this.submitted = false;
+      })
     },
       error => {
         this.loading = false;
