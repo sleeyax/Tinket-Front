@@ -15,6 +15,9 @@ import { ProfileComponent } from './modules/profile/profile/profile.component';
 import { MyAssignmentsComponent } from './modules/my-assignments/my-assignments/my-assignments.component';
 import { MyReviewsComponent } from './modules/my-reviews/my-reviews/my-reviews.component';
 import { PasswordComponent } from './modules/profile/password/password.component';
+import { ModUsersComponent } from './modules/admin/mod-users/mod-users/mod-users.component';
+import { AdminGuard } from './core/guards/admin.guard';
+import { ModReviewsComponent } from './modules/admin/mod-reviews/mod-reviews/mod-reviews.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -29,6 +32,10 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   { path: 'changePassword', component: PasswordComponent, canActivate: [AuthGuard]},
 
+  { path: 'mod/users', component: ModUsersComponent, canActivate: [AdminGuard]},
+  { path: 'mod/reviews', component: ModReviewsComponent, canActivate: [AdminGuard]},
+
+  { path: 'changePassword', component: PasswordComponent, canActivate: [AuthGuard]},
   { path: 'messages', component: LandingComponent, canActivate: [AuthGuard]}
 ];
 

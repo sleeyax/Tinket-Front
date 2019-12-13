@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ModReviewsComponent } from './mod-reviews/mod-reviews.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [ModReviewsComponent],
   imports: [
     CommonModule
   ]

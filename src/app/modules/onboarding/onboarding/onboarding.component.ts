@@ -21,7 +21,6 @@ export class OnboardingComponent implements OnInit {
   error = '';
   stepTwo = false;
   isMaker = true;
-
   skills: Skill[];
   selectedSkills = [];
 
