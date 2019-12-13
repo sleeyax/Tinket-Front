@@ -26,7 +26,6 @@ export class OnboardingComponent implements OnInit {
   currentUser: User;
   selected: any;
 
-
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -35,7 +34,14 @@ export class OnboardingComponent implements OnInit {
     private skillService: SkillService
   ) {
     this.authenticationService.currentUser
-      .subscribe(user => this.currentUser = user);
+      .subscribe(user => {
+        this.currentUser = user;
+
+        // check if the user already has a complete profile
+        if(user.isMaker || user.representsCompany) {
+          this.finish();
+        }
+      });
   }
 
   ngOnInit() {
@@ -95,14 +101,18 @@ export class OnboardingComponent implements OnInit {
     updateHandler
       .subscribe(() => {
         this.authenticationService.refreshCurrentUser()
-          .then(() => this.router.navigate([
-            this.currentUser.isMaker ? '/discover' : '/assignments'
-          ]));
+          .then(() => this.finish());
       },
       error => {
         this.error = error;
         this.loading = false;
       });
+  }
+
+  finish() {
+    this.router.navigate([
+      this.currentUser.isMaker ? '/discover' : '/assignments'
+    ]);
   }
 
   createMakerProfile() : MakerProfile {
