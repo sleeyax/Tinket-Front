@@ -38,6 +38,8 @@ export class PasswordComponent implements OnInit {
 
     this.authenticationService.changePassword(this.f.oldpassword.value, this.f.password.value).subscribe(() => {
       this.authenticationService.deteleUserTokens().subscribe(() => {
+        this.authenticationService.logout()
+        this.router.navigate(['login']);
         this.loading = false;
         this.submitted = false;
       })
