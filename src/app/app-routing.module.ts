@@ -13,6 +13,7 @@ import { MyApplicationsComponent } from './modules/my-applications/my-applicatio
 import { DiscoverComponent } from './modules/discover/discover/discover.component';
 import { ProfileComponent } from './modules/profile/profile/profile.component';
 import { MyAssignmentsComponent } from './modules/my-assignments/my-assignments/my-assignments.component';
+import { AssignmentDetailComponent } from './modules/my-assignments/assignment-detail/assignment-detail.component';
 import { MyReviewsComponent } from './modules/my-reviews/my-reviews/my-reviews.component';
 
 const routes: Routes = [
@@ -23,7 +24,11 @@ const routes: Routes = [
 
   { path: 'discover', component: DiscoverComponent, canActivate: [AuthGuard, MakerGuard]},
   { path: 'applications', component: MyApplicationsComponent, canActivate: [AuthGuard, MakerGuard]},
+
   { path: 'assignments', component: MyAssignmentsComponent, canActivate: [AuthGuard, CompanyGuard]},
+  { path: 'assignments/:id', component: AssignmentDetailComponent, canActivate: [AuthGuard, CompanyGuard]},
+
+
   { path: 'reviews', component: MyReviewsComponent, canActivate: [AuthGuard, CompanyGuard]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   { path: 'messages', component: LandingComponent, canActivate: [AuthGuard]}

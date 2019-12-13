@@ -20,7 +20,7 @@ import { RouterModule } from '@angular/router';
     AssignmentEditComponent,
     AssignmentNewComponent,
     AssignmentApplicantsComponent,
-    AssignmentApplicantDetailComponent
+    AssignmentApplicantDetailComponent,
   ],
   imports: [
     CommonModule,

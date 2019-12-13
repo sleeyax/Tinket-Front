@@ -21,6 +21,8 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     AngularSvgIconModule
   ],
   exports: [
+    RouterModule,
+    AngularSvgIconModule,
     HeaderComponent,
     MenuMobileComponent,
     MenuItemComponent,
