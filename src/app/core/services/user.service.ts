@@ -20,6 +20,10 @@ export class UserService {
     return this.http.put(`${environment.apiUrl}/users/me/company-profile`, profile);
   }
 
+  updateUser(user: User) {
+    return this.http.put(`${environment.apiUrl}/users/me`, user);
+  }
+
   getUser(): Observable<User>{
     return this.http.get<User>(`${environment.apiUrl}/users/me`);
   }
