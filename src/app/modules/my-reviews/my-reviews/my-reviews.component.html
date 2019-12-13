@@ -1,12 +1,16 @@
 <app-header title="Mijn reviews">
-  Reviews zijn publiek, maar annoniem naar keuze. Alleen {{ isMaker? 'makers': 'bedrijven'}} die eerder met je gewerkt hebben kunnen nieuwe reviews
+  Reviews zijn publiek, maar annoniem naar keuze. Alleen {{ isMaker? 'bedrijven': 'makers'}} die eerder met je gewerkt
+  hebben kunnen nieuwe reviews
   plaatsen.
 </app-header>
-
-<app-stars vraag="Je gemiddelde score" underline="true" clickAble="false" [ratingValue]=gemiddeldeScore>
-</app-stars>
+<p>{{ avarageScore}}
+  </p>
+<app-stars vraag="Je gemiddelde score" underline="true" clickAble="false" [ratingValue]="avarageScore"></app-stars>
 
 <div class="container mt-5 mb-5">
-  <app-reviewbox score="3" userName="Anoniem" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Est cupiditate facilis assumenda esse. Dolores expedita veritatis voluptatibus magnam. Repudiandae mollitia vel earum aspernatur laboriosam nobis aperiam officia quis vero esse!"></app-reviewbox>
-  <app-reviewbox score="5" userName="Lenny" description="Repudiandae mollitia vel earum aspernatur laboriosam nobis aperiam officia quis vero esse!"></app-reviewbox>
+  <ng-container *ngFor="let review of reviews">
+    <app-reviewbox score="{{review.score}}" userName="{{review.anonymous ? 'Anoniem' : 'test'}}"
+      description="{{review.description}}">
+    </app-reviewbox>
+  </ng-container>
 </div>
