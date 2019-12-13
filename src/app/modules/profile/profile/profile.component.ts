@@ -25,6 +25,8 @@ export class ProfileComponent implements OnInit {
   mySkills: Skill[] = [];
   mySkillIds: string[] = [];
   currentUser: User;
+  toast = false;
+
 
   constructor(private formBuilder: FormBuilder,
     private router: Router,
@@ -35,7 +37,6 @@ export class ProfileComponent implements OnInit {
     if (this.currentUser.companyProfile != null) {
       this.isMaker = false;
     }
-    console.log(this.isMaker)
   }
 
   get f() { return this.profileForm.controls; }
@@ -59,19 +60,19 @@ export class ProfileComponent implements OnInit {
     if (this.isMaker) {
       this.getSkills();
     }
-    
+
     this.profileForm = this.formBuilder.group({
       username: [this.isMaker ? this.currentUser.makerProfile.displayName : this.currentUser.companyProfile.name, [Validators.required]],
       firstname: [this.currentUser.firstname, [Validators.required]],
       lastname: [this.currentUser.lastname, [Validators.required]],
       email: [this.currentUser.email, [Validators.required]],
-      mobile: [this.isMaker?  this.currentUser.makerProfile.contactInfo.phoneNumber : this.currentUser.companyProfile.contactInfo.phoneNumber],
-      birthday: [this.isMaker? this.currentUser.makerProfile.dateOfBirth : '', [Validators.required]],
+      mobile: [this.isMaker ? this.currentUser.makerProfile.contactInfo.phoneNumber : this.currentUser.companyProfile.contactInfo.phoneNumber],
+      birthday: [this.isMaker ? this.currentUser.makerProfile.dateOfBirth : '', [Validators.required]],
       country: [this.isMaker ? this.currentUser.makerProfile.location.country : this.currentUser.companyProfile.location.country],
       city: [this.isMaker ? this.currentUser.makerProfile.location.city : this.currentUser.companyProfile.location.city],
       postalCode: [this.isMaker ? this.currentUser.makerProfile.location.postalCode : this.currentUser.companyProfile.location.postalCode],
       bio: [this.isMaker ? this.currentUser.makerProfile.bio : this.currentUser.companyProfile.description],
-      experience: [this.isMaker ? this.currentUser.makerProfile.experience: ''],
+      experience: [this.isMaker ? this.currentUser.makerProfile.experience : ''],
       interest: []
     });
     this.f.interest.setValue("Kies hier...")
@@ -102,7 +103,7 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['changePassword']);
   }
 
-  logout(){
+  logout() {
     this.authenticationService.logout();
     this.router.navigate(['']);
   }
@@ -157,6 +158,8 @@ export class ProfileComponent implements OnInit {
     this.userService.updateUser(user).subscribe(() => {
       this.authenticationService.refreshCurrentUser().then(() => {
         this.loading = false;
+        this.toast = true;
+        setTimeout( () => { this.toast = false }, 2000 )
       })
     });
   }

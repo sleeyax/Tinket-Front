@@ -1,7 +1,7 @@
 <app-header title="Je profiel">
   Je profielgegevens worden alleen met bedrijven gedeeld waarin je interesse toont.
 </app-header>
-
+<app-toast *ngIf="toast" message="Profiel opgeslagen!"></app-toast>
 <div class="container">
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="w-100">
     <div class="form-group">
