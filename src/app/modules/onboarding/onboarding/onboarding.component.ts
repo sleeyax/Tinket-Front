@@ -30,7 +30,9 @@ export class OnboardingComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private userService: UserService,
-    private skillService: SkillService) { }
+    private skillService: SkillService) {
+      this.authenticationService.currentUser.subscribe(res => this.currentUser = res)
+     }
 
   ngOnInit() {
     this.skillService.getSkills().subscribe(res => {
@@ -83,7 +85,6 @@ export class OnboardingComponent implements OnInit {
   onSubmit() {
     this.loading = true;
     this.submitted = true;
-    this.authenticationService.currentUser.subscribe(res => this.currentUser = res)
     if (this.isMaker) {
       const makerProfile: MakerProfile = {
         displayName: this.f.username.value,

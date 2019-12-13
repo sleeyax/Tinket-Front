@@ -11,6 +11,7 @@ export class StarsComponent implements OnInit {
   @Input() rating: number;
   @Output() starClick: EventEmitter<any> = new EventEmitter<any>();
   @Input() ratingValue: number;
+  @Input() clickAble: boolean;
 
   ngOnInit() {
     if (this.ratingValue) {

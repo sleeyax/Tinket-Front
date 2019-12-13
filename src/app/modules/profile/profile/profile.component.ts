@@ -32,9 +32,10 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private skillService: SkillService) {
     this.authenticationService.currentUser.subscribe(user => this.currentUser = user)
-    if (this.currentUser.makerProfile != null) {
-      this.isMaker = true;
+    if (this.currentUser.companyProfile != null) {
+      this.isMaker = false;
     }
+    console.log(this.isMaker)
   }
 
   get f() { return this.profileForm.controls; }
@@ -54,19 +55,23 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getSkills();
+
+    if (this.isMaker) {
+      this.getSkills();
+    }
+    
     this.profileForm = this.formBuilder.group({
       username: [this.isMaker ? this.currentUser.makerProfile.displayName : this.currentUser.companyProfile.name, [Validators.required]],
       firstname: [this.currentUser.firstname, [Validators.required]],
       lastname: [this.currentUser.lastname, [Validators.required]],
       email: [this.currentUser.email, [Validators.required]],
-      mobile: [this.currentUser.makerProfile.contactInfo.phoneNumber],
-      birthday: [this.currentUser.makerProfile.dateOfBirth, [Validators.required]],
+      mobile: [this.isMaker?  this.currentUser.makerProfile.contactInfo.phoneNumber : this.currentUser.companyProfile.contactInfo.phoneNumber],
+      birthday: [this.isMaker? this.currentUser.makerProfile.dateOfBirth : '', [Validators.required]],
       country: [this.isMaker ? this.currentUser.makerProfile.location.country : this.currentUser.companyProfile.location.country],
       city: [this.isMaker ? this.currentUser.makerProfile.location.city : this.currentUser.companyProfile.location.city],
       postalCode: [this.isMaker ? this.currentUser.makerProfile.location.postalCode : this.currentUser.companyProfile.location.postalCode],
       bio: [this.isMaker ? this.currentUser.makerProfile.bio : this.currentUser.companyProfile.description],
-      experience: [this.currentUser.makerProfile.experience],
+      experience: [this.isMaker ? this.currentUser.makerProfile.experience: ''],
       interest: []
     });
     this.f.interest.setValue("Kies hier...")
