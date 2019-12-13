@@ -5,7 +5,7 @@
 </app-header>
 <p>{{ avarageScore}}
   </p>
-<app-stars vraag="Je gemiddelde score" underline="true" clickAble="false" [ratingValue]="avarageScore"></app-stars>
+<app-stars vraag="Je gemiddelde score" underline="true" clickAble="false" [rating]="avarageScore"></app-stars>
 
 <div class="container mt-5 mb-5">
   <ng-container *ngFor="let review of reviews">
