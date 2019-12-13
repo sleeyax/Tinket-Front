@@ -37,6 +37,11 @@ export class AuthenticationService {
       .pipe(map(response => this.storeUser(response.user, response.token)));
   }
 
+  changePassword(oldpassword: string, newpassword: string){
+    return this.http.put<any>(`${environment.apiUrl}/users/me/change-password`, { password: oldpassword, newPassword: newpassword })
+    .pipe(map(() => this.refreshCurrentUser()));
+  }
+
   logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
@@ -62,7 +67,6 @@ export class AuthenticationService {
       email: userDetais.email,
       firstname: userDetais.firstname,
       lastname: userDetais.lastname,
-      onboardingCompletedAt: userDetais.onboardingCompletedAt,
       isAdmin: userDetais.isAdmin,
       companyProfile: userDetais.companyProfile,
       makerProfile: userDetais.makerProfile

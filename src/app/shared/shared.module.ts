@@ -7,6 +7,7 @@ import { MenuMobileComponent } from './components/menu/menu-mobile/menu-mobile.c
 import { MenuItemComponent } from './components/menu/menu-item/menu-item.component'
 import { PopupComponent } from './components/popup/popup.component'
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { StarsComponent } from './components/stars/stars.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     MenuMobileComponent,
     MenuItemComponent,
     PopupComponent,
+    StarsComponent,
   ],
   imports: [
     CommonModule,
@@ -25,6 +27,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     MenuMobileComponent,
     MenuItemComponent,
     PopupComponent,
+    StarsComponent
   ],
 })
 export class SharedModule { }

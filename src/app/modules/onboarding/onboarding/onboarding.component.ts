@@ -23,7 +23,7 @@ export class OnboardingComponent implements OnInit {
   isMaker = true;
 
   skills: Skill[];
-  selectedSkills= [];
+  selectedSkills = [];
 
 
   constructor(private formBuilder: FormBuilder,
@@ -68,12 +68,12 @@ export class OnboardingComponent implements OnInit {
     this.stepTwo = !this.stepTwo;
   }
 
-  addSkill(skill: Skill){
+  addSkill(skill: Skill) {
     if (this.selectedSkills.includes(skill._id)) {
-      let index = this.selectedSkills.findIndex( record => record === skill._id );
+      let index = this.selectedSkills.findIndex(record => record === skill._id);
       console.log(index);
       this.selectedSkills.splice(index, 1)
-    } else{
+    } else {
       this.selectedSkills.push(skill._id)
     }
   }
@@ -104,13 +104,14 @@ export class OnboardingComponent implements OnInit {
       }
 
       this.userService.updateMakerProfile(makerProfile).subscribe((user) => {
-        this.userService.getUser().subscribe(res => this.authenticationService.storeUser(res, res.token));
-        this.router.navigate(['discover'])
+        this.authenticationService.refreshCurrentUser().then(() => {
+          this.router.navigate(['discover'])
+        })
       },
-      error => {
-        this.error = error;
-        this.loading = false;
-      });
+        error => {
+          this.error = error;
+          this.loading = false;
+        });
     }
     else {
       const companyProfile: CompanyProfile = {
@@ -128,8 +129,9 @@ export class OnboardingComponent implements OnInit {
         }
       }
       this.userService.updateCompanyProfile(companyProfile).subscribe(() => {
-        this.userService.getUser().subscribe(res => this.authenticationService.storeUser(res, res.token));
-        this.router.navigate(['discover']);
+        this.authenticationService.refreshCurrentUser().then(() => {
+          this.router.navigate(['profile'])
+        })
       },
         error => {
           this.error = error;

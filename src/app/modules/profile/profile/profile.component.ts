@@ -6,6 +6,8 @@ import { UserService } from '@app/core/services/user.service';
 import { SkillService } from '@app/core/services/skill.service';
 import { Skill } from '@app/shared/models/skill';
 import { User } from '@app/shared/models/user';
+import { CompanyProfile } from '@app/shared/models/companyProfile';
+import { MakerProfile } from '@app/shared/models/makerProfile';
 
 @Component({
   selector: 'app-profile',
@@ -30,6 +32,9 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private skillService: SkillService) {
     this.authenticationService.currentUser.subscribe(user => this.currentUser = user)
+    if (this.currentUser.makerProfile != null) {
+      this.isMaker = true;
+    }
   }
 
   get f() { return this.profileForm.controls; }
@@ -47,7 +52,6 @@ export class ProfileComponent implements OnInit {
       })
     });
   }
-
 
   ngOnInit() {
     this.getSkills();
@@ -87,5 +91,68 @@ export class ProfileComponent implements OnInit {
     this.skillService.updateUserSkills(this.mySkillIds).subscribe(() => {
       this.getSkills()
     })
+  }
+
+  changePassword() {
+    this.router.navigate(['changePassword']);
+  }
+
+  logout(){
+    this.authenticationService.logout();
+    this.router.navigate(['']);
+  }
+
+  onSubmit() {
+    this.loading = true
+    if (this.isMaker) {
+      var updateMakerProfile: MakerProfile = {
+        displayName: this.f.username.value,
+        bio: this.f.bio.value,
+        experience: this.f.experience.value,
+        dateOfBirth: this.f.birthday.value,
+        skills: this.mySkillIds,
+        contactInfo: {
+          email: this.f.email.value,
+          linkedIn: "linkedInAccount",
+          phoneNumber: this.f.mobile.value
+        },
+        location: {
+          country: this.f.country.value,
+          city: this.f.city.value,
+          postalCode: this.f.postalCode.value
+        }
+      }
+    } else {
+      var updateCompanyProfile: CompanyProfile = {
+        name: this.f.username.value,
+        description: this.f.bio.value,
+        contactInfo: {
+          email: this.currentUser.email,
+          linkedIn: "linkedInAccount",
+          phoneNumber: this.f.mobile.value
+        },
+        location: {
+          country: this.f.country.value,
+          city: this.f.city.value,
+          postalCode: this.f.postalCode.value
+        }
+      }
+    }
+
+    const user: User = new User({
+      _id: this.currentUser._id,
+      email: this.f.email.value,
+      firstname: this.f.firstname.value,
+      lastname: this.f.lastname.value,
+      isAdmin: this.currentUser.isAdmin,
+      companyProfile: updateCompanyProfile,
+      makerProfile: updateMakerProfile,
+    }, this.currentUser.token)
+
+    this.userService.updateUser(user).subscribe(() => {
+      this.authenticationService.refreshCurrentUser().then(() => {
+        this.loading = false;
+      })
+    });
   }
 }

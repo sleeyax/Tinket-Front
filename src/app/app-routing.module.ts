@@ -14,6 +14,7 @@ import { DiscoverComponent } from './modules/discover/discover/discover.componen
 import { ProfileComponent } from './modules/profile/profile/profile.component';
 import { MyAssignmentsComponent } from './modules/my-assignments/my-assignments/my-assignments.component';
 import { MyReviewsComponent } from './modules/my-reviews/my-reviews/my-reviews.component';
+import { PasswordComponent } from './modules/profile/password/password.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -26,6 +27,9 @@ const routes: Routes = [
   { path: 'assignments', component: MyAssignmentsComponent, canActivate: [AuthGuard, CompanyGuard]},
   { path: 'reviews', component: MyReviewsComponent, canActivate: [AuthGuard, CompanyGuard]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  { path: 'changePassword', component: PasswordComponent, canActivate: [AuthGuard]},
+
+
   { path: 'messages', component: LandingComponent, canActivate: [AuthGuard]}
 ];
 

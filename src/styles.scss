@@ -45,3 +45,19 @@ a, button {
   }
 }
 
+
+.chip {
+    margin: 5px 5px 5px 0px;
+    display: inline-block;
+    padding: 0 15px;
+    height: 50px;
+    font-size: 12px;
+    line-height: 50px;
+    font-weight: 600;
+    border-radius: 5px;
+    background-color: #DBEBF6;
+  }
+
+  .closebtn:hover {
+    color: #000;
+  }
