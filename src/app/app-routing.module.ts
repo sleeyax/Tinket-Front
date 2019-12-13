@@ -18,23 +18,32 @@ import { MyReviewsComponent } from './modules/my-reviews/my-reviews/my-reviews.c
 import { PasswordComponent } from './modules/profile/password/password.component';
 
 const routes: Routes = [
+  // Security
   { path: '', component: LandingComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+
+  // Onboarding
   { path: 'onboarding', component: OnboardingComponent, canActivate: [AuthGuard]},
 
+  // Discover
   { path: 'discover', component: DiscoverComponent, canActivate: [AuthGuard, MakerGuard]},
+
+  // Applications
   { path: 'applications', component: MyApplicationsComponent, canActivate: [AuthGuard, MakerGuard]},
 
+  // Assignments
   { path: 'assignments', component: MyAssignmentsComponent, canActivate: [AuthGuard, CompanyGuard]},
   { path: 'assignments/:id', component: AssignmentDetailComponent, canActivate: [AuthGuard, CompanyGuard]},
 
-
+  // Reviews
   { path: 'reviews', component: MyReviewsComponent, canActivate: [AuthGuard, CompanyGuard]},
+
+  // Profile
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
-  { path: 'changePassword', component: PasswordComponent, canActivate: [AuthGuard]},
+  { path: 'profile/change-password', component: PasswordComponent, canActivate: [AuthGuard]},
 
-
+  // Messages
   { path: 'messages', component: LandingComponent, canActivate: [AuthGuard]}
 ];
 
