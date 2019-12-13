@@ -9,6 +9,7 @@ import { PopupComponent } from './components/popup/popup.component'
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { StarsComponent } from './components/stars/stars.component';
 import { ToastComponent } from './components/toast/toast.component';
+import { ReviewboxComponent } from './components/reviewbox/reviewbox.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ToastComponent } from './components/toast/toast.component';
     PopupComponent,
     StarsComponent,
     ToastComponent,
+    ReviewboxComponent,
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import { ToastComponent } from './components/toast/toast.component';
     MenuItemComponent,
     PopupComponent,
     StarsComponent,
-    ToastComponent
+    ToastComponent,
+    ReviewboxComponent
   ],
 })
 export class SharedModule { }

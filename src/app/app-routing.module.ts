@@ -25,10 +25,9 @@ const routes: Routes = [
   { path: 'discover', component: DiscoverComponent, canActivate: [AuthGuard, MakerGuard]},
   { path: 'applications', component: MyApplicationsComponent, canActivate: [AuthGuard, MakerGuard]},
   { path: 'assignments', component: MyAssignmentsComponent, canActivate: [AuthGuard, CompanyGuard]},
-  { path: 'reviews', component: MyReviewsComponent, canActivate: [AuthGuard, CompanyGuard]},
+  { path: 'reviews', component: MyReviewsComponent, canActivate: [AuthGuard]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   { path: 'changePassword', component: PasswordComponent, canActivate: [AuthGuard]},
-
 
   { path: 'messages', component: LandingComponent, canActivate: [AuthGuard]}
 ];

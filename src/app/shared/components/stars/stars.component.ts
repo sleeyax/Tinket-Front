@@ -6,23 +6,27 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./stars.component.scss']
 })
 export class StarsComponent implements OnInit {
-  
+
   @Input() vraag: string;
   @Input() rating: number;
   @Output() starClick: EventEmitter<any> = new EventEmitter<any>();
   @Input() ratingValue: number;
   @Input() clickAble: boolean;
+  @Input() underline: boolean;
 
   ngOnInit() {
     if (this.ratingValue) {
-      this.onClick(this.ratingValue);
+      this.rating = Number(this.ratingValue)
     }
   }
 
   onClick(rating: number): void {
-    this.rating = rating;
-    this.starClick.emit({
-      rating: rating
-    });
+    console.log(this.clickAble)
+    if (this.clickAble == false) {
+      this.rating = rating;
+      this.starClick.emit({
+        rating: rating
+      });
+    }
   }
 }
