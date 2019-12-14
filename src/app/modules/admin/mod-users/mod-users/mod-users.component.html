@@ -1,1 +1,19 @@
-<p>mod-users works!</p>
+<app-header underline="true" title="Gebruikers">
+  <label for="naam">Zoeken</label>
+  <input [(ngModel)]="searchText" type="text" class="form-control form-control-lg text-black">
+</app-header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <ng-container *ngFor="let user of users | filter : searchText">
+        <ng-container *ngIf="!user.isAdmin && user.makerProfile || user.companyProfile">
+          <div style="margin: 20px 30px; widows: 100%; border-bottom: 1px solid #E3E9EF;">
+            <p style="margin-bottom: 0;">{{user.firstname}} {{user.lastname}}</p>
+            <p style="font-size: 12px;">{{user.makerProfile? calculateAge(user.makerProfile.dateOfBirth): 'Bedrijf, '}} {{user.makerProfile ? user.makerProfile.location.city : user.companyProfile.location.city}}</p>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</div>

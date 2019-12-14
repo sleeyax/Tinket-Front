@@ -10,6 +10,7 @@ export class HeaderComponent implements OnInit {
   @Input() parentTitle: String;
   @Input() parentRouterLink: String;
   @Input() fixed: boolean;
+  @Input() underline: boolean;
 
   constructor() { }
 

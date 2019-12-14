@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModReviewsComponent } from './mod-reviews/mod-reviews.component';
+import { ModAssignmentsComponent } from './mod-assignments/mod-assignments.component';
 import { SharedModule } from '@app/shared/shared.module';
 
 
 
 @NgModule({
-  declarations: [ModReviewsComponent],
+  declarations: [ModAssignmentsComponent],
   imports: [
     CommonModule,
     SharedModule
   ]
 })
-export class ModReviewsModule { }
+export class ModAssignmentsModule { }

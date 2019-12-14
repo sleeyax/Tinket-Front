@@ -11,13 +11,16 @@ import { UserService } from '@app/core/services/user.service';
   styleUrls: ['./landing.component.scss']
 })
 export class LandingComponent implements OnInit {
-
+  currentUser: User;
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
-    if (this.authenticationService.currentUserValue) {
+    this.currentUser = this.authenticationService.currentUserValue;
+    if (this.currentUser && !this.currentUser.isAdmin) {
       this.router.navigate(['/discover']);
+    } else if (this.currentUser.isAdmin) {
+      this.router.navigate(['/mod/reviews']);
     }
   }
 
