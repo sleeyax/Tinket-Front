@@ -1,5 +1,11 @@
 <div id="app">
   <div id="outlet">
+    <ul id="toasts" class="list-unstyled">
+      <li *ngFor="let toast of currentToasts">
+        <span class="custom-toast">{{ toast }}</span>
+      </li>
+    </ul>
+
     <router-outlet></router-outlet>
   </div>
 
