@@ -2,4 +2,15 @@
     background-color: #F3F7FA;
     border-radius: 10px;
     padding: 20px 20px;
+    position: relative;
+}
+
+.delete{
+    background-color: #E53636;
+    border-radius: 100%;
+    width: fit-content;
+    padding: 10px;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-reviewbox',
@@ -7,13 +7,22 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ReviewboxComponent implements OnInit {
 
+  @Input() reviewId: string;
   @Input() userName: string;
   @Input() score: Number;
   @Input() description: string;
+  @Input() deleteButton: boolean;
+  @Output() deleteClicked: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  deleteClick(reviewId): void{
+    this.deleteClicked.emit({
+      reviewId
+    });
   }
 
 }

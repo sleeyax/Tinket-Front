@@ -28,4 +28,8 @@ export class ReviewService {
     return this.http.get<Review[]>(`${environment.apiUrl}/users/${id}/reviews/`);
   }
 
+  deleteReview(id: string){
+    return this.http.delete<Review>((`${environment.apiUrl}/reviews/` + id));
+  }
+
 }

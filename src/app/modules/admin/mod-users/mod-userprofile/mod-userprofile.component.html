@@ -57,7 +57,8 @@
   <div class="container">
     <p style="margin-bottom: 0; font-weight: 600;">Ontvangen reviews</p>
     <ng-container *ngFor="let review of reviews">
-      <app-reviewbox score="{{review.score}}" userName="{{review.creator.anonymous ? 'Anoniem' : review.creator.user.firstname + ' ' + review.creator.user.lastname }}"
+      <app-reviewbox (deleteClicked)="onDelete($event)" [reviewId]="review._id" deleteButton="true" score="{{review.score}}"
+        userName="{{review.creator.anonymous ? 'Anoniem' : review.creator.user.firstname + ' ' + review.creator.user.lastname }}"
         description="{{review.description}}">
       </app-reviewbox>
     </ng-container>
@@ -66,3 +67,14 @@
     </div>
   </div>
 </div>
+
+<app-footer>
+  <div class="container border-top py-3">
+    <div class="d-flex">
+      <a (click)="deleteUser(selectedUser._id)" class="btn btn-danger text-white mr-3">Verwijder</a>
+      <a (click)="goToReviews(selectedUser._id)" class="btn btn-white border flex-grow-1 shadow-sm font-weight-bold">
+        Bekijk geschreven reviews <svg-icon src="../../../../../assets/svg/forward.svg"></svg-icon>
+      </a>
+    </div>
+  </div>
+</app-footer>
