@@ -10,6 +10,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { StarsComponent } from './components/stars/stars.component';
 import { ReviewboxComponent } from './components/reviewbox/reviewbox.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     PopupComponent,
     StarsComponent,
     ReviewboxComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MenuItemComponent,
     PopupComponent,
     StarsComponent,
-    ReviewboxComponent
+    ReviewboxComponent,
+    FooterComponent,
   ],
 })
 export class SharedModule { }

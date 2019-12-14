@@ -20,6 +20,18 @@ export class AssignmentService {
       .subscribe((user) => this.currentUser = user);
    }
 
+  getAssignment(id): Observable<Assignment>{
+    return this.http.get<Assignment>(`${environment.apiUrl}/assignments/${id}`);
+  }
+
+  createAssignment(assignment): Observable<Object> {
+    return this.http.post(`${environment.apiUrl}/assignments/`, assignment);
+  }
+
+  updateAssignment(id, assignment): Observable<Object> {
+    return this.http.put(`${environment.apiUrl}/assignments/${id}`, assignment);
+  }
+
   getMyAssignments(): Observable<Assignment[]>{
     return this.http.get<Assignment[]>(`${environment.apiUrl}/users/${this.currentUser._id}/assignments`);
   }

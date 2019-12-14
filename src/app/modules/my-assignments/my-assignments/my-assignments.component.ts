@@ -8,7 +8,17 @@ import { Assignment } from '@app/shared/models/assignment';
   styleUrls: ['./my-assignments.component.scss']
 })
 export class MyAssignmentsComponent implements OnInit {
-  assignments : Assignment[];
+  assignments = [];
+
+  get visibleAssignments() : Assignment[] {
+    return this.assignments
+      .filter((assignment) => !assignment.archivedAt);
+  }
+
+  get archivedAssignments() : Assignment[] {
+    return this.assignments
+      .filter((assignment) => assignment.archivedAt);
+  }
 
   constructor(
     private assignmentService : AssignmentService

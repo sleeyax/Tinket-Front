@@ -3,6 +3,7 @@ import { Location } from './location';
 import { Skill } from './skill';
 
 export class Assignment {
+  _id: String;
   title: String;
   videoUrl: String;
   description: String;
