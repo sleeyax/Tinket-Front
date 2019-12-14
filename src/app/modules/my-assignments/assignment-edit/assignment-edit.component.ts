@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AssignmentService } from '@app/core/services/assignment.service';
+import { Assignment } from '@app/shared/models/assignment';
 
 @Component({
   selector: 'app-assignment-edit',
