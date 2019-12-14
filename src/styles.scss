@@ -2,10 +2,6 @@
 @import './styles/variables';
 @import "../node_modules/bootstrap/scss/bootstrap";
 
-body {
-  overflow: hidden;
-}
-
 h2, h3, h4 {
   font-weight: 700;
 }
@@ -15,18 +11,21 @@ h2 {
 }
 
 #app {
-  display: flex;
-  flex-direction: column;
   margin:0;
   padding:0;
-  height: 100vh;
+  overflow-x: hidden;
   width: 100vw;
 
-  #outlet {
-    flex-grow: 1;
-    overflow-x: hidden;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+  #menu-mobile--wrapper {
+    background:white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+
+  .bottom-spacer {
+    width:100vw;
+    height:100px;
   }
 }
 
