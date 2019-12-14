@@ -5,7 +5,7 @@
 
 <div class="container">
 
-  <app-assignment-card *ngFor="let assignment of assignments"
+  <app-assignment-card *ngFor="let assignment of visibleAssignments"
     [title]="assignment.title"
     [location]="assignment.location.city + ', ' + assignment.location.country"
     [routerLink]="'/assignments/' + assignment._id"
@@ -13,14 +13,16 @@
     [archived]="false">
   </app-assignment-card>
 
-  <hr class="mt-5">
-  <h3 class="small text-muted text-uppercase text-center mb-4">Gearchiveerd</h3>
+  <div *ngIf="archivedAssignments.length > 0">
+    <hr class="mt-5">
+    <h3 class="small text-muted text-uppercase text-center mb-4">Gearchiveerd</h3>
+  </div>
 
-  <app-assignment-card
-    title="Op zoek naar freelancers?"
-    location="Brussel, België"
-    routerLink="/assignments/test"
-    [open]="false"
+  <app-assignment-card *ngFor="let assignment of archivedAssignments"
+    [title]="assignment.title"
+    [location]="assignment.location.city + ', ' + assignment.location.country"
+    [routerLink]="'/assignments/' + assignment._id"
+    [open]="assignment.open"
     [archived]="true">
   </app-assignment-card>
 
