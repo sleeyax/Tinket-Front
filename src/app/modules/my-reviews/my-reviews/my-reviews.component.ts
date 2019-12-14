@@ -21,7 +21,7 @@ export class MyReviewsComponent implements OnInit {
     this.authenticationService.currentUser
       .subscribe(user => this.currentUser = user);
 
-    this.reviewService.getSkills().subscribe((reviews: Review[]) => {
+    this.reviewService.getReviews().subscribe((reviews: Review[]) => {
       this.reviews = reviews;
       const scores = [];
       console.log(this.reviews)

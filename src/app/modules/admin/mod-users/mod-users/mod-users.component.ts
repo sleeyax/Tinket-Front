@@ -35,6 +35,6 @@ export class ModUsersComponent implements OnInit {
     let date = new Date(birthday)
     var ageDifMs = Date.now() - date.getTime();
     var ageDate = new Date(ageDifMs);
-    return String(Math.abs(ageDate.getUTCFullYear() - 1970) + " jaar,");
+    return String(Math.abs(ageDate.getUTCFullYear() - 1970) + " jaar, ");
   }
 }

@@ -3,12 +3,66 @@
   parentRouterLink="/mod/users">
   <div>
     <div>
-      <img style="border-radius: 100%;" src="https://api.adorable.io/avatars/75/{{selectedUser._id}}" alt="">
-      &nbsp; &nbsp;{{isMaker ? selectedUser.makerProfile.bio : selectedUser.companyProfile.description }}
+      <div class="row">
+        <div class="col-4">
+          <img style="border-radius: 100%;" src="https://api.adorable.io/avatars/75/{{selectedUser._id}}" alt="avatar">
+
+        </div>
+        <div class="col-8 my-auto">
+          {{isMaker ? selectedUser.makerProfile.bio == ''? 'Geen bio' : selectedUser.makerProfile.bio  : selectedUser.companyProfile.description == ''? 'Geen beschrijving' : selectedUser.companyProfile.description}}
+        </div>
+      </div>
     </div>
     <p>
     </p>
   </div>
 </app-header>
 
+<div *ngIf="selectedUser && isMaker" style="border-bottom: 1px solid #E3E9EF; padding: 10px 0;">
+  <div class="container" style="line-height: 50px;">
+    <div class="row">
+      <div class="col-2">
+        <img src="../../../../../assets/svg/moderate/birthday.svg" alt="birthdaycake">
+      </div>
+      <div class="col-10">
+        {{birthday}} ({{age}})
+      </div>
+    </div>
+  </div>
+</div>
 
+<div *ngIf="selectedUser" style="border-bottom: 1px solid #E3E9EF; padding: 10px 0;">
+  <div class="container" style="line-height: 50px;">
+    <div class="row">
+      <div class="col-2">
+        <img src="../../../../../assets/svg/moderate/location.svg" alt="location">
+
+      </div>
+      <div class="col-10">
+        {{location}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="selectedUser && isMaker" style="border-bottom: 1px solid #E3E9EF; padding: 10px 0; margin-top: 15px;">
+  <div class="container">
+    <p style="margin-bottom: 0; font-weight: 600;">Ervaring</p>
+    <p style="margin-top: 10px;">
+      {{selectedUser.makerProfile.experience == ''? 'Geen ervaring' : selectedUser.makerProfile.experience }}</p>
+  </div>
+</div>
+
+<div *ngIf="selectedUser" style="padding: 10px 0; margin-top: 15px;">
+  <div class="container">
+    <p style="margin-bottom: 0; font-weight: 600;">Ontvangen reviews</p>
+    <ng-container *ngFor="let review of reviews">
+      <app-reviewbox score="{{review.score}}" userName="{{review.creator.anonymous ? 'Anoniem' : review.creator.user.firstname + ' ' + review.creator.user.lastname }}"
+        description="{{review.description}}">
+      </app-reviewbox>
+    </ng-container>
+    <div *ngIf="reviews.length == 0" class="alert alert-warning mt-2" role="alert">
+      Deze gebruiker heeft nog geen reviews!
+    </div>
+  </div>
+</div>

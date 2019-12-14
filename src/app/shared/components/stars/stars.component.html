@@ -1,9 +1,9 @@
-<div class="container" [ngClass]="{'starContainer': underline}">
-  <div class="row">
+<div [ngClass]="{'starContainer': underline}">
+  <div class="row ">
     <span class="mx-auto" style="font-size: 15px; font-weight: 600;" *ngIf="vraag">{{ vraag }}</span>
   </div>
-  <div class="row mx-auto text-center">
-    <fieldset class="rating mx-auto">
+  <div class="row justify-content-center">
+    <fieldset class="rating ">
       <input type="radio" value="5" [checked]="rating===5" />
       <label title="Rocks!" (click)='onClick(5)'>5 stars</label>
 

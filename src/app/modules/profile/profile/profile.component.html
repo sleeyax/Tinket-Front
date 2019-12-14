@@ -2,6 +2,7 @@
   Je profielgegevens worden alleen met bedrijven gedeeld waarin je interesse toont.
 </app-header>
 <div class="container">
+  <div *ngIf="error" class="text-danger font-weight-bold mb-3 mb-0">{{error}}</div>
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="w-100">
     <div *ngIf="!currentUser.isAdmin" class="form-group">
       <label class="small" for="username">{{ isMaker? 'Gebruikersnaam' : 'Bedrijfsnaam' }} <span
