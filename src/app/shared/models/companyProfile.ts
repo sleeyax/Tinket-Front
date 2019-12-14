@@ -1,3 +1,5 @@
+import { Location } from './location';
+
 export class CompanyProfile {
   name: String;
   description: String;
@@ -6,9 +8,5 @@ export class CompanyProfile {
     phoneNumber: String,
     linkedIn: String
   };
-  location: {
-      country: String,
-      city: String,
-      postalCode: String,
-  };
+  location: Location;
 }

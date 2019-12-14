@@ -11,7 +11,8 @@ import { Assignment } from '@app/shared/models/assignment';
 export class AssignmentService {
   constructor(private http: HttpClient) { }
 
-  getMyAssignments(): Observable<Assignment>{
-    return this.http.get<Assignment>(`${environment.apiUrl}/users/me`);
+  getMyAssignments(): Observable<Assignment[]>{
+    console.log("test");
+    return this.http.get<Assignment[]>(`${environment.apiUrl}/users/me/assignments`);
   }
 }
