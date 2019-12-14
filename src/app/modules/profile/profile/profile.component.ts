@@ -100,7 +100,7 @@ export class ProfileComponent implements OnInit {
   }
 
   changePassword() {
-    this.router.navigate(['changePassword']);
+    this.router.navigate(['/profile/change-password']);
   }
 
   logout() {

@@ -1,3 +1,5 @@
+import { Location } from './location';
+
 export class MakerProfile {
   displayName: String;
   bio: String;
@@ -9,9 +11,5 @@ export class MakerProfile {
     phoneNumber: String,
     linkedIn: String
   };
-  location: {
-      country: String,
-      city: String,
-      postalCode: String
-  };
+  location: Location;
 }

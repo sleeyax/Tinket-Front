@@ -6,12 +6,12 @@ import { Router } from '@angular/router';
   templateUrl: './menu-item.component.html',
 })
 export class MenuItemComponent implements OnInit {
-  @Input() routerLink: String;
+  @Input() routerLink: string;
   @Input() icon: String;
   @Input() label: String;
 
   constructor(
-    private router: Router,
+    public router: Router,
   ) { }
 
   ngOnInit() {

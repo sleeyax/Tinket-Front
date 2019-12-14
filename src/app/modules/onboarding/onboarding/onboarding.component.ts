@@ -21,22 +21,32 @@ export class OnboardingComponent implements OnInit {
   error = '';
   stepTwo = false;
   isMaker = true;
-
   skills: Skill[];
-  selectedSkills = [];
+  selectedSkills= [];
+  currentUser: User;
+  selected: any;
 
-
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private router: Router,
     private authenticationService: AuthenticationService,
     private userService: UserService,
-    private skillService: SkillService) {
-      this.authenticationService.currentUser.subscribe(res => this.currentUser = res)
-     }
+    private skillService: SkillService
+  ) {
+    this.authenticationService.currentUser
+      .subscribe(user => {
+        this.currentUser = user;
+
+        // check if the user already has a complete profile
+        if(user.isMaker || user.representsCompany) {
+          this.finish();
+        }
+      });
+  }
 
   ngOnInit() {
-    this.skillService.getSkills().subscribe(res => {
-      this.skills = res;
+    this.skillService.getSkills().subscribe(skills => {
+      this.skills = skills;
     })
 
     this.onboardingForm = this.formBuilder.group({
@@ -50,9 +60,7 @@ export class OnboardingComponent implements OnInit {
       country: [''],
       userType: [false, [Validators.required]]
     });
-
   }
-  selected: any;
 
   get f() { return this.onboardingForm.controls; }
 
@@ -63,81 +71,88 @@ export class OnboardingComponent implements OnInit {
 
   nextStep() {
     if (this.onboardingForm.invalid) {
-      this.error = "Vul alle verplichte velden in!"
-      return
+      this.error = "Vul alle verplichte velden in!";
+      return;
     }
     this.error = "";
     this.stepTwo = !this.stepTwo;
   }
 
-  addSkill(skill: Skill) {
+  toggleSkill(skill: Skill){
     if (this.selectedSkills.includes(skill._id)) {
-      let index = this.selectedSkills.findIndex(record => record === skill._id);
-      console.log(index);
+      let index = this.selectedSkills.findIndex( record => record === skill._id );
       this.selectedSkills.splice(index, 1)
-    } else {
+    } else{
       this.selectedSkills.push(skill._id)
     }
   }
 
-  currentUser: User;
-
   onSubmit() {
-    this.loading = true;
-    this.submitted = true;
-    if (this.isMaker) {
-      const makerProfile: MakerProfile = {
-        displayName: this.f.username.value,
-        bio: this.f.bio.value,
-        experience: this.f.experience.value,
-        dateOfBirth: this.f.geboorteDatum.value,
-        skills: this.selectedSkills,
-        contactInfo: {
-          email: this.currentUser.email,
-          linkedIn: "linkedInAccount",
-          phoneNumber: this.f.mobile.value
-        },
-        location: {
-          country: this.f.country.value,
-          city: this.f.city.value,
-          postalCode: this.f.postalCode.value
-        }
-      }
+    this.loading, this.submitted = true;
 
-      this.userService.updateMakerProfile(makerProfile).subscribe((user) => {
-        this.authenticationService.refreshCurrentUser().then(() => {
-          this.router.navigate(['discover'])
-        })
+    const updateHandler = (this.isMaker)
+      ? this.userService.updateMakerProfile(
+        this.createMakerProfile()
+      )
+      : this.userService.updateCompanyProfile(
+        this.createCompanyProfile()
+      );
+
+    updateHandler
+      .subscribe(() => {
+        this.authenticationService.refreshCurrentUser()
+          .then(() => this.finish());
       },
-        error => {
-          this.error = error;
-          this.loading = false;
-        });
-    }
-    else {
-      const companyProfile: CompanyProfile = {
-        name: this.f.username.value,
-        description: this.f.bio.value,
-        contactInfo: {
-          email: this.currentUser.email,
-          linkedIn: "linkedInAccount",
-          phoneNumber: this.f.mobile.value
-        },
-        location: {
-          country: this.f.country.value,
-          city: this.f.city.value,
-          postalCode: this.f.postalCode.value
-        }
+      error => {
+        this.error = error;
+        this.loading = false;
+      });
+  }
+
+  finish() {
+    this.router.navigate([
+      this.currentUser.isMaker ? '/discover' : '/assignments'
+    ]);
+  }
+
+  createMakerProfile() : MakerProfile {
+    const makerProfile: MakerProfile = {
+      displayName: this.f.username.value,
+      bio: this.f.bio.value,
+      experience: this.f.experience.value,
+      dateOfBirth: this.f.geboorteDatum.value,
+      skills: this.selectedSkills,
+      contactInfo: {
+        email: this.currentUser.email,
+        linkedIn: "linkedInAccount",
+        phoneNumber: this.f.mobile.value
+      },
+      location: {
+        country: this.f.country.value,
+        city: this.f.city.value,
+        postalCode: this.f.postalCode.value
       }
-      this.userService.updateCompanyProfile(companyProfile).subscribe(() => {
-        this.authenticationService.refreshCurrentUser().then(() => {
-          this.router.navigate(['profile'])
-        })
-      },
-        error => {
-          this.error = error;
-          this.loading = false;
-        });
     }
+
+    return makerProfile;
+  }
+
+  createCompanyProfile() : CompanyProfile {
+    const companyProfile: CompanyProfile = {
+      name: this.f.username.value,
+      description: this.f.bio.value,
+      contactInfo: {
+        email: this.currentUser.email,
+        linkedIn: "linkedInAccount",
+        phoneNumber: this.f.mobile.value
+      },
+      location: {
+        country: this.f.country.value,
+        city: this.f.city.value,
+        postalCode: this.f.postalCode.value
+      }
+    }
+
+    return companyProfile;
   }
 }

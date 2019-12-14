@@ -80,7 +80,7 @@
           <div class="col-sm-12">
             <div class="skills">
               <ng-container *ngFor="let skill of skills">
-                <button (click)="addSkill(skill)" type="button" class="skill btn">
+                <button (click)="toggleSkill(skill)" type="button" class="skill btn">
                   <img *ngIf="selectedSkills.includes(skill._id)"
                     style="position: absolute; right: 5px; top: 5px; z-index: 2;" src="../../../../assets/svg/check.svg"
                     alt="check">
