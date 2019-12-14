@@ -27,6 +27,10 @@ export class ModUsersComponent implements OnInit {
   ngOnInit() {
   }
 
+  goToProfile(userId){
+    console.log(userId)
+  }
+
   calculateAge(birthday) {
     let date = new Date(birthday)
     var ageDifMs = Date.now() - date.getTime();

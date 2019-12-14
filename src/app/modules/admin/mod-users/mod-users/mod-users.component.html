@@ -11,7 +11,7 @@
           <div style="margin: 20px 30px; widows: 100%; border-bottom: 1px solid #E3E9EF; position: relative;">
             <p style="margin-bottom: 0;">{{user.firstname}} {{user.lastname}}</p>
             <p style="font-size: 12px;">{{user.makerProfile? calculateAge(user.makerProfile.dateOfBirth): 'Bedrijf, '}} {{user.makerProfile ? user.makerProfile.location.city : user.companyProfile.location.city}}</p>
-            <span style="position: absolute; right: 0; top: 15%"><img src="../../../../../assets/svg/moderate/eye.svg" alt="eye"></span>
+            <span (click)="goToProfile(user._id)" style="position: absolute; right: 0; top: 15%"><img src="../../../../../assets/svg/moderate/eye.svg" alt="eye"></span>
           </div>
         </ng-container>
       </ng-container>
