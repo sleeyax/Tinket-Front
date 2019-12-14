@@ -13,21 +13,34 @@ import { MyApplicationsComponent } from './modules/my-applications/my-applicatio
 import { DiscoverComponent } from './modules/discover/discover/discover.component';
 import { ProfileComponent } from './modules/profile/profile/profile.component';
 import { MyAssignmentsComponent } from './modules/my-assignments/my-assignments/my-assignments.component';
+import { AssignmentDetailComponent } from './modules/my-assignments/assignment-detail/assignment-detail.component';
 import { MyReviewsComponent } from './modules/my-reviews/my-reviews/my-reviews.component';
 import { PasswordComponent } from './modules/profile/password/password.component';
 import { ModUsersComponent } from './modules/admin/mod-users/mod-users/mod-users.component';
 import { AdminGuard } from './core/guards/admin.guard';
 import { ModReviewsComponent } from './modules/admin/mod-reviews/mod-reviews/mod-reviews.component';
 import { ModAssignmentsComponent } from './modules/admin/mod-assignments/mod-assignments/mod-assignments.component';
+import { AssignmentNewComponent } from './modules/my-assignments/assignment-new/assignment-new.component';
+import { AssignmentEditComponent } from './modules/my-assignments/assignment-edit/assignment-edit.component';
+import { AssignmentApplicantsComponent } from './modules/my-assignments/assignment-applicants/assignment-applicants.component';
+import { AssignmentApplicantDetailComponent } from './modules/my-assignments/assignment-applicant-detail/assignment-applicant-detail.component';
 
 const routes: Routes = [
+  // Security
   { path: '', component: LandingComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+
+  // Onboarding
   { path: 'onboarding', component: OnboardingComponent, canActivate: [AuthGuard]},
 
+  // Discover
   { path: 'discover', component: DiscoverComponent, canActivate: [AuthGuard, MakerGuard]},
+
+  // Applications
   { path: 'applications', component: MyApplicationsComponent, canActivate: [AuthGuard, MakerGuard]},
+
+  // Assignments
   { path: 'assignments', component: MyAssignmentsComponent, canActivate: [AuthGuard, CompanyGuard]},
   { path: 'reviews', component: MyReviewsComponent, canActivate: [AuthGuard]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
@@ -36,7 +49,20 @@ const routes: Routes = [
   { path: 'mod/users', component: ModUsersComponent, canActivate: [AdminGuard]},
   { path: 'mod/reviews', component: ModReviewsComponent, canActivate: [AdminGuard]},
   { path: 'mod/assignments', component: ModAssignmentsComponent, canActivate: [AdminGuard]},
+  { path: 'assignments/new', component: AssignmentNewComponent, canActivate: [AuthGuard, CompanyGuard]},
+  { path: 'assignments/:id', component: AssignmentDetailComponent, canActivate: [AuthGuard, CompanyGuard]},
+  { path: 'assignments/:id/edit', component: AssignmentEditComponent, canActivate: [AuthGuard, CompanyGuard]},
+  { path: 'assignments/:id/applicants', component: AssignmentApplicantsComponent, canActivate: [AuthGuard, CompanyGuard]},
+  { path: 'assignments/:id/applicants/:id', component: AssignmentApplicantDetailComponent, canActivate: [AuthGuard, CompanyGuard]},
 
+  // Reviews
+  { path: 'reviews', component: MyReviewsComponent, canActivate: [AuthGuard, CompanyGuard]},
+
+  // Profile
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  { path: 'profile/change-password', component: PasswordComponent, canActivate: [AuthGuard]},
+
+  // Messages
   { path: 'messages', component: LandingComponent, canActivate: [AuthGuard]}
 ];
 

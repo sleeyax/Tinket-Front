@@ -1,4 +1,4 @@
-<a [routerLink]="routerLink" [class.active]="this.router.url === routerLink">
+<a [routerLink]="routerLink" [class.active]="this.router.url.startsWith(routerLink)">
   <span class="icon">
       <svg-icon [src]="icon"></svg-icon>
   </span>

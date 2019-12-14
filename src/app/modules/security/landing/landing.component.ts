@@ -16,11 +16,16 @@ export class LandingComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
-    this.currentUser = this.authenticationService.currentUserValue;
-    if (this.currentUser && !this.currentUser.isAdmin) {
-      this.router.navigate(['/discover']);
-    } else if (this.currentUser.isAdmin) {
-      this.router.navigate(['/mod/reviews']);
+
+    const user = this.authenticationService.currentUserValue;
+
+    if(user) {
+      let startpage = '/onboarding';
+
+      if(user.isMaker) startpage = '/discover';
+      if(user.representsCompany) startpage = '/assignments';
+      if(user.isAdmin) startpage = 'mod/users';
+      this.router.navigate([ startpage ]);
     }
   }
 

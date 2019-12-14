@@ -10,6 +10,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { StarsComponent } from './components/stars/stars.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { ReviewboxComponent } from './components/reviewbox/reviewbox.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,9 +25,13 @@ import { ReviewboxComponent } from './components/reviewbox/reviewbox.component';
   imports: [
     CommonModule,
     RouterModule,
-    AngularSvgIconModule
+    AngularSvgIconModule,
+    ReactiveFormsModule
   ],
   exports: [
+    RouterModule,
+    AngularSvgIconModule,
+    ReactiveFormsModule,
     HeaderComponent,
     MenuMobileComponent,
     MenuItemComponent,
