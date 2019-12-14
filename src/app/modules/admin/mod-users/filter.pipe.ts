@@ -7,7 +7,6 @@ import { User } from '@app/shared/models/user';
 })
 export class FilterPipe implements PipeTransform {
   transform(items: User[], searchText: string): any[] {
-      console.log(searchText)
     if (!items) return [];
     if (!searchText) return items;
     searchText = searchText.toLowerCase();
