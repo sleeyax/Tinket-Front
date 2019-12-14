@@ -9,9 +9,25 @@
       <ng-container *ngFor="let user of users | filter : searchText">
         <ng-container *ngIf="!user.isAdmin && user.makerProfile || user.companyProfile">
           <div style="margin: 20px 30px; widows: 100%; border-bottom: 1px solid #E3E9EF; position: relative;">
-            <p style="margin-bottom: 0;">{{user.makerProfile ? user.firstname + ' ' + user.lastname : user.companyProfile.name}}</p>
-            <p style="font-size: 12px;">{{user.makerProfile ? calculateAge(user.makerProfile.dateOfBirth): 'Bedrijf, '}} {{user.makerProfile ? user.makerProfile.location.city == ''? 'Geen locatie' : user.makerProfile.location.city : user.companyProfile.location.city}}</p>
-            <span (click)="goToProfile(user._id)" style="position: absolute; right: 0; top: 15%"><img src="../../../../../assets/svg/moderate/eye.svg" alt="eye"></span>
+            <div class="row">
+              <div class="col-2">
+                <img style="border-radius: 100%;" src="https://api.adorable.io/avatars/25/{{user._id}}" alt="avatar">
+              </div>
+              <div class="col-10">
+                <p style="margin-bottom: 0;">
+                  {{user.makerProfile ? user.firstname + ' ' + user.lastname : user.companyProfile.name}}</p>
+                <p style="font-size: 12px;">
+                  {{user.makerProfile ? calculateAge(user.makerProfile.dateOfBirth): 'Bedrijf, '}}
+                  {{user.makerProfile ? user.makerProfile.location.city == ''? 'Geen locatie' : user.makerProfile.location.city : user.companyProfile.location.city}}
+                </p>
+              </div>
+            </div>
+
+
+
+
+            <span (click)="goToProfile(user._id)" style="position: absolute; right: 0; top: 15%"><img
+                src="../../../../../assets/svg/moderate/eye.svg" alt="eye"></span>
           </div>
         </ng-container>
       </ng-container>

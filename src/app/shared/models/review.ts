@@ -1,16 +1,13 @@
+import { User } from './user';
+
 export class Review {
-    _id: string;
-    anonymous: boolean;
-    description: string;
+    creator: {
+        anonymous: boolean;
+        user: User;
+    }
     score: Number;
-    reviewedBy?: {
-        reviewedById: number,
-        email: string,
-        firstname: string,
-        lastname: string,
-    };
-    flaggedAt?: Date;
-    flagSolvedAt?: Date;
-    deletedAt?: Date;
+    _id: string;
+    reviewed: string;
+    description: string;
   }
   

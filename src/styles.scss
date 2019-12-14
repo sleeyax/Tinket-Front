@@ -2,6 +2,10 @@
 @import './styles/variables';
 @import "../node_modules/bootstrap/scss/bootstrap";
 
+#outlet {
+  scroll-behavior: smooth;
+}
+
 body {
   overflow: hidden;
 }

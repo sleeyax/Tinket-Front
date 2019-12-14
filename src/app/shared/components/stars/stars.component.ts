@@ -15,7 +15,6 @@ export class StarsComponent implements OnInit {
   @Input() underline: boolean;
 
   ngOnInit() {
-    console.log(this.ratingValue)
     if (this.ratingValue) {
       this.rating = Number(this.ratingValue)
     }

@@ -63,17 +63,17 @@ export class ProfileComponent implements OnInit {
     }
 
     this.profileForm = this.formBuilder.group({
-      username: [this.currentUser.isAdmin? '' : this.isMaker ? this.currentUser.makerProfile.displayName : this.currentUser.companyProfile.name , [Validators.required]],
+      username: [this.currentUser.isAdmin ? '' : this.isMaker ? this.currentUser.makerProfile.displayName : this.currentUser.companyProfile.name, [Validators.required]],
       firstname: [this.currentUser.firstname, [Validators.required]],
       lastname: [this.currentUser.lastname, [Validators.required]],
       email: [this.currentUser.email, [Validators.required]],
-      mobile: [this.currentUser.isAdmin? '' : this.isMaker ? this.currentUser.makerProfile.contactInfo.phoneNumber : this.currentUser.companyProfile.contactInfo.phoneNumber],
-      birthday: [this.currentUser.isAdmin? '' : this.isMaker ? this.currentUser.makerProfile.dateOfBirth : '', [Validators.required]],
-      country: [this.currentUser.isAdmin? '' : this.isMaker ? this.currentUser.makerProfile.location.country : this.currentUser.companyProfile.location.country],
-      city: [this.currentUser.isAdmin? '' : this.isMaker ? this.currentUser.makerProfile.location.city : this.currentUser.companyProfile.location.city],
-      postalCode: [this.currentUser.isAdmin? '' : this.isMaker ? this.currentUser.makerProfile.location.postalCode : this.currentUser.companyProfile.location.postalCode],
-      bio: [this.currentUser.isAdmin? '' : this.isMaker ? this.currentUser.makerProfile.bio : this.currentUser.companyProfile.description],
-      experience: [this.currentUser.isAdmin? '' : this.isMaker ? this.currentUser.makerProfile.experience : ''],
+      mobile: [this.currentUser.isAdmin ? '' : this.isMaker ? this.currentUser.makerProfile.contactInfo.phoneNumber : this.currentUser.companyProfile.contactInfo.phoneNumber],
+      birthday: [this.currentUser.isAdmin ? '' : this.isMaker ? this.currentUser.makerProfile.dateOfBirth : '', [Validators.required]],
+      country: [this.currentUser.isAdmin ? '' : this.isMaker ? this.currentUser.makerProfile.location.country : this.currentUser.companyProfile.location.country],
+      city: [this.currentUser.isAdmin ? '' : this.isMaker ? this.currentUser.makerProfile.location.city : this.currentUser.companyProfile.location.city],
+      postalCode: [this.currentUser.isAdmin ? '' : this.isMaker ? this.currentUser.makerProfile.location.postalCode : this.currentUser.companyProfile.location.postalCode],
+      bio: [this.currentUser.isAdmin ? '' : this.isMaker ? this.currentUser.makerProfile.bio : this.currentUser.companyProfile.description],
+      experience: [this.currentUser.isAdmin ? '' : this.isMaker ? this.currentUser.makerProfile.experience : ''],
       interest: []
     });
     this.f.interest.setValue("Kies hier...")
@@ -152,8 +152,8 @@ export class ProfileComponent implements OnInit {
       firstname: this.f.firstname.value,
       lastname: this.f.lastname.value,
       isAdmin: this.currentUser.isAdmin,
-      companyProfile: this.currentUser.isAdmin? null : updateCompanyProfile,
-      makerProfile: this.currentUser.isAdmin? null : updateMakerProfile,
+      companyProfile: this.currentUser.isAdmin ? null : updateCompanyProfile,
+      makerProfile: this.currentUser.isAdmin ? null : updateMakerProfile,
     }, this.currentUser.token)
 
     this.userService.updateUser(user).subscribe(() => {
@@ -161,6 +161,13 @@ export class ProfileComponent implements OnInit {
         this.loading = false;
         this.toastservice.toast("Profiel geupdate!")
       })
-    });
+    },
+      error => {
+        this.error = error
+        this.loading = false
+        this.submitted = false;
+        document.getElementById('outlet').scrollTop = 0;
+      }
+    );
   }
 }

@@ -20,7 +20,12 @@ export class ReviewService {
       .subscribe((user) => this.currentUser = user);
   }
 
-  getSkills(): Observable<Review[]> {
+  getReviews(): Observable<Review[]> {
     return this.http.get<Review[]>(`${environment.apiUrl}/users/${this.currentUser._id}/reviews`);
   }
+
+  getReviewsById(id: string): Observable<Review[]> {
+    return this.http.get<Review[]>(`${environment.apiUrl}/users/${id}/reviews/`);
+  }
+
 }
