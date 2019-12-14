@@ -9,6 +9,7 @@ import { PopupComponent } from './components/popup/popup.component'
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { StarsComponent } from './components/stars/stars.component';
 import { ToastComponent } from './components/toast/toast.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,15 +23,19 @@ import { ToastComponent } from './components/toast/toast.component';
   imports: [
     CommonModule,
     RouterModule,
-    AngularSvgIconModule
+    AngularSvgIconModule,
+    ReactiveFormsModule
   ],
   exports: [
+    RouterModule,
+    AngularSvgIconModule,
+    ReactiveFormsModule,
     HeaderComponent,
     MenuMobileComponent,
     MenuItemComponent,
     PopupComponent,
     StarsComponent,
-    ToastComponent
+    ToastComponent,
   ],
 })
 export class SharedModule { }

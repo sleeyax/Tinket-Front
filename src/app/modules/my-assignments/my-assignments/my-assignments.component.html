@@ -5,19 +5,11 @@
 
 <div class="container">
 
-  <app-assignment-card
-    title="Op zoek naar freelancers?"
-    location="Brussel, België"
-    routerLink="/test"
-    [open]="true"
-    [archived]="false">
-  </app-assignment-card>
-
-  <app-assignment-card
-    title="Op zoek naar freelancers?"
-    location="Brussel, België"
-    routerLink="/test"
-    [open]="false"
+  <app-assignment-card *ngFor="let assignment of assignments"
+    [title]="assignment.title"
+    [location]="assignment.location.city + ', ' + assignment.location.country"
+    [routerLink]="'/assignments/' + assignment._id"
+    [open]="assignment.open"
     [archived]="false">
   </app-assignment-card>
 
@@ -27,7 +19,7 @@
   <app-assignment-card
     title="Op zoek naar freelancers?"
     location="Brussel, België"
-    routerLink="/test"
+    routerLink="/assignments/test"
     [open]="false"
     [archived]="true">
   </app-assignment-card>
