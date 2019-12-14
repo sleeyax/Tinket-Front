@@ -7,25 +7,29 @@ import { User } from '@app/shared/models/user';
 import { MakerProfile } from '@app/shared/models/makerProfile';
 import { CompanyProfile } from '@app/shared/models/companyProfile';
 import { Observable } from 'rxjs';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  constructor(private http: HttpClient) { }
+  currentUser: User;
+  constructor(private http: HttpClient, private authenticationService: AuthenticationService) { 
+    this.authenticationService.currentUser.subscribe(res => this.currentUser = res)
+  }
 
   updateMakerProfile(profile: MakerProfile) {
-    return this.http.put(`${environment.apiUrl}/users/me/maker-profile`, profile);
+    return this.http.put(`${environment.apiUrl}/users/${this.currentUser._id}/maker-profile`, profile);
   }
 
   updateCompanyProfile(profile: CompanyProfile) {
-    return this.http.put(`${environment.apiUrl}/users/me/company-profile`, profile);
+    return this.http.put(`${environment.apiUrl}/users/${this.currentUser._id}/company-profile`, profile);
   }
 
   updateUser(user: User) {
-    return this.http.put(`${environment.apiUrl}/users/me`, user);
+    return this.http.put(`${environment.apiUrl}/users/${this.currentUser._id}`, user);
   }
 
   getUser(): Observable<User>{
-    return this.http.get<User>(`${environment.apiUrl}/users/me`);
+    return this.http.get<User>(`${environment.apiUrl}/users/${this.currentUser._id}`);
   }
 
   getUsers(): Observable<User[]>{

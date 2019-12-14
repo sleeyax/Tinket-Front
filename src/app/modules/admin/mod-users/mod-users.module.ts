@@ -4,11 +4,12 @@ import { ModUsersComponent } from './mod-users/mod-users.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { FormsModule }   from '@angular/forms';
 import { FilterPipe} from './filter.pipe';
+import { ModUserprofileComponent } from './mod-userprofile/mod-userprofile.component';
 
 
 
 @NgModule({
-  declarations: [ModUsersComponent, FilterPipe],
+  declarations: [ModUsersComponent, FilterPipe, ModUserprofileComponent],
   imports: [
     CommonModule,
     SharedModule,
