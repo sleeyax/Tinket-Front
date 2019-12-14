@@ -16,11 +16,11 @@ export class AssignmentDetailComponent implements OnInit {
   ) {
     const assignmentId = this.route.snapshot.paramMap.get("id")
 
-    this.assignmentService.getAssignment(assignmentId)
+    /*this.assignmentService.getAssignment(assignmentId)
       .subscribe(
         poll => {
           this.poll = poll;
-        });
+        });*/
    }
 
   ngOnInit() {
