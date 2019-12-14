@@ -12,7 +12,7 @@ export class AssignmentService {
   constructor(private http: HttpClient) { }
 
   getMyAssignments(): Observable<Assignment[]>{
-    console.log("test");
-    return this.http.get<Assignment[]>(`${environment.apiUrl}/users/me/assignments`);
+    return null;
+    //return this.http.get<Assignment[]>(`${environment.apiUrl}/users/me/assignments`);
   }
 }

@@ -13,6 +13,7 @@ export class MyAssignmentsComponent implements OnInit {
   constructor(
     private assignmentService : AssignmentService
   ) {
+    return;
     this.assignmentService.getMyAssignments()
       .subscribe((assignments : Assignment[]) =>
         this.assignments = assignments
