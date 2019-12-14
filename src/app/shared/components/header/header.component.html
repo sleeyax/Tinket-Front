@@ -1,4 +1,4 @@
-<header [class.fixed]="fixed">
+<header [ngClass]="{'underline': underline}" [class.fixed]="fixed">
   <div class="container">
     <h1 id="logo" class="text-center mt-3 mb-5 colored">Tinket</h1>
     <p *ngIf="parentRouterLink" class="navigate-up">

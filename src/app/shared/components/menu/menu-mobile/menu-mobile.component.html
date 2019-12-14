@@ -37,6 +37,12 @@
       label="Reviews">
     </app-menu-item>
 
+    <app-menu-item *ngIf="currentUser.isAdmin"
+      routerLink="/mod/assignments"
+      icon="/assets/svg/menu/assignments.svg"
+      label="Opdrachten">
+    </app-menu-item>
+
     <app-menu-item
       routerLink="/profile"
       icon="/assets/svg/menu/profile.svg"

@@ -35,7 +35,7 @@ export class PasswordComponent implements OnInit {
   onSubmit() {
     this.loading = true;
 
-    if (this.passwordForm.valid) {
+    if (this.passwordForm.valid && this.f.password == this.f.confirmPassword) {
       this.authenticationService.changePassword(this.f.oldpassword.value, this.f.password.value).subscribe(() => {
         this.authenticationService.deteleUserTokens().subscribe(() => {
           this.authenticationService.logout()
@@ -51,6 +51,7 @@ export class PasswordComponent implements OnInit {
         }
       )
     } else{
+      this.error = "Nieuwe wachtwoorden komen niet overeen"
       this.loading = false;
     }
   }

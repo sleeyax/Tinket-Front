@@ -17,23 +17,22 @@ export class MyReviewsComponent implements OnInit {
 
   constructor(
     private reviewService: ReviewService,
-    private authenticationService: AuthenticationService
-  ) {
+    private authenticationService: AuthenticationService) {
     this.authenticationService.currentUser
       .subscribe(user => this.currentUser = user);
 
-    this.reviewService.getSkills().subscribe((reviews : Review[]) => {
+    this.reviewService.getSkills().subscribe((reviews: Review[]) => {
       this.reviews = reviews;
       const scores = [];
-
+      console.log(this.reviews)
       this.reviews.forEach(review => scores.push(review.score));
-      this.avarageScore =  this.calculateAverage(scores);
+      this.avarageScore = this.calculateAverage(scores);
+
     });
   }
 
   calculateAverage(scores) {
     const average = arr => arr.reduce((p, c) => p + c, 0) / arr.length;
-
     return average(scores)
   }
 

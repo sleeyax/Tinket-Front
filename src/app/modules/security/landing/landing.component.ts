@@ -11,11 +11,12 @@ import { UserService } from '@app/core/services/user.service';
   styleUrls: ['./landing.component.scss']
 })
 export class LandingComponent implements OnInit {
-
+  currentUser: User;
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
+
     const user = this.authenticationService.currentUserValue;
 
     if(user) {
@@ -23,6 +24,7 @@ export class LandingComponent implements OnInit {
 
       if(user.isMaker) startpage = '/discover';
       if(user.representsCompany) startpage = '/assignments';
+      if(user.isAdmin) startpage = 'mod/users';
       this.router.navigate([ startpage ]);
     }
   }

@@ -16,6 +16,10 @@ import { MyAssignmentsComponent } from './modules/my-assignments/my-assignments/
 import { AssignmentDetailComponent } from './modules/my-assignments/assignment-detail/assignment-detail.component';
 import { MyReviewsComponent } from './modules/my-reviews/my-reviews/my-reviews.component';
 import { PasswordComponent } from './modules/profile/password/password.component';
+import { ModUsersComponent } from './modules/admin/mod-users/mod-users/mod-users.component';
+import { AdminGuard } from './core/guards/admin.guard';
+import { ModReviewsComponent } from './modules/admin/mod-reviews/mod-reviews/mod-reviews.component';
+import { ModAssignmentsComponent } from './modules/admin/mod-assignments/mod-assignments/mod-assignments.component';
 import { AssignmentNewComponent } from './modules/my-assignments/assignment-new/assignment-new.component';
 import { AssignmentEditComponent } from './modules/my-assignments/assignment-edit/assignment-edit.component';
 import { AssignmentApplicantsComponent } from './modules/my-assignments/assignment-applicants/assignment-applicants.component';
@@ -38,6 +42,13 @@ const routes: Routes = [
 
   // Assignments
   { path: 'assignments', component: MyAssignmentsComponent, canActivate: [AuthGuard, CompanyGuard]},
+  { path: 'reviews', component: MyReviewsComponent, canActivate: [AuthGuard]},
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  { path: 'changePassword', component: PasswordComponent, canActivate: [AuthGuard]},
+
+  { path: 'mod/users', component: ModUsersComponent, canActivate: [AdminGuard]},
+  { path: 'mod/reviews', component: ModReviewsComponent, canActivate: [AdminGuard]},
+  { path: 'mod/assignments', component: ModAssignmentsComponent, canActivate: [AdminGuard]},
 
   { path: 'assignments/new', component: AssignmentNewComponent, canActivate: [AuthGuard, CompanyGuard]},
   { path: 'assignments/:id', component: AssignmentDetailComponent, canActivate: [AuthGuard, CompanyGuard]},
