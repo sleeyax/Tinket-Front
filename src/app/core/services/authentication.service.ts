@@ -38,12 +38,12 @@ export class AuthenticationService {
   }
 
   deteleUserTokens(){
-    return this.http.delete(`${environment.apiUrl}/users/me/tokens`);
+    return this.http.delete(`${environment.apiUrl}/users/${this.currentUserValue._id}/tokens`);
   }
 
 
   changePassword(oldpassword: string, newpassword: string){
-    return this.http.put<any>(`${environment.apiUrl}/users/me/change-password`, { password: oldpassword, newPassword: newpassword })
+    return this.http.put<any>(`${environment.apiUrl}/users/${this.currentUserValue._id}/change-password`, { password: oldpassword, newPassword: newpassword })
     .pipe(map(() => this.deteleUserTokens()));
   }
 
@@ -54,7 +54,7 @@ export class AuthenticationService {
 
   async refreshCurrentUser() {
     return new Promise((resolve) => {
-      this.http.get(`${environment.apiUrl}/users/me`)
+      this.http.get(`${environment.apiUrl}/users/${this.currentUserValue._id}`)
         .subscribe((user => {
           const currentToken = this.currentUserValue.token;
           this.storeUser(

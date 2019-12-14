@@ -6,13 +6,22 @@ import { map, catchError } from 'rxjs/operators';
 import { environment } from '@environments/environment';
 import { User } from '@app/shared/models/user';
 import { Assignment } from '@app/shared/models/assignment';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({ providedIn: 'root' })
 export class AssignmentService {
-  constructor(private http: HttpClient) { }
+  currentUser : User;
+
+  constructor(
+    private http: HttpClient,
+    private authenticationService : AuthenticationService
+  ) {
+    this.authenticationService.currentUser
+      .subscribe((user) => this.currentUser = user);
+   }
 
   getMyAssignments(): Observable<Assignment[]>{
-    return null;
-    //return this.http.get<Assignment[]>(`${environment.apiUrl}/users/me/assignments`);
+    return this.http.get<Assignment[]>(`${environment.apiUrl}/users/${this.currentUser._id}/assignments`);
   }
+
 }
