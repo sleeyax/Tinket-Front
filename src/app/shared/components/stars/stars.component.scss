@@ -28,14 +28,6 @@
   color: rgb(226, 190, 60);
 }
 
-.rating:not(:checked)>label:hover,
-.rating:not(:checked)>label:hover~label {
-  color: #EAD382;
-}
-
-
-.rating>input:checked~label:hover,
-.rating>input:checked~label:hover~label,
-.rating>label:hover~input:checked~label {
-  color: #ea0;
+.starContainer{
+  border-bottom: 1px solid #E3E9EF;
 }

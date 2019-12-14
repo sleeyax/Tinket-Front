@@ -38,6 +38,7 @@ const routes: Routes = [
 
   // Assignments
   { path: 'assignments', component: MyAssignmentsComponent, canActivate: [AuthGuard, CompanyGuard]},
+
   { path: 'assignments/new', component: AssignmentNewComponent, canActivate: [AuthGuard, CompanyGuard]},
   { path: 'assignments/:id', component: AssignmentDetailComponent, canActivate: [AuthGuard, CompanyGuard]},
   { path: 'assignments/:id/edit', component: AssignmentEditComponent, canActivate: [AuthGuard, CompanyGuard]},
