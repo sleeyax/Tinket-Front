@@ -38,9 +38,13 @@
 
 </div>
 
-
 <app-footer>
-  <div class="container border-top">
-    test
+  <div class="container border-top py-3">
+    <div class="d-flex">
+        <a *ngIf="!assignment.archivedAt" routerLink="edit" class="btn btn-primary mr-3">Bewerk</a>
+        <a routerLink="applicants" class="btn btn-white border flex-grow-1 shadow-sm font-weight-bold">
+          Bekijk inschrijvingen <svg-icon src="../../../../../assets/svg/forward.svg"></svg-icon>
+        </a>
+    </div>
   </div>
 </app-footer>
