@@ -24,7 +24,6 @@ export class SkillService {
     return this.http.get<Skill[]>(`${environment.apiUrl}/skills`);
   }
 
-
   updateUserSkills(skills: string[]) {
     return this.http.put<string[]>(`${environment.apiUrl}/users/${this.currentUser._id}/skills`, skills);
   }

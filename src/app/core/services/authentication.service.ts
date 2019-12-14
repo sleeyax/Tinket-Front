@@ -43,7 +43,7 @@ export class AuthenticationService {
 
 
   changePassword(oldpassword: string, newpassword: string){
-    return this.http.put<any>(`${environment.apiUrl}/users/${this.currentUserValue._id}/change-password`, { password: oldpassword, newPassword: newpassword })
+    return this.http.put<any>(`${environment.apiUrl}/users/${this.currentUserValue._id}/password`, { password: oldpassword, newPassword: newpassword })
     .pipe(map(() => this.deteleUserTokens()));
   }
 

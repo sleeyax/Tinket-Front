@@ -8,7 +8,6 @@ import { MenuItemComponent } from './components/menu/menu-item/menu-item.compone
 import { PopupComponent } from './components/popup/popup.component'
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { StarsComponent } from './components/stars/stars.component';
-import { ToastComponent } from './components/toast/toast.component';
 import { ReviewboxComponent } from './components/reviewbox/reviewbox.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -19,7 +18,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     MenuItemComponent,
     PopupComponent,
     StarsComponent,
-    ToastComponent,
     ReviewboxComponent,
   ],
   imports: [
@@ -37,7 +35,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     MenuItemComponent,
     PopupComponent,
     StarsComponent,
-    ToastComponent,
     ReviewboxComponent
   ],
 })
