@@ -49,6 +49,7 @@ const routes: Routes = [
   { path: 'mod/users', component: ModUsersComponent, canActivate: [AdminGuard]},
   { path: 'mod/reviews', component: ModReviewsComponent, canActivate: [AdminGuard]},
   { path: 'mod/assignments', component: ModAssignmentsComponent, canActivate: [AdminGuard]},
+
   { path: 'assignments/new', component: AssignmentNewComponent, canActivate: [AuthGuard, CompanyGuard]},
   { path: 'assignments/:id', component: AssignmentDetailComponent, canActivate: [AuthGuard, CompanyGuard]},
   { path: 'assignments/:id/edit', component: AssignmentEditComponent, canActivate: [AuthGuard, CompanyGuard]},

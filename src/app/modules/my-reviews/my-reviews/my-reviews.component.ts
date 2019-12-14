@@ -27,6 +27,7 @@ export class MyReviewsComponent implements OnInit {
       console.log(this.reviews)
       this.reviews.forEach(review => scores.push(review.score));
       this.avarageScore = this.calculateAverage(scores);
+
     });
   }
 
