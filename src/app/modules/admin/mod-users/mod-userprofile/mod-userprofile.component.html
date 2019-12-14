@@ -1,1 +1,14 @@
-<p>mod-userprofile works!</p>
+<app-header *ngIf="selectedUser" underline="true" parentTitle="Beheer gebruikers"
+  [title]="isMaker ? selectedUser.firstname + ' ' + selectedUser.lastname : selectedUser.companyProfile.name"
+  parentRouterLink="/mod/users">
+  <div>
+    <div>
+      <img style="border-radius: 100%;" src="https://api.adorable.io/avatars/75/{{selectedUser._id}}" alt="">
+      &nbsp; &nbsp;{{isMaker ? selectedUser.makerProfile.bio : selectedUser.companyProfile.description }}
+    </div>
+    <p>
+    </p>
+  </div>
+</app-header>
+
+

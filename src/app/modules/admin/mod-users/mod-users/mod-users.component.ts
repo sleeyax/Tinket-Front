@@ -28,7 +28,7 @@ export class ModUsersComponent implements OnInit {
   }
 
   goToProfile(userId){
-    console.log(userId)
+    this.router.navigate([`mod/users/${userId}`])
   }
 
   calculateAge(birthday) {

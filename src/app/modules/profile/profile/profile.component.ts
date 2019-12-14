@@ -158,8 +158,6 @@ export class ProfileComponent implements OnInit {
     this.userService.updateUser(user).subscribe(() => {
       this.authenticationService.refreshCurrentUser().then(() => {
         this.loading = false;
-        this.toast = true;
-        setTimeout( () => { this.toast = false }, 2000 )
       })
     });
   }
