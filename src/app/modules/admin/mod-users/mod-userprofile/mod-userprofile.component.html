@@ -3,12 +3,40 @@
   parentRouterLink="/mod/users">
   <div>
     <div>
-      <img style="border-radius: 100%;" src="https://api.adorable.io/avatars/75/{{selectedUser._id}}" alt="">
-      &nbsp; &nbsp;{{isMaker ? selectedUser.makerProfile.bio : selectedUser.companyProfile.description }}
+      <img style="border-radius: 100%;" src="https://api.adorable.io/avatars/75/{{selectedUser._id}}" alt="avatar">
+      &nbsp; &nbsp; {{isMaker ? selectedUser.makerProfile.bio == ''? 'Geen bio' : selectedUser.makerProfile.bio  : selectedUser.companyProfile.description == ''? 'Geen beschrijving' : selectedUser.companyProfile.description}}
     </div>
     <p>
     </p>
   </div>
 </app-header>
 
+<div *ngIf="selectedUser && isMaker" style="border-bottom: 1px solid #E3E9EF; padding: 10px 0;">
+  <div class="container" style="line-height: 50px;">
+    <img src="../../../../../assets/svg/moderate/birthday.svg" alt="birthdaycake">
+    &nbsp; <span>{{birthday}} ({{age}})</span>
+  </div>
+</div>
 
+<div *ngIf="selectedUser" style="border-bottom: 1px solid #E3E9EF; padding: 10px 0;">
+  <div class="container" style="line-height: 50px;">
+    <img src="../../../../../assets/svg/moderate/location.svg" alt="location">
+    &nbsp;
+    <span>{{location}}</span>
+  </div>
+</div>
+
+<div *ngIf="selectedUser && isMaker" style="border-bottom: 1px solid #E3E9EF; padding: 10px 0; margin-top: 15px;">
+  <div class="container">
+    <p style="margin-bottom: 0; font-weight: 600;">Ervaring</p>
+    <p style="margin-top: 10px;">{{selectedUser.makerProfile.experience == ''? 'Geen ervaring' : selectedUser.makerProfile.experience }}</p>
+  </div>
+</div>
+
+<div *ngIf="selectedUser" style="padding: 10px 0; margin-top: 15px;">
+        <div class="container">
+          <p style="margin-bottom: 0; font-weight: 600;">Ontvangen reviews</p>
+
+        </div>
+      </div>
+      

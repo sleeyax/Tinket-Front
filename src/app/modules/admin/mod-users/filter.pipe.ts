@@ -14,8 +14,8 @@ export class FilterPipe implements PipeTransform {
     searchText = searchText.toLowerCase();
     return items.filter(it => {
       return it.lastname.toLowerCase().includes(searchText) 
-      || it.firstname.toLowerCase().includes(searchText);
-    //   || it.companyProfile.name.toLowerCase().includes(searchText); //needs fix
+      || it.firstname.toLowerCase().includes(searchText)
+      || ( it.companyProfile && it.companyProfile.name.toLowerCase().includes(searchText));
     });
   }
 }

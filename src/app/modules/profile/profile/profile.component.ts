@@ -8,6 +8,7 @@ import { Skill } from '@app/shared/models/skill';
 import { User } from '@app/shared/models/user';
 import { CompanyProfile } from '@app/shared/models/companyProfile';
 import { MakerProfile } from '@app/shared/models/makerProfile';
+import { ToastService } from '@app/core/services/toast.service';
 
 @Component({
   selector: 'app-profile',
@@ -25,14 +26,14 @@ export class ProfileComponent implements OnInit {
   mySkills: Skill[] = [];
   mySkillIds: string[] = [];
   currentUser: User;
-  toast = false;
 
 
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private authenticationService: AuthenticationService,
     private userService: UserService,
-    private skillService: SkillService) {
+    private skillService: SkillService,
+    private toastservice: ToastService) {
     this.authenticationService.currentUser.subscribe(user => this.currentUser = user)
     if (this.currentUser.companyProfile != null) {
       this.isMaker = false;
@@ -158,6 +159,7 @@ export class ProfileComponent implements OnInit {
     this.userService.updateUser(user).subscribe(() => {
       this.authenticationService.refreshCurrentUser().then(() => {
         this.loading = false;
+        this.toastservice.toast("Profiel geupdate!")
       })
     });
   }
