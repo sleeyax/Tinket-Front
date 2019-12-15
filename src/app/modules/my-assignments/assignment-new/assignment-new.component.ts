@@ -52,9 +52,10 @@ export class AssignmentNewComponent implements OnInit {
       open: true,
       createdBy: this.currentUser,
     }
+    this.submitted = true;
+
     if (this.newAssignmentForm.valid) {
       this.loading = true;
-      this.submitted = true;
       this.assignmentService.createAssignment(assignment).subscribe(() => {
         this.toastService.toast("Opdracht gemaakt!")
         this.router.navigate(['/assignments'])
@@ -77,12 +78,16 @@ export class AssignmentNewComponent implements OnInit {
       postalCode: ['', [Validators.required]],
       interest: []
     });
+    this.f.interest.setValue("Kies hier...")
+
   }
 
   addSkill() {
     if (this.selectedSkills == null || !this.selectedSkills.includes(this.f.interest.value)) {
-      console.log(this.f.interest.value)
-      this.selectedSkills.push(this.f.interest.value)
+      if (this.f.interest.value !== "Kies hier...") {
+        console.log(this.f.interest.value)
+        this.selectedSkills.push(this.f.interest.value)
+      }
     }
   }
 
@@ -90,5 +95,4 @@ export class AssignmentNewComponent implements OnInit {
     let index = this.selectedSkills.findIndex(skill => skill._id === deleteskill._id);
     this.selectedSkills.splice(index, 1);
   }
-
 }

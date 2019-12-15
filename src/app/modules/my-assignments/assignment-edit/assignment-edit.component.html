@@ -1,29 +1,70 @@
-<app-header
-  title="Bewerken"
-  parentTitle="Mijn opdracht"
+<app-header *ngIf="assignment" title="Bewerken" parentTitle="Mijn opdracht"
   [parentRouterLink]="'/assignments/' + assignment._id">
 </app-header>
 
-<div class="container border-top my-4 pt-4">
-
-  <form [formGroup]="editAssignmentForm" (ngSubmit)="onSubmit()">
-
+<form [formGroup]="editAssignmentForm" (ngSubmit)="onSubmit()">
+  <div class="container pt-4" style="margin-bottom: 100px;">
+    <div *ngIf="error" class="text-danger font-weight-bold mb-3 mb-0">{{error}}</div>
     <div class="form-group">
       <label class="small" for="title">Titel van de opdracht</label>
-      <input type="text" formControlName="title" class="form-control form-control-lg text-black" [ngClass]="{ 'is-invalid': submitted && f.title.errors }" />
+      <input type="text" formControlName="title" class="form-control form-control-lg text-black"
+        [ngClass]="{ 'is-invalid': submitted && f.title.errors }" />
       <div *ngIf="submitted && f.title.errors" class="invalid-feedback text-right">
         <div *ngIf="f.title.errors.required">Vul een titel in</div>
       </div>
     </div>
-
     <div class="form-group">
       <label class="small" for="description">Omschrijving</label>
-      <input type="text" formControlName="description" class="form-control form-control-lg text-black" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+      <textarea placeholder="Typ een korte omschrijving van je opdracht ter aanvulling van je video." type="text"
+        rows="4" cols="20" formControlName="description" class="form-control form-control-lg text-black"
+        [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
       <div *ngIf="submitted && f.description.errors" class="invalid-feedback text-right">
         <div *ngIf="f.description.errors.required">Vul een omschrijving in</div>
       </div>
     </div>
-
-  </form>
-
-</div>
+    <div class="form-group">
+      <label class="small" for="interests">Tags</label>
+      <div class="input-group">
+        <select formControlName="interest" class="custom-select">
+          <option selected>Kies hier...</option>
+          <ng-container *ngFor="let skill of skills">
+            <option [ngValue]="skill">{{skill.name}}</option>
+          </ng-container>
+        </select>
+        <div class="input-group-append">
+          <button (click)="addSkill()" class="btn btn-sm addButton" type="button">
+            <img src="../../../../assets/svg/profile/plus.svg" alt="plus sign"></button>
+        </div>
+      </div>
+      <div *ngFor="let skill of selectedSkills" class="chip">
+        {{skill.name}}
+        <span class="closebtn" (click)="deleteSkill(skill)">&times;</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="location" class="small">Adres</label>
+      <input [ngClass]="{ 'is-invalid': submitted && f.city.errors }" type="text" id="location" placeholder="Stad"
+        formControlName="city" class="form-control text-black" />
+      <input [ngClass]="{ 'is-invalid': submitted && f.postalCode.errors }" type="text" placeholder="Postcode"
+        formControlName="postalCode" class="form-control text-black mt-1" />
+      <input [ngClass]="{ 'is-invalid': submitted && f.country.errors }" type="text" placeholder="Land"
+        formControlName="country" class="form-control text-black mt-1" />
+      <div *ngIf="submitted && f.title.errors" class="invalid-feedback text-right">
+        <div *ngIf="f.country.errors.required || f.city.errors.required || f.postalCode.errors.required">Vul een adres
+          in</div>
+      </div>
+    </div>
+  </div>
+  <app-footer>
+    <div class="container border-top py-3">
+      <div class="d-flex">
+        <button type="button" (click)="archive()" routerLinkActive="router-link-active" class="btn btn-danger text-white mr-3">Archive
+          <svg-icon style="fill: white;" src="../../../../../assets/svg/assignments/archive.svg"></svg-icon></button>
+        <button type="submit" class="btn btn-white border flex-grow-1 shadow-sm font-weight-bold">Opslaan
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          <svg-icon *ngIf="!loading" src="../../../../../assets/svg/forward.svg"></svg-icon>
+        </button>
+      </div>
+    </div>
+  </app-footer>
+</form>

@@ -82,10 +82,12 @@ export class ProfileComponent implements OnInit {
   addSkill() {
     this.loadingSkills = true
     if (this.mySkills == null || !this.mySkillIds.includes(this.f.interest.value)) {
-      this.mySkillIds.push(this.f.interest.value)
-      this.skillService.updateUserSkills(this.mySkillIds).subscribe(() => {
-        this.getSkills()
-      })
+      if (this.f.interest.value !== "Kies hier...") {
+        this.mySkillIds.push(this.f.interest.value)
+        this.skillService.updateUserSkills(this.mySkillIds).subscribe(() => {
+          this.getSkills()
+        })
+      }
     } else {
       this.loadingSkills = false;
     }

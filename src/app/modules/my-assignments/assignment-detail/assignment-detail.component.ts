@@ -24,6 +24,7 @@ export class AssignmentDetailComponent implements OnInit {
       .subscribe(
         assignment => {
           this.assignment = assignment;
+          console.log(assignment)
         });
    }
 
