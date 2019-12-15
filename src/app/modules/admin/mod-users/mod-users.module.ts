@@ -6,6 +6,7 @@ import { FormsModule }   from '@angular/forms';
 import { FilterPipe} from './filter.pipe';
 import { ModUserDetailComponent } from './mod-user-detail/mod-user-detail.component';
 import { ModUserReviewsComponent } from './mod-user-reviews/mod-user-reviews.component';
+import { ModUserCreateComponent } from './mod-user-create/mod-user-create.component';
 
 
 
@@ -14,7 +15,8 @@ import { ModUserReviewsComponent } from './mod-user-reviews/mod-user-reviews.com
     ModUsersComponent,
     FilterPipe,
     ModUserDetailComponent,
-    ModUserReviewsComponent
+    ModUserReviewsComponent,
+    ModUserCreateComponent
   ],
   imports: [
     CommonModule,

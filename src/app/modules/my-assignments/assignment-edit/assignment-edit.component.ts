@@ -8,8 +8,6 @@ import { AuthenticationService } from '@app/core/services/authentication.service
 import { ToastService } from '@app/core/services/toast.service';
 import { User } from '@app/shared/models/user';
 import { Skill } from '@app/shared/models/skill';
-import { get } from 'http';
-import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-assignment-edit',

@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { UserService } from '@app/core/services/user.service';
 import { User } from '@app/shared/models/user';
-import { FilterPipe} from '../filter.pipe';
+import { FilterPipe } from '../filter.pipe';
+import { ToastService } from '@app/core/services/toast.service';
 
 
 @Component({
@@ -18,17 +19,39 @@ export class ModUsersComponent implements OnInit {
   users: User[];
   constructor(private formBuilder: FormBuilder,
     private router: Router,
+    private toastService: ToastService,
     private authenticationService: AuthenticationService,
     private userService: UserService) {
     this.authenticationService.currentUser.subscribe(res => this.currentUser = res)
+    this.getUsers()
+  }
+
+  getUsers() {
     this.userService.getUsers().subscribe(res => this.users = res)
   }
 
   ngOnInit() {
   }
 
-  goToProfile(userId){
+  goToProfile(userId) {
     this.router.navigate([`mod/users/${userId}`])
+  }
+
+  deleteCounter = 0
+  deleteUser(userId) {
+    this.deleteCounter++;
+    if (this.deleteCounter == 2) {
+      this.userService.deleteUser(userId).subscribe(() => {
+        this.toastService.toast("Gebruiker verwijderd!")
+        this.getUsers();
+      })
+    } else {
+      this.toastService.toast("Klik nogmaals om te verwijderen")
+    }
+
+    setTimeout(() => {
+      this.deleteCounter = 0;
+    }, 3000);
   }
 
   calculateAge(birthday) {
@@ -36,5 +59,9 @@ export class ModUsersComponent implements OnInit {
     var ageDifMs = Date.now() - date.getTime();
     var ageDate = new Date(ageDifMs);
     return String(Math.abs(ageDate.getUTCFullYear() - 1970) + " jaar, ");
+  }
+
+  create(){
+    this.router.navigate(['mod/users/create'])
   }
 }

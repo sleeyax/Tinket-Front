@@ -3,15 +3,17 @@
   <input [(ngModel)]="searchText" type="text" class="form-control form-control-lg text-black">
 </app-header>
 
-<div class="container">
+<div class="container" style="margin-bottom: 100px;">
   <ng-container *ngFor="let user of users | filter : searchText">
-    <a (click)="goToProfile(user._id)" class="py-3 px-0 border-bottom position-relative d-block">
+    <a (click)="!user.makerProfile && !user.companyProfile? deleteUser(user._id) : goToProfile(user._id)"
+      class="py-3 px-0 border-bottom position-relative d-block">
       <div class="row">
         <div class="col-2">
           <img class="rounded-circle" [src]="'https://api.adorable.io/avatars/25/' + user._id" alt="avatar">
         </div>
-        <div class="col-10">
-          <p class="m-0"> {{ !user.representsCompany ? user.firstname + ' ' + user.lastname : user.companyProfile.name }} </p>
+        <div class="col-7">
+          <p class="m-0">
+            {{ !user.representsCompany ? user.firstname + ' ' + user.lastname : user.companyProfile.name }} </p>
           <p class="m-0 small" *ngIf="user.makerProfile || user.companyProfile">
             {{ user.makerProfile ? calculateAge(user.makerProfile.dateOfBirth): 'Bedrijf, '}}
             {{
@@ -24,7 +26,26 @@
             Incompleet profiel
           </p>
         </div>
+        <div class="col-3 pt-2 m-0">
+          <svg-icon *ngIf="user.makerProfile || user.companyProfile" class="p-0"
+            src="../../../../../assets/svg/moderate/eye.svg" alt="icon">
+          </svg-icon>
+          <svg-icon style="fill: red;" *ngIf="!user.makerProfile && !user.companyProfile" class="p-0"
+            src="../../../../../assets/svg/moderate/delete.svg" alt="icon">
+          </svg-icon>
+        </div>
       </div>
     </a>
   </ng-container>
 </div>
+
+<app-footer>
+  <div class="container border-top py-3">
+    <div class="d-flex">
+      <a *ngIf="assignment && !assignment.archivedAt" routerLink="edit" class="btn btn-primary mr-3">Bewerk</a>
+      <a [routerLink]="['create']" routerLinkActive="router-link-active"  routerLinkActive="router-link-active"  class="btn btn-white border flex-grow-1 shadow-sm font-weight-bold">
+        Maak gebruiker aan <svg-icon src="../../../../../assets/svg/forward.svg"></svg-icon>
+      </a>
+    </div>
+  </div>
+</app-footer>

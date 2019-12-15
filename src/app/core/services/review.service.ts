@@ -29,7 +29,11 @@ export class ReviewService {
   }
 
   deleteReview(id: string){
-    return this.http.delete<Review>((`${environment.apiUrl}/reviews/` + id));
+    return this.http.delete<Review>(`${environment.apiUrl}/reviews/` + id);
+  }
+
+  getWrittenReviewsByUserId(id: string): Observable<Review[]>{
+    return this.http.get<Review[]>(`${environment.apiUrl}/users/${id}/writtenReviews`)
   }
 
 }

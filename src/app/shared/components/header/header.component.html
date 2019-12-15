@@ -7,7 +7,7 @@
         {{ parentTitle }}
       </a>
     </p>
-    <h2 class="mb-3"> {{ title }} </h2>
+    <h2 [ngClass]="{'mb-3': !subtitle}"> {{ title }} </h2>
     <p *ngIf="subtitle" style="margin-top: 0;"> {{subtitle}} </p>
     <p class="text-muted">
       <ng-content></ng-content>

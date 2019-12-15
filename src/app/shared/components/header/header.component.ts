@@ -11,6 +11,7 @@ export class HeaderComponent implements OnInit {
   @Input() parentRouterLink: String;
   @Input() fixed: boolean;
   @Input() underline: boolean;
+  @Input() subtitle: String;
 
   constructor() { }
 
