@@ -13,7 +13,9 @@
       description="{{review.description}}">
     </app-reviewbox>
   </ng-container>
-  <div *ngIf="reviews.length == 0" class="alert alert-warning mt-2 text-center" role="alert">
-    Je hebt nog geen reviews!
+  <div *ngIf="reviews.length == 0" class="h4 text-weight-normal text-center text-black-50 my-5" role="alert">
+    <img class="img-fluid mx-auto d-block mb-3" style="max-width:120px;"
+      src="../../../../../assets/svg/no-data.svg" alt="Geen gegevens!">
+    <small> Je hebt nog geen reviews ontvangen! </small>
   </div>
 </div>
