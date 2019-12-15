@@ -14,7 +14,7 @@ import { ToastService } from '@app/core/services/toast.service';
   styleUrls: ['./mod-users.component.scss']
 })
 export class ModUsersComponent implements OnInit {
-
+  searchText: string;
   currentUser: User;
   users: User[];
   constructor(private formBuilder: FormBuilder,

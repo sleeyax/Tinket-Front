@@ -1,6 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import Plyr from 'plyr';
 import Hammer from 'hammerjs';
+import { Assignment } from '@app/shared/models/assignment';
+import { AssignmentService } from '@app/core/services/assignment.service';
+import { AuthenticationService } from '@app/core/services/authentication.service';
+import { User } from '@app/shared/models/user';
 
 @Component({
   selector: 'app-discover',
@@ -10,8 +14,45 @@ import Hammer from 'hammerjs';
 })
 export class DiscoverComponent implements OnInit {
   player : Plyr;
-  hammer : Hammer;
+  hammerContent : Hammer;
+  hammerDetail : Hammer;
   infoShown = false;
+  currentUser : User;
+  assignments : Assignment[];
+  currentIndex = 0;
+
+  constructor(
+    private assignmentService : AssignmentService,
+    private authenticationService : AuthenticationService
+  ) {
+    authenticationService.currentUser
+      .subscribe((user) => this.currentUser = user );
+
+    assignmentService.getUserRecommended(this.currentUser._id)
+      .subscribe((recommended) => this.assignments = recommended);
+  }
+
+  get currentAssignment() : Assignment {
+    if(!this.assignments || this.assignments.length <= 0) return null;
+    return this.assignments[this.currentIndex];
+  }
+
+  get hasNextSlide() : Boolean {
+    if(!this.assignments) return false;
+    return (this.currentIndex + 1) < this.assignments.length;
+  }
+
+  get hasPrevSlide() : Boolean {
+    return this.currentIndex > 0;
+  }
+
+  next() {
+    if(this.hasNextSlide) this.currentIndex++;
+  }
+
+  prev() {
+    if(this.hasPrevSlide) this.currentIndex--;
+  }
 
   restart() {
     this.player.restart();
@@ -30,7 +71,10 @@ export class DiscoverComponent implements OnInit {
     this.mute();
   }
 
-  constructor() { }
+  hideContent() {
+    this.infoShown = false;
+    this.unmute();
+  }
 
   ngOnInit() {
     this.player = new Plyr('#player', {
@@ -43,15 +87,21 @@ export class DiscoverComponent implements OnInit {
       },
     });
 
-    this.hammer = new Hammer(
+    this.hammerContent = new Hammer(
       document.querySelector('.content'),
       { }
     );
 
-    this.hammer.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
-    this.hammer.on('swipeup', (e) => {
-      this.revealContent();
-    });
+    this.hammerContent.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+    this.hammerContent.on('swipeup', (e) => { this.revealContent(); });
+
+    this.hammerDetail = new Hammer(
+      document.querySelector('.detail'),
+      { }
+    );
+
+    this.hammerDetail.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+    this.hammerDetail.on('swipedown', (e) => { console.log("down"); this.hideContent(); });
 
   }
 

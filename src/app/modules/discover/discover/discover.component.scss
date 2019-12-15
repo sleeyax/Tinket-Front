@@ -1,4 +1,5 @@
 #discover {
+  overflow-y: hidden;
 
   header {
     position: fixed;
@@ -25,12 +26,22 @@
       left:0;
       border-top-right-radius: 30px;
       border-bottom-right-radius: 30px;
+      transition: transform .5s ease;
+
+      &.slide-in {
+        transform: translateX(-46px);
+      }
     }
 
     &.discover-nav--next {
       right:0;
       border-top-left-radius: 30px;
       border-bottom-left-radius: 30px;
+      transition: transform .5s ease;
+
+      &.slide-in {
+        transform: translateX(46px);
+      }
     }
   }
 
@@ -43,9 +54,9 @@
     justify-content: center;
 
     video {
-      max-width: 100%;;
+      max-width: 100%;
       width: auto !important;
-      height: 100% !important;
+      height: calc(var(--vh, 1vh) * 100) !important;
       object-fit: cover !important;
     }
   }

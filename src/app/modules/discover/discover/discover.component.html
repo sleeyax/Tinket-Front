@@ -1,4 +1,4 @@
-<div id="discover" class="h-100 position-relative">
+<div id="discover" class="h-100 position-relative" >
 
   <div id="swipe-panel">
 
@@ -10,17 +10,19 @@
     </div>
   </header>
 
-  <button *ngIf="!infoShown" class="discover-nav discover-nav--prev">
+  <button *ngIf="!infoShown" class="discover-nav discover-nav--prev"
+    (click)="prev()" [class.slide-in]="!hasPrevSlide">
     <img src="../../../../assets/svg/prev.svg" alt="">
   </button>
-  <button *ngIf="!infoShown" class="discover-nav discover-nav--next">
+  <button *ngIf="!infoShown" class="discover-nav discover-nav--next"
+    (click)="next()" [class.slide-in]="!hasNextSlide">
     <img src="../../../../assets/svg/next.svg" alt="">
   </button>
 
   <div class="h-100 mx-4 video-container">
-    <video poster="/path/to/poster.jpg" id="player">
+    <video poster="../../../../assets/poster.png" id="player">
       <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-        type="video/mp4" />
+        playsinline type="video/mp4" />
     </video>
   </div>
 
@@ -51,8 +53,24 @@
 
     <div (click)="revealContent()" class="detail bg-white shadow w-100">
       <div class="container">
-        <h2>Word jij onze nieuwe productfotograaf?</h2>
-        <p class="text-muted mb-0">Antwerpen, België</p>
+
+        <div *ngIf="!currentAssignment" class="d-flex justify-content-center">
+          <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+
+        <div *ngIf="currentAssignment">
+
+          <h2>{{ currentAssignment.title }}</h2>
+          <p class="text-muted mb-3">
+            {{ currentAssignment.location.city }},
+            {{ currentAssignment.location.country }}
+          </p>
+
+          <p> {{ currentAssignment.description }}  </p>
+
+        </div>
       </div>
     </div>
   </div>
