@@ -50,9 +50,9 @@ const routes: Routes = [
   { path: 'changePassword', component: PasswordComponent, canActivate: [AuthGuard]},
 
   { path: 'mod/users', component: ModUsersComponent, canActivate: [AdminGuard]},
+  { path: 'mod/users/create', component: ModUserCreateComponent, canActivate: [AdminGuard]},
   { path: 'mod/users/:id', component: ModUserDetailComponent, canActivate: [AdminGuard]},
   { path: 'mod/users/:id/reviews', component: ModUserReviewsComponent, canActivate: [AdminGuard]},
-  { path: 'mod/users/create', component: ModUserCreateComponent, canActivate: [AdminGuard]},
   { path: 'mod/reviews', component: ModReviewsComponent, canActivate: [AdminGuard]},
   { path: 'mod/assignments', component: ModAssignmentsComponent, canActivate: [AdminGuard]},
 

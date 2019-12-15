@@ -43,7 +43,7 @@
   <div class="container border-top py-3">
     <div class="d-flex">
       <a *ngIf="assignment && !assignment.archivedAt" routerLink="edit" class="btn btn-primary mr-3">Bewerk</a>
-      <a [routerLink]="['create']" routerLinkActive="router-link-active"  routerLinkActive="router-link-active"  class="btn btn-white border flex-grow-1 shadow-sm font-weight-bold">
+      <a routerLink="create" class="btn btn-white border flex-grow-1 shadow-sm font-weight-bold">
         Maak gebruiker aan <svg-icon src="../../../../../assets/svg/forward.svg"></svg-icon>
       </a>
     </div>
