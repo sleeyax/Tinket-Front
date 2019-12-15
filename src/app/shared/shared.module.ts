@@ -11,6 +11,7 @@ import { StarsComponent } from './components/stars/stars.component';
 import { ReviewboxComponent } from './components/reviewbox/reviewbox.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
+import { ApplicationCardComponent } from './components/application-card/application-card.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FooterComponent } from './components/footer/footer.component';
     StarsComponent,
     ReviewboxComponent,
     FooterComponent,
+    ApplicationCardComponent
   ],
   imports: [
     CommonModule,
@@ -39,6 +41,7 @@ import { FooterComponent } from './components/footer/footer.component';
     StarsComponent,
     ReviewboxComponent,
     FooterComponent,
+    ApplicationCardComponent
   ],
 })
 export class SharedModule { }
