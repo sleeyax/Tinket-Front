@@ -12,5 +12,10 @@
       </app-reviewbox>
     </ng-container>
   </div>
+</div>
 
+<div class="container">
+  <div *ngIf="deletedReviews && deletedReviews.length == 0" class="alert alert-warning text-center" role="alert">
+    Er zijn geen verwijderde reviews
+  </div>
 </div>

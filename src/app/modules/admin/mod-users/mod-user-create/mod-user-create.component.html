@@ -1,5 +1,6 @@
 <app-header title="Nieuwe gebruiker" parentTitle="Beheer gebruikers" parentRouterLink="/mod/users" underline="true">
-  Registreer een gebruiker, het onboarden moet de gebruiker doen bij de eerste inlog.
+  
+  {{isAdmin? 'Registreer een gebruiker, het onboarden moet de gebruiker doen bij de eerste inlog.' : 'Registreer een admin account.' }}
   <div class="row">
     <div class="col-8 my-auto">
     </div>
