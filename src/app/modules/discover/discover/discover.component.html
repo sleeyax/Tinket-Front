@@ -1,1 +1,59 @@
-<p>discover works!</p>
+<div id="discover" class="h-100 position-relative">
+
+  <div id="swipe-panel">
+
+  </div>
+
+  <header>
+    <div class="container">
+      <h1 id="logo" class="text-center pt-3 mb-5">Tinket</h1>
+    </div>
+  </header>
+
+  <button *ngIf="!infoShown" class="discover-nav discover-nav--prev">
+    <img src="../../../../assets/svg/prev.svg" alt="">
+  </button>
+  <button *ngIf="!infoShown" class="discover-nav discover-nav--next">
+    <img src="../../../../assets/svg/next.svg" alt="">
+  </button>
+
+  <div class="h-100 mx-4 video-container">
+    <video poster="/path/to/poster.jpg" id="player">
+      <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+        type="video/mp4" />
+    </video>
+  </div>
+
+  <div class="position-absolute w-100 content" [class.full-height]="infoShown">
+    <div class="player-controls" *ngIf="!infoShown">
+      <button (click)="restart()" class="player-button player-button--mute">
+        <svg-icon src="../../../../assets/svg/restart.svg"></svg-icon>
+      </button>
+
+      <button (click)="mute()" class="player-button player-button--mute" *ngIf="!player.muted">
+        <svg-icon src="../../../../assets/svg/sound.svg"></svg-icon>
+      </button>
+
+      <button (click)="unmute()" class="player-button player-button--sound" *ngIf="player.muted">
+        <svg-icon src="../../../../assets/svg/muted.svg"></svg-icon>
+      </button>
+    </div>
+
+    <div class="swipe-instructions text-center" [class.hidden]="infoShown">
+      <svg-icon src="../../../../assets/svg/up.svg"></svg-icon>
+      <p>veeg omhoog voor meer info</p>
+    </div>
+
+    <div class="swipe-instructions text-center" [class.hidden]="!infoShown">
+      <p class="mb-0">video bekijken</p>
+      <svg-icon src="../../../../assets/svg/down.svg"></svg-icon>
+    </div>
+
+    <div (click)="revealContent()" class="detail bg-white shadow w-100">
+      <div class="container">
+        <h2>Word jij onze nieuwe productfotograaf?</h2>
+        <p class="text-muted mb-0">Antwerpen, België</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Gochi+Hand|Muli:400,500,700&display=swap');
 @import './styles/variables';
 @import "../node_modules/bootstrap/scss/bootstrap";
+@import "../node_modules/plyr/src/sass/plyr.scss";
 
 #outlet {
   scroll-behavior: smooth;
@@ -38,6 +39,7 @@ h2 {
 
 a, button {
   cursor: pointer;
+  outline: 0 !important;
 }
 
 #logo{
@@ -71,7 +73,7 @@ a, button {
   .closebtn:hover {
     color: #000;
   }
-  
+
 // toggle switch css (copy pasta van google, meeste eruit gehaald als je nu iets weg doet werkt het nietmeer en i dont know why dus )
 
 @mixin can-toggle-branding($can-toggle-off-color: #777,
