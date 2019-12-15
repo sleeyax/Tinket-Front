@@ -1,1 +1,23 @@
-<p>assignment-applicants works!</p>
+<app-header
+  title="Inschrijvingen"
+  parentTitle="Mijn opdracht"
+  [parentRouterLink]="'/assignments/' + assignment._id">
+</app-header>
+
+<div class="container border-top my-4 pt-4">
+
+  <ul class="list-unstyled">
+    <a routerLink="" *ngFor="let application of assignment.applications">
+      <li class="d-flex">
+        <img src="https://api.adorable.io/avatars/285/bla" alt="Avatar"
+        class="img-fluid rounded-circle" style="width: 40px;">
+
+        <div class="col-10 flex-grow-1">
+          <p class="m-0 font-weight-bold">Jane Doe</p>
+          <p class="text-muted small m-0">Aangenomen</p>
+        </div>
+      </li>
+    </a>
+  </ul>
+
+</div>
