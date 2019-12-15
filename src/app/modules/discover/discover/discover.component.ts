@@ -20,6 +20,7 @@ export class DiscoverComponent implements OnInit {
   currentUser : User;
   assignments : Assignment[];
   currentIndex = 0;
+  flagged = false;
 
   constructor(
     private assignmentService : AssignmentService,
@@ -47,10 +48,12 @@ export class DiscoverComponent implements OnInit {
   }
 
   next() {
+    this.flagged = false;
     if(this.hasNextSlide) this.currentIndex++;
   }
 
   prev() {
+    this.flagged = false;
     if(this.hasPrevSlide) this.currentIndex--;
   }
 
@@ -74,6 +77,10 @@ export class DiscoverComponent implements OnInit {
   hideContent() {
     this.infoShown = false;
     this.unmute();
+  }
+
+  flag() {
+    this.flagged = true;
   }
 
   ngOnInit() {

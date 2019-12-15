@@ -72,7 +72,8 @@
 
           <p class="small text-black-50 mt-5 text-right"
             [class.d-none]="!infoShown">
-            <a (click)="flag()">Een probleem melden</a>
+            <a *ngIf="!flagged" (click)="flag()">Een probleem melden</a>
+            <a *ngIf="flagged" disabled class="disabled">Bedankt voor je inbreng</a>
           </p>
 
         </div>
