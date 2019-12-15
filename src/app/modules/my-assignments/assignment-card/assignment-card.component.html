@@ -4,7 +4,8 @@
   <div class="assignment-card rounded bg-light p-3"
     [class.open]="open"
     [class.archived]="archived">
-    <p class="status mb-2"><small> {{ open? 'Open voor inschrijvingen.' : 'Gesloten voor inschrijvingen.'}}</small></p>
+    <p *ngIf="!archived" class="status mb-2"><small> {{ open? 'Open voor inschrijvingen.' : 'Gesloten voor inschrijvingen.'}}</small></p>
+    <p *ngIf="archived" class="status mb-2"><small>Gearchiveerd</small></p>
     <h3 class="assignment-title">{{ title }}</h3>
     <p class="mt-1 mb-0">
       <svg-icon src="../../../../assets/svg/location.svg"></svg-icon>
