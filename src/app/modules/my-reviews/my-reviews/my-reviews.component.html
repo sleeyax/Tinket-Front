@@ -8,7 +8,7 @@
 
 <div class="container mt-5 mb-5">
   <ng-container *ngFor="let review of reviews">
-    <app-reviewbox score="{{review.score}}"
+    <app-reviewbox (deleteClicked)="onDelete($event)" flag="true" deleteButton="true" [reviewId]="review._id" score="{{review.score}}"
       userName="{{review.creator.anonymous ? 'Anoniem' : review.creator.user.firstname + ' ' + review.creator.user.lastname}}"
       description="{{review.description}}">
     </app-reviewbox>

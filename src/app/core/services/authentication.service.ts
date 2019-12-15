@@ -15,10 +15,10 @@ export class AuthenticationService {
     this.currentUserSubject = new BehaviorSubject<User>(null);
     this.currentUser = this.currentUserSubject.asObservable();
 
-    const storedUser : any = JSON.parse(localStorage.getItem('currentUser'));
+    const storedUser: any = JSON.parse(localStorage.getItem('currentUser'));
 
-    if(storedUser) {
-      let {token, ...userDetails} = storedUser;
+    if (storedUser) {
+      let { token, ...userDetails } = storedUser;
       this.storeUser(userDetails, token);
     }
   }
@@ -34,17 +34,21 @@ export class AuthenticationService {
 
   register(firstname: string, lastname: string, email: string, password: string) {
     return this.http.post<any>(`${environment.apiUrl}/users`, { firstname, lastname, email, password })
-      .pipe(map(response => this.storeUser(response.user, response.token)));
+      .pipe(map(response => {
+        if (!this.currentUserValue.isAdmin) {
+          this.storeUser(response.user, response.token)
+        }
+      }));
   }
 
-  deteleUserTokens(){
+  deteleUserTokens() {
     return this.http.delete(`${environment.apiUrl}/users/${this.currentUserValue._id}/tokens`);
   }
 
 
-  changePassword(oldpassword: string, newpassword: string){
+  changePassword(oldpassword: string, newpassword: string) {
     return this.http.put<any>(`${environment.apiUrl}/users/${this.currentUserValue._id}/password`, { password: oldpassword, newPassword: newpassword })
-    .pipe(map(() => this.deteleUserTokens()));
+      .pipe(map(() => this.deteleUserTokens()));
   }
 
   logout() {

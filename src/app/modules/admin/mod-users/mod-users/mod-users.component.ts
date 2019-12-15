@@ -27,7 +27,10 @@ export class ModUsersComponent implements OnInit {
   }
 
   getUsers() {
-    this.userService.getUsers().subscribe(res => this.users = res)
+    this.userService.getUsers().subscribe(res => {
+      this.users = res
+      console.log(res)
+    })
   }
 
   ngOnInit() {

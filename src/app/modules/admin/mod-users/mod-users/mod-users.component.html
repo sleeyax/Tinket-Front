@@ -13,7 +13,7 @@
         </div>
         <div class="col-7">
           <p class="m-0">
-            {{ !user.representsCompany ? user.firstname + ' ' + user.lastname : user.companyProfile.name }} </p>
+            {{ user.makerProfile || !user.makerProfile && !user.companyProfile ? user.firstname + ' ' + user.lastname : user.companyProfile.name }} </p>
           <p class="m-0 small" *ngIf="user.makerProfile || user.companyProfile">
             {{ user.makerProfile ? calculateAge(user.makerProfile.dateOfBirth): 'Bedrijf, '}}
             {{
