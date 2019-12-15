@@ -1,0 +1,16 @@
+<app-header title="Verwijderde reviews" fixed="true" parentTitle="Beheer reviews" parentRouterLink="/mod/reviews">
+  Hier vindt u een lijst van al de verwijderde reviews, het is hier ook mogelijk om een review weer goed te keuren.
+</app-header>
+
+<div style="margin-top: 300px;" class="mb-5">
+  <div class="container" *ngFor="let review of deletedReviews">
+    <ng-container *ngIf="!typeReview">
+      <app-reviewbox (deleteClicked)="onDelete($event)" [reviewId]="review._id" unDeleteButton="true"
+        score="{{review.score}}"
+        userName="{{review.creator.anonymous ? 'Anoniem' : review.creator.user.firstname + ' ' + review.creator.user.lastname }}"
+        description="{{review.description}}">
+      </app-reviewbox>
+    </ng-container>
+  </div>
+
+</div>

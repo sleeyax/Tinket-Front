@@ -1,0 +1,20 @@
+<div class="box">
+  <div class="contents">
+    <div>
+      <span *ngIf="flaggedAt" style="font-size: 12px;">{{datum}}</span>  
+      <p style="margin: 0; font-size: 18px; font-weight: 600;">{{userName}}</p>
+      <p style="margin-bottom: 50px;">{{description}}</p>
+      <app-stars style="position: absolute; bottom: 10px; left: 40px;" clickAble="false" ratingValue="{{score}}"></app-stars>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="solve" (click)="solveClick(reviewId)">
+      <svg-icon style="fill: #3DD080;" src="../../../../assets/svg/moderate/check.svg" alt="check">
+      </svg-icon>
+    </div>
+    <div class="delete" (click)="deleteClick(reviewId)">
+      <svg-icon style="fill: #F40A0A;" src="../../../../assets/svg/moderate/cross.svg" alt="cross">
+      </svg-icon>
+    </div>
+  </div>
+</div>

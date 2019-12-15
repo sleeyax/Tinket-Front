@@ -94,7 +94,7 @@ export class ModUserDetailComponent implements OnInit {
   onDelete(id) {
     this.deleteCounter++;
     if (this.deleteCounter == 2) {
-      this.reviewService.deleteReview(id.reviewId).subscribe(() => {
+      this.reviewService.ignoreReview(id.reviewId).subscribe(() => {
         this.toastService.toast("Review verwijderd!")
         this.getReviews();
       })

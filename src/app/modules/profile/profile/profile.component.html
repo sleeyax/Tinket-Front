@@ -1,5 +1,12 @@
 <app-header title="Je profiel">
-  Je profielgegevens worden alleen met bedrijven gedeeld waarin je interesse toont.
+  <div class="row">
+    <div class="col-9 pr-0">
+      Je profielgegevens worden alleen met bedrijven gedeeld waarin je interesse toont.
+    </div>
+    <div class="col-3 p-0">
+      <img class="rounded-circle" [src]="'https://api.adorable.io/avatars/75/' + currentUser._id" alt="avatar">
+    </div>
+  </div>
 </app-header>
 <div class="container">
   <div *ngIf="error" class="text-danger font-weight-bold mb-3 mb-0">{{error}}</div>

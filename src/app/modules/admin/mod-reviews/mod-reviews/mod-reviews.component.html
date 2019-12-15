@@ -4,9 +4,40 @@
       <div class="can-toggle can-toggle--size-large">
         <input (click)="switchReviewType()" formControlName="reviewType" id="c" type="checkbox">
         <label for="c">
-          <div class="can-toggle__switch w-100" data-checked="Opmerkelijk" data-unchecked="Nieuw"></div>
+          <div class="can-toggle__switch w-100" data-checked="Opgelost" data-unchecked="Nieuw"></div>
         </label>
       </div>
     </div>
   </form>
 </app-header>
+
+
+<div *ngIf="typeReview" class="container mt-3 mb-3">
+  <div class="mt-3" *ngFor="let review of flaggedReviews">
+    <app-mod-review-box [flaggedAt]="review.flaggedAt" (solveClicked)="solve($event)" (deleteClicked)="solve($event)"
+      [reviewId]="review._id" userName="Wesley Janse" [score]="review.score" [description]="review.description">
+    </app-mod-review-box>
+  </div>
+</div>
+
+
+
+<div class="container mt-3" *ngFor="let review of solvedReviews">
+  <ng-container *ngIf="!typeReview">
+    <app-reviewbox (deleteClicked)="onDelete($event)" delete="true" [reviewId]="review._id" deleteButton="true"
+      score="{{review.score}}"
+      userName="{{review.creator.anonymous ? 'Anoniem' : review.creator.user.firstname + ' ' + review.creator.user.lastname }}"
+      description="{{review.description}}">
+    </app-reviewbox>
+  </ng-container>
+</div>
+
+<app-footer *ngIf="!typeReview">
+  <div class="container border-top py-3">
+    <div class="d-flex">
+      <a routerLink="ignored" class="btn btn-white border flex-grow-1 shadow-sm font-weight-bold">
+        Toon deleted reviews <svg-icon src="../../../../../assets/svg/forward.svg"></svg-icon>
+      </a>
+    </div>
+  </div>
+</app-footer>

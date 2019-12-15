@@ -29,7 +29,6 @@ export class ModUsersComponent implements OnInit {
   getUsers() {
     this.userService.getUsers().subscribe(res => {
       this.users = res
-      console.log(res)
     })
   }
 
@@ -47,6 +46,7 @@ export class ModUsersComponent implements OnInit {
       this.userService.deleteUser(userId).subscribe(() => {
         this.toastService.toast("Gebruiker verwijderd!")
         this.getUsers();
+        this.deleteCounter = 0
       })
     } else {
       this.toastService.toast("Klik nogmaals om te verwijderen")

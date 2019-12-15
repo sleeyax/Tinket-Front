@@ -12,6 +12,7 @@ export class ReviewboxComponent implements OnInit {
   @Input() score: Number;
   @Input() description: string;
   @Input() deleteButton: boolean;
+  @Input() unDeleteButton: boolean;
   @Input() delete: boolean;
   @Input() flag: boolean;
   @Output() deleteClicked: EventEmitter<any> = new EventEmitter<any>();

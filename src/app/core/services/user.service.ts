@@ -8,6 +8,7 @@ import { MakerProfile } from '@app/shared/models/makerProfile';
 import { CompanyProfile } from '@app/shared/models/companyProfile';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
+import { Mail } from '@app/shared/models/mail';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -41,6 +42,10 @@ export class UserService {
   }
 
   deleteUser(id: string){
-    return this.http.delete<User>((`${environment.apiUrl}/users/` + id));
+    return this.http.delete<User>(`${environment.apiUrl}/users/` + id);
+  }
+
+  sendMail(mail: Mail){
+    return this.http.post<Mail>(`${environment.apiUrl}/mail`, mail);
   }
 }

@@ -5,7 +5,7 @@
 <div *ngIf="selectedUser" style="padding: 10px 0; margin-top: 15px; margin-bottom: 100px;">
   <div *ngIf="reviews" class="container">
     <ng-container *ngFor="let review of reviews">
-      <app-reviewbox (deleteClicked)="onDelete($event)" [reviewId]="review._id" deleteButton="true"
+      <app-reviewbox (deleteClicked)="onDelete($event)" delete="true" [reviewId]="review._id" deleteButton="true"
         score="{{review.score}}"
         userName="{{review.creator.anonymous ? 'Anoniem' : review.creator.user.firstname + ' ' + review.creator.user.lastname }}"
         description="{{review.description}}">

@@ -41,6 +41,10 @@ export class AuthenticationService {
       }));
   }
 
+  registerAdmin(firstname: string, lastname: string, email: string, password: string) {
+    return this.http.post<any>(`${environment.apiUrl}/admins`, { firstname, lastname, email, password })
+  }
+
   deteleUserTokens() {
     return this.http.delete(`${environment.apiUrl}/users/${this.currentUserValue._id}/tokens`);
   }

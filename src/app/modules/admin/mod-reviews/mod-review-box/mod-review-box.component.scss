@@ -1,0 +1,39 @@
+.box {
+  min-height: 200px;
+  width: 100%;
+  background: #F3F7FA;
+  border-radius: 15px;
+  display: flex;
+  position: relative;
+
+  .contents {
+    flex-grow: 1;
+    padding: 20px;
+    
+  }
+
+  .solve {
+    background-color: #E3F0E9;
+    border-radius: 0 15px 15px 0;
+  }
+
+  .delete {
+    background-color: #FCE9E9;
+    margin-top: auto;
+    border-radius: 0 15px 15px 0;
+  }
+
+
+  .actions {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    div {
+      height: 48%;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

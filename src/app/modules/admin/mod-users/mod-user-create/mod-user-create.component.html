@@ -10,6 +10,16 @@
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <div class="container" style="margin-bottom: 100px;">
     <div *ngIf="error" class="text-danger font-weight-bold mb-3 mb-0">{{error}}</div>
+    <div class="form-group mt-3">
+      <label for="userType" class="small">Soort gebruiker <span
+          style="font-size: 10px; opacity: 75%;">(verplicht)</span></label>
+      <div class="can-toggle can-toggle--size-large">
+        <input (click)="switchUserProfile()" formControlName="userType" id="c" type="checkbox">
+        <label for="c">
+          <div class="can-toggle__switch w-100" data-checked="Admin" data-unchecked="Gebruiker"></div>
+        </label>
+      </div>
+    </div>
     <div class="form-group">
       <label class="small" for="name">Voornaam</label>
       <input type="text" id="name" formControlName="name" class="form-control form-control-lg text-black"
@@ -41,7 +51,7 @@
       <div class="d-flex">
         <button type="submit" style="background: linear-gradient(45deg, #16C1E7, #1E96B0);"
           class="btn text-white border flex-grow-1 shadow-sm font-weight-bold">
-          Registreer gebruiker <svg-icon src="../../../../../assets/svg/profile/save.svg"></svg-icon>
+          {{isAdmin? 'Registreer gebruiker': 'Registreer admin' }}  <svg-icon src="../../../../../assets/svg/profile/save.svg"></svg-icon>
         </button>
       </div>
     </div>
