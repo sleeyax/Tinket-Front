@@ -3,6 +3,8 @@
     <p style="margin: 0; font-size: 18px; font-weight: 600;">{{userName}}</p>
     <p>{{description}}</p>
     <app-stars clickAble="false" ratingValue="{{score}}"></app-stars>
-    <button *ngIf="deleteButton" (click)="deleteClick(reviewId)" class="delete btn"><img src="../../../../assets/svg/moderate/trash.svg" alt="trash"></button>
+    <button *ngIf="deleteButton" (click)="deleteClick(reviewId)" class="delete btn">
+      <svg-icon style="fill: white;" *ngIf="delete" src="../../../../assets/svg/moderate/trash.svg" alt="trash"></svg-icon>
+      <svg-icon style="fill: white;" *ngIf="flag" src="../../../../assets/svg/moderate/flag.svg" alt="flag"></svg-icon></button>
   </div>
 </div>

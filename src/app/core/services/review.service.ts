@@ -36,4 +36,7 @@ export class ReviewService {
     return this.http.get<Review[]>(`${environment.apiUrl}/users/${id}/writtenReviews`)
   }
 
+  flagReview(id: string){
+    return this.http.get(`${environment.apiUrl}/reviews/${id}/flag`);
+  }
 }

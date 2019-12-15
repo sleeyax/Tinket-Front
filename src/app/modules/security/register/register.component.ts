@@ -41,6 +41,11 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
+    
+    if (this.f.password.value != this.f.passwordRepeat.value) {
+      this.error = "Wachtwoorden zijn niet gelijk"
+      return;
+    }
 
     this.loading = true;
     this.authenticationService.register(
