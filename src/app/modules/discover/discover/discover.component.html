@@ -1,9 +1,4 @@
-<div id="discover" class="h-100 position-relative" >
-
-  <div id="swipe-panel">
-
-  </div>
-
+<div id="discover" class="h-100 position-relative">
   <header>
     <div class="container">
       <h1 id="logo" class="text-center pt-3 mb-5">Tinket</h1>
@@ -85,8 +80,13 @@
 <app-footer>
   <div class="container py-4 border-top action-container"
     [class.d-none]="!infoShown">
-    <button class="btn btn-primary btn-block">
+    <button *ngIf="!applied" (click)="apply()" class="btn btn-primary btn-block"
+      [disabled]="applying">
+      <span *ngIf="applying" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
       Ik ben geïnteresseerd
+    </button>
+    <button *ngIf="applied" disabled class="btn btn-white shadow-sm border btn-block">
+      Je bent ingeschreven! 🥳
     </button>
   </div>
 </app-footer>

@@ -5,6 +5,7 @@ import { Assignment } from '@app/shared/models/assignment';
 import { AssignmentService } from '@app/core/services/assignment.service';
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { User } from '@app/shared/models/user';
+import { ApplicationService } from '@app/core/services/application.service';
 
 @Component({
   selector: 'app-discover',
@@ -13,6 +14,8 @@ import { User } from '@app/shared/models/user';
   encapsulation: ViewEncapsulation.None
 })
 export class DiscoverComponent implements OnInit {
+  applying = false;
+  applied = false;
   player : Plyr;
   hammerContent : Hammer;
   hammerDetail : Hammer;
@@ -23,6 +26,7 @@ export class DiscoverComponent implements OnInit {
   flagged = false;
 
   constructor(
+    private applicationService : ApplicationService,
     private assignmentService : AssignmentService,
     private authenticationService : AuthenticationService
   ) {
@@ -81,6 +85,15 @@ export class DiscoverComponent implements OnInit {
 
   flag() {
     this.flagged = true;
+  }
+
+  apply() {
+    this.applying = true;
+    this.applicationService.applyForAssignment(this.currentAssignment._id)
+      .subscribe(() => {
+        this.applying = false;
+        this.applied = true;
+      })
   }
 
   ngOnInit() {
