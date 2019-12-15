@@ -4,30 +4,27 @@
 </app-header>
 
 <div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <ng-container *ngFor="let user of users | filter : searchText">
-        <ng-container *ngIf="!user.isAdmin && user.makerProfile || user.companyProfile">
-          <div style="margin: 20px 30px; widows: 100%; border-bottom: 1px solid #E3E9EF; position: relative;">
-            <div class="row">
-              <div class="col-2">
-                <img style="border-radius: 100%;" src="https://api.adorable.io/avatars/25/{{user._id}}" alt="avatar">
-              </div>
-              <div class="col-10">
-                <p style="margin-bottom: 0;">
-                  {{user.makerProfile ? user.firstname + ' ' + user.lastname : user.companyProfile.name}}</p>
-                <p style="font-size: 12px;">
-                  {{user.makerProfile ? calculateAge(user.makerProfile.dateOfBirth): 'Bedrijf, '}}
-                  {{user.makerProfile ? user.makerProfile.location.city == ''? 'Geen locatie' : user.makerProfile.location.city : 
-                  user.companyProfile.location.city ==''? 'Geen locatie' : user.companyProfile.location.city}}
-                </p>
-              </div>
-            </div>
-            <span (click)="goToProfile(user._id)" style="position: absolute; right: 0; top: 15%"><img
-                src="../../../../../assets/svg/moderate/eye.svg" alt="eye"></span>
-          </div>
-        </ng-container>
-      </ng-container>
-    </div>
-  </div>
+  <ng-container *ngFor="let user of users | filter : searchText">
+    <a (click)="goToProfile(user._id)" class="py-3 px-0 border-bottom position-relative d-block">
+      <div class="row">
+        <div class="col-2">
+          <img class="rounded-circle" [src]="'https://api.adorable.io/avatars/25/' + user._id" alt="avatar">
+        </div>
+        <div class="col-10">
+          <p class="m-0"> {{ !user.representsCompany ? user.firstname + ' ' + user.lastname : user.companyProfile.name }} </p>
+          <p class="m-0 small" *ngIf="user.makerProfile || user.companyProfile">
+            {{ user.makerProfile ? calculateAge(user.makerProfile.dateOfBirth): 'Bedrijf, '}}
+            {{
+              user.makerProfile ? user.makerProfile.location.city == ''
+                  ? 'Geen locatie' : user.makerProfile.location.city
+                  : user.companyProfile.location.city ==''? 'Geen locatie' : user.companyProfile.location.city
+            }}
+          </p>
+          <p class="m-0 small" *ngIf="!user.makerProfile && !user.companyProfile">
+            Incompleet profiel
+          </p>
+        </div>
+      </div>
+    </a>
+  </ng-container>
 </div>
