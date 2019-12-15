@@ -19,7 +19,7 @@
       label="Opdrachten">
     </app-menu-item>
 
-    <app-menu-item *ngIf="currentUser.representsCompany"
+    <app-menu-item *ngIf="!currentUser.isAdmin"
       routerLink="/reviews"
       icon="/assets/svg/menu/reviews.svg"
       label="Reviews">
@@ -47,12 +47,6 @@
       routerLink="/profile"
       icon="/assets/svg/menu/profile.svg"
       label="Profiel">
-    </app-menu-item>
-
-    <app-menu-item *ngIf="!currentUser.isAdmin"
-      routerLink="/messages"
-      icon="/assets/svg/menu/messages.svg"
-      label="Berichten">
     </app-menu-item>
 
   </div>
