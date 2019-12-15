@@ -9,11 +9,11 @@ export class Assignment {
   description: String;
   requiredSkills: Skill[];
   location: Location;
-  candidates: [{
+  open: boolean;
+  createdBy: User;
+  archivedAt?: Date;
+  candidates?: [{
     contacted: Boolean,
     user: User
   }];
-  open: boolean;
-  archivedAt: Date;
-  createdBy: User;
 }
