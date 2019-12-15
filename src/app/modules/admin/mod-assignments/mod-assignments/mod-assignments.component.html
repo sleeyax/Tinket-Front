@@ -1,1 +1,12 @@
-<app-header title="Opdrachten"></app-header>
+<app-header underline="true" title="Opdrachten">
+  <form [formGroup]="inputForm">
+    <div class="form-group">
+      <div class="can-toggle can-toggle--size-large">
+        <input (click)="switchReviewType()" formControlName="reviewType" id="c" type="checkbox">
+        <label for="c">
+          <div class="can-toggle__switch w-100" data-checked="Goedgekeurd" data-unchecked="Nieuw"></div>
+        </label>
+      </div>
+    </div>
+  </form>
+</app-header>
