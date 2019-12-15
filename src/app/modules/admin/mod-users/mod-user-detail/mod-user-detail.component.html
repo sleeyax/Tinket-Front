@@ -1,70 +1,69 @@
-<app-header *ngIf="selectedUser" underline="true" parentTitle="Beheer gebruikers"
-  [title]="isMaker ? selectedUser.firstname + ' ' + selectedUser.lastname : selectedUser.companyProfile.name"
-  parentRouterLink="/mod/users">
-  <div>
-    <div>
-      <div class="row">
-        <div class="col-4">
-          <img style="border-radius: 100%;" src="https://api.adorable.io/avatars/75/{{selectedUser._id}}" alt="avatar">
+<ng-template [ngIf]="selectedUser">
 
-        </div>
-        <div class="col-8 my-auto">
-          {{isMaker ? selectedUser.makerProfile.bio == ''? 'Geen bio' : selectedUser.makerProfile.bio  : selectedUser.companyProfile.description == ''? 'Geen beschrijving' : selectedUser.companyProfile.description}}
-        </div>
+  <app-header
+    [title]="isMaker ? selectedUser.firstname + ' ' + selectedUser.lastname : selectedUser.companyProfile.name"
+    underline="true"
+    parentTitle="Beheer gebruikers"
+    parentRouterLink="/mod/users">
+
+    <div class="row">
+      <div class="col-4">
+        <img style="border-radius: 100%;"
+          src="https://api.adorable.io/avatars/75/{{selectedUser._id}}" alt="avatar">
+      </div>
+      <div class="col-8 my-auto">
+        {{   isMaker ? selectedUser.makerProfile.bio == ''? 'Geen bio' : selectedUser.makerProfile.bio  : selectedUser.companyProfile.description == ''? 'Geen beschrijving' : selectedUser.companyProfile.description   }}
       </div>
     </div>
-    <p>
-    </p>
-  </div>
+
 </app-header>
 
-<div *ngIf="selectedUser && isMaker" style="border-bottom: 1px solid #E3E9EF; padding: 10px 0;">
-  <div class="container" style="line-height: 50px;">
-    <div class="row">
+<div *ngIf="selectedUser && isMaker" class="border-bottom py-4">
+  <div class="container">
+    <div class="row align-items-center">
       <div class="col-2">
         <img src="../../../../../assets/svg/moderate/birthday.svg" alt="birthdaycake">
       </div>
-      <div class="col-10">
-        {{birthday}} ({{age}})
-      </div>
+      <div class="col-10"> {{birthday}} ({{age}}) </div>
     </div>
   </div>
 </div>
 
-<div *ngIf="selectedUser" style="border-bottom: 1px solid #E3E9EF; padding: 10px 0;">
-  <div class="container" style="line-height: 50px;">
-    <div class="row">
+<div *ngIf="selectedUser" class="border-bottom py-4">
+  <div class="container">
+    <div class="row align-items-center">
       <div class="col-2">
         <img src="../../../../../assets/svg/moderate/location.svg" alt="location">
-
       </div>
-      <div class="col-10">
-        {{location}}
-      </div>
+      <div class="col-10"> {{location}} </div>
     </div>
   </div>
 </div>
 
-<div *ngIf="selectedUser && isMaker" style="border-bottom: 1px solid #E3E9EF; padding: 10px 0; margin-top: 15px;">
+<div *ngIf="selectedUser && isMaker" class="border-bottom py-4">
   <div class="container">
     <p style="margin-bottom: 0; font-weight: 600;">Ervaring</p>
     <p style="margin-top: 10px;">
       {{selectedUser.makerProfile.experience == ''? 'Geen ervaring' : selectedUser.makerProfile.experience }}</p>
-  </div>
-</div>
-
-<div *ngIf="selectedUser" style="padding: 10px 0; margin-top: 15px; margin-bottom: 100px;">
-  <div class="container">
-    <p style="margin-bottom: 0; font-weight: 600;">Ontvangen reviews</p>
-    <ng-container *ngFor="let review of reviews">
-      <app-reviewbox (deleteClicked)="onDelete($event)" [reviewId]="review._id" deleteButton="true" score="{{review.score}}"
-        userName="{{review.creator.anonymous ? 'Anoniem' : review.creator.user.firstname + ' ' + review.creator.user.lastname }}"
-        description="{{review.description}}">
-      </app-reviewbox>
-    </ng-container>
-    <div *ngIf="reviews.length == 0" class="alert alert-warning mt-2" role="alert">
-      Deze gebruiker heeft nog geen reviews!
     </div>
+  </div>
+
+  <div *ngIf="selectedUser" style="padding: 10px 0; margin-top: 15px; margin-bottom: 100px;">
+    <div class="container">
+      <p style="margin-bottom: 0; font-weight: 600;">Ontvangen reviews</p>
+      <ng-container *ngFor="let review of reviews">
+        <app-reviewbox (deleteClicked)="onDelete($event)" [reviewId]="review._id" deleteButton="true" score="{{review.score}}"
+          userName="{{review.creator.anonymous ? 'Anoniem' : review.creator.user.firstname + ' ' + review.creator.user.lastname }}"
+          description="{{review.description}}">
+        </app-reviewbox>
+    </ng-container>
+
+    <div *ngIf="reviews.length == 0" class="h4 text-weight-normal text-center text-black-50 my-5" role="alert">
+      <img class="img-fluid mx-auto d-block mb-3" style="max-width:120px;"
+        src="../../../../../assets/svg/no-data.svg" alt="Geen gegevens!">
+      <small> {{ selectedUser.firstname }} heeft nog geen reviews ontvangen! </small>
+    </div>
+
   </div>
 </div>
 
@@ -72,9 +71,12 @@
   <div class="container border-top py-3">
     <div class="d-flex">
       <a (click)="deleteUser(selectedUser._id)" class="btn btn-danger text-white mr-3">Verwijder</a>
-      <a (click)="goToReviews(selectedUser._id)" class="btn btn-white border flex-grow-1 shadow-sm font-weight-bold">
-        Bekijk geschreven reviews <svg-icon src="../../../../../assets/svg/forward.svg"></svg-icon>
+      <a (click)="goToReviews(selectedUser._id)"
+        class="btn btn-white border flex-grow-1 shadow-sm font-weight-bold">
+        Gegeven reviews <svg-icon src="../../../../../assets/svg/forward.svg"></svg-icon>
       </a>
     </div>
   </div>
 </app-footer>
+
+</ng-template>

@@ -20,8 +20,9 @@ export class ModUserDetailComponent implements OnInit {
   isMaker = false;
   birthday = "";
   age = "";
-  location = ""
-  reviews: Review[] = []
+  location = "";
+  reviews: Review[] = [];
+
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private authenticationService: AuthenticationService,
