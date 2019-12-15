@@ -18,14 +18,11 @@
                   {{user.makerProfile ? user.firstname + ' ' + user.lastname : user.companyProfile.name}}</p>
                 <p style="font-size: 12px;">
                   {{user.makerProfile ? calculateAge(user.makerProfile.dateOfBirth): 'Bedrijf, '}}
-                  {{user.makerProfile ? user.makerProfile.location.city == ''? 'Geen locatie' : user.makerProfile.location.city : user.companyProfile.location.city}}
+                  {{user.makerProfile ? user.makerProfile.location.city == ''? 'Geen locatie' : user.makerProfile.location.city : 
+                  user.companyProfile.location.city ==''? 'Geen locatie' : user.companyProfile.location.city}}
                 </p>
               </div>
             </div>
-
-
-
-
             <span (click)="goToProfile(user._id)" style="position: absolute; right: 0; top: 15%"><img
                 src="../../../../../assets/svg/moderate/eye.svg" alt="eye"></span>
           </div>

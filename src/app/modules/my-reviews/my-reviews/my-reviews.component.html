@@ -3,12 +3,17 @@
   hebben kunnen nieuwe reviews
   plaatsen.
 </app-header>
+
 <app-stars vraag="Je gemiddelde score" underline="true" clickAble="false" [rating]="avarageScore"></app-stars>
 
 <div class="container mt-5 mb-5">
   <ng-container *ngFor="let review of reviews">
-    <app-reviewbox score="{{review.score}}" userName="{{review.anonymous ? 'Anoniem' : review.reviewedBy.firstname}}"
+    <app-reviewbox score="{{review.score}}"
+      userName="{{review.creator.anonymous ? 'Anoniem' : review.creator.user.firstname + ' ' + review.creator.user.lastname}}"
       description="{{review.description}}">
     </app-reviewbox>
   </ng-container>
+  <div *ngIf="reviews.length == 0" class="alert alert-warning mt-2 text-center" role="alert">
+    Je hebt nog geen reviews!
+  </div>
 </div>

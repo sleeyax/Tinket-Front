@@ -32,7 +32,7 @@ export class ModUserprofileComponent implements OnInit {
     let userId = this.route.snapshot.paramMap.get("id")
     this.userService.getUserById(userId).subscribe(res => {
       this.selectedUser = res
-      this.reviewService.getReviewsById(res._id).subscribe(res => this.reviews = res)
+      this.getReviews();      
       if (this.selectedUser.makerProfile) {
         this.isMaker = true;
         this.birthday = moment(this.selectedUser.makerProfile.dateOfBirth).format("LL");
@@ -51,6 +51,11 @@ export class ModUserprofileComponent implements OnInit {
         }
       }
     });
+  }
+
+
+  getReviews(){
+    this.reviewService.getReviewsById(this.selectedUser._id).subscribe(res => this.reviews = res)
   }
 
   ngOnInit() {
@@ -81,11 +86,23 @@ export class ModUserprofileComponent implements OnInit {
     }, 3000);
   }
 
-  goToReviews(id){
+  goToReviews(id) {
     this.router.navigate([`mod/users/${id}/reviews`])
   }
 
-  onDelete(id){
-    console.log(id)
+  onDelete(id) {
+    this.deleteCounter++;
+    if (this.deleteCounter == 2) {
+      this.reviewService.deleteReview(id.reviewId).subscribe(() => {
+        this.toastService.toast("Review verwijderd!")
+        this.getReviews();
+      })
+    } else {
+      this.toastService.toast("Klik nogmaals om te verwijderen")
+    }
+
+    setTimeout(() => {
+      this.deleteCounter = 0;
+    }, 3000);
   }
 }

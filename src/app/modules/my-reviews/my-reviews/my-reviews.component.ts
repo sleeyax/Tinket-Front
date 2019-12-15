@@ -23,6 +23,7 @@ export class MyReviewsComponent implements OnInit {
 
     this.reviewService.getReviews().subscribe((reviews: Review[]) => {
       this.reviews = reviews;
+      console.log(this.reviews)
       const scores = [];
       console.log(this.reviews)
       this.reviews.forEach(review => scores.push(review.score));
