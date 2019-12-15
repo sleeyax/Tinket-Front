@@ -24,6 +24,10 @@ export class AssignmentService {
     return this.http.get<Assignment>(`${environment.apiUrl}/assignments/${id}`);
   }
 
+  getUserRecommended(userId): Observable<Assignment[]>{
+    return this.http.get<Assignment[]>(`${environment.apiUrl}/users/${userId}/assignments/discover`);
+  }
+
   createAssignment(assignment): Observable<Object> {
     return this.http.post(`${environment.apiUrl}/assignments/`, assignment);
   }

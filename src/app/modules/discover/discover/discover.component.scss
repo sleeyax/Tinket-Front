@@ -26,12 +26,22 @@
       left:0;
       border-top-right-radius: 30px;
       border-bottom-right-radius: 30px;
+      transition: transform .5s ease;
+
+      &.slide-in {
+        transform: translateX(-46px);
+      }
     }
 
     &.discover-nav--next {
       right:0;
       border-top-left-radius: 30px;
       border-bottom-left-radius: 30px;
+      transition: transform .5s ease;
+
+      &.slide-in {
+        transform: translateX(46px);
+      }
     }
   }
 
