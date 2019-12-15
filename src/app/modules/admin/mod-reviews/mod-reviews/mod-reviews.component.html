@@ -21,16 +21,18 @@
 </div>
 
 
-
-<div class="container mt-3" *ngFor="let review of solvedReviews">
-  <ng-container *ngIf="!typeReview">
-    <app-reviewbox (deleteClicked)="onDelete($event)" delete="true" [reviewId]="review._id" deleteButton="true"
-      score="{{review.score}}"
-      userName="{{review.creator.anonymous ? 'Anoniem' : review.creator.user.firstname + ' ' + review.creator.user.lastname }}"
-      description="{{review.description}}">
-    </app-reviewbox>
-  </ng-container>
+<div style="margin-bottom: 100px;">
+  <div class="container mt-3" *ngFor="let review of solvedReviews">
+    <ng-container *ngIf="!typeReview">
+      <app-reviewbox (deleteClicked)="onDelete($event)" delete="true" [reviewId]="review._id" deleteButton="true"
+        score="{{review.score}}"
+        userName="{{review.creator.anonymous ? 'Anoniem' : review.creator.user.firstname + ' ' + review.creator.user.lastname }}"
+        description="{{review.description}}">
+      </app-reviewbox>
+    </ng-container>
+  </div>
 </div>
+
 
 <app-footer *ngIf="!typeReview">
   <div class="container border-top py-3">

@@ -27,7 +27,7 @@ export class ReviewService {
   getReviewsById(id: string): Observable<Review[]> {
     return this.http.get<Review[]>(`${environment.apiUrl}/users/${id}/reviews/`);
   }
-  
+
   getWrittenReviewsByUserId(id: string): Observable<Review[]>{
     return this.http.get<Review[]>(`${environment.apiUrl}/users/${id}/writtenReviews`)
   }
@@ -43,6 +43,11 @@ export class ReviewService {
   ignoreReview(id: string){
     return this.http.get(`${environment.apiUrl}/reviews/${id}/flag/ignore`);
   }
+
+  undoIgnoredReview(id: string){
+    return this.http.get(`${environment.apiUrl}/reviews/${id}/flag/ignore/undo`);
+  }
+
 
   getFlaggedReviews(): Observable<Review[]>{
     return this.http.get<Review[]>(`${environment.apiUrl}/reviews/flaggedAt`);

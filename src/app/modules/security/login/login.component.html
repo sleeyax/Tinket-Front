@@ -1,29 +1,11 @@
+<app-header title="Login" parentTitle="Home" parentRouterLink="/">
+Log in met uw e-mailadres en wachtwoord. Als u nog geen account heeft kunt u uzelf registreren.
+</app-header>
+
 <div class="container">
-  <div class="row">
-    <div class="col-sm-12 mt-4 d-flex justify-content-around">
-      <div (click)="Back()" class="flex-grow w-100">
-        <img class="backArrow" src="../../../../assets/svg/Arrow.svg" alt="Pijltje">
-      </div>
-      <div class="flex-grow w-100">
-        <h1 class="text-center" style="font-size: 30px;">Login</h1>
-      </div>
-      <div class="flex-grow w-100"></div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12 text-center mt-4">
-      <button id="LinkedInButton" type="button" class="btn btn-primary btn-lg">Linked <img
-          src="../../../../assets/svg/linkedIn2.svg" alt=""></button>
-    </div>
-  </div>
-  <div class="row" style="margin: 20px 0;">
-    <div class="col-sm-12" style="height: 1px; background-color: black; width: 90%; margin: auto;">
-    </div>
-  </div>
   <div class="row">
     <div class="col-sm-12">
       <div *ngIf="error" class="text-danger font-weight-bold mb-3 mb-0">{{error}}</div>
-
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label class="small" for="email">E-mailadres</label>

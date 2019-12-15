@@ -36,7 +36,7 @@ export class ModDeletedReviewsComponent implements OnInit {
     console.log(review.reviewId)
     this.resetCounter++;
     if (this.resetCounter == 2) {
-      this.reviewService.ignoreReview(review.reviewId).subscribe(() => {
+      this.reviewService.undoIgnoredReview(review.reviewId).subscribe(() => {
         this.toastService.toast("Review goed gekeurd!")
         this.getReviews();
         this.resetCounter = 0

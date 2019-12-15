@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { LandingComponent } from './landing/landing.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { SharedModule } from '@app/shared/shared.module';
 
 
 
@@ -12,7 +13,8 @@ import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class SecurityModule { }
