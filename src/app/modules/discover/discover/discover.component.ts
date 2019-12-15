@@ -14,7 +14,8 @@ import { User } from '@app/shared/models/user';
 })
 export class DiscoverComponent implements OnInit {
   player : Plyr;
-  hammer : Hammer;
+  hammerContent : Hammer;
+  hammerDetail : Hammer;
   infoShown = false;
   currentUser : User;
   assignments : Assignment[];
@@ -70,6 +71,10 @@ export class DiscoverComponent implements OnInit {
     this.mute();
   }
 
+  hideContent() {
+    this.infoShown = false;
+    this.unmute();
+  }
 
   ngOnInit() {
     this.player = new Plyr('#player', {
@@ -82,15 +87,21 @@ export class DiscoverComponent implements OnInit {
       },
     });
 
-    this.hammer = new Hammer(
+    this.hammerContent = new Hammer(
       document.querySelector('.content'),
       { }
     );
 
-    this.hammer.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
-    this.hammer.on('swipeup', (e) => {
-      this.revealContent();
-    });
+    this.hammerContent.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+    this.hammerContent.on('swipeup', (e) => { this.revealContent(); });
+
+    this.hammerDetail = new Hammer(
+      document.querySelector('.detail'),
+      { }
+    );
+
+    this.hammerDetail.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+    this.hammerDetail.on('swipedown', (e) => { console.log("down"); this.hideContent(); });
 
   }
 
