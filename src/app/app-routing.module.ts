@@ -24,7 +24,7 @@ import { AssignmentNewComponent } from './modules/my-assignments/assignment-new/
 import { AssignmentEditComponent } from './modules/my-assignments/assignment-edit/assignment-edit.component';
 import { AssignmentApplicantsComponent } from './modules/my-assignments/assignment-applicants/assignment-applicants.component';
 import { AssignmentApplicantDetailComponent } from './modules/my-assignments/assignment-applicant-detail/assignment-applicant-detail.component';
-import { ModUserprofileComponent } from './modules/admin/mod-users/mod-userprofile/mod-userprofile.component';
+import { ModUserDetailComponent } from './modules/admin/mod-users/mod-user-detail/mod-user-detail.component';
 import { ModUserReviewsComponent } from './modules/admin/mod-users/mod-user-reviews/mod-user-reviews.component';
 
 const routes: Routes = [
@@ -49,7 +49,7 @@ const routes: Routes = [
   { path: 'changePassword', component: PasswordComponent, canActivate: [AuthGuard]},
 
   { path: 'mod/users', component: ModUsersComponent, canActivate: [AdminGuard]},
-  { path: 'mod/users/:id', component: ModUserprofileComponent, canActivate: [AdminGuard]},
+  { path: 'mod/users/:id', component: ModUserDetailComponent, canActivate: [AdminGuard]},
   { path: 'mod/users/:id/reviews', component: ModUserReviewsComponent, canActivate: [AdminGuard]},
   { path: 'mod/reviews', component: ModReviewsComponent, canActivate: [AdminGuard]},
   { path: 'mod/assignments', component: ModAssignmentsComponent, canActivate: [AdminGuard]},

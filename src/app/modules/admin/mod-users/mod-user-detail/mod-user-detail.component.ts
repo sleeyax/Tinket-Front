@@ -11,11 +11,11 @@ import { ReviewService } from '@app/core/services/review.service';
 import { ToastService } from '@app/core/services/toast.service';
 
 @Component({
-  selector: 'app-mod-userprofile',
-  templateUrl: './mod-userprofile.component.html',
-  styleUrls: ['./mod-userprofile.component.scss']
+  selector: 'app-mod-user-detail',
+  templateUrl: './mod-user-detail.component.html',
+  styleUrls: ['./mod-user-detail.component.scss']
 })
-export class ModUserprofileComponent implements OnInit {
+export class ModUserDetailComponent implements OnInit {
   selectedUser: User;
   isMaker = false;
   birthday = "";
@@ -32,7 +32,7 @@ export class ModUserprofileComponent implements OnInit {
     let userId = this.route.snapshot.paramMap.get("id")
     this.userService.getUserById(userId).subscribe(res => {
       this.selectedUser = res
-      this.getReviews();      
+      this.getReviews();
       if (this.selectedUser.makerProfile) {
         this.isMaker = true;
         this.birthday = moment(this.selectedUser.makerProfile.dateOfBirth).format("LL");
