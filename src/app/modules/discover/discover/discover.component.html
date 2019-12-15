@@ -70,8 +70,22 @@
 
           <p> {{ currentAssignment.description }}  </p>
 
+          <p class="small text-black-50 mt-5 text-right"
+            [class.d-none]="!infoShown">
+            <a href="">Een probleem melden</a>
+          </p>
+
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<app-footer>
+  <div class="container py-4 border-top action-container"
+    [class.d-none]="!infoShown">
+    <button class="btn btn-primary btn-block">
+      Ik ben geïnteresseerd
+    </button>
+  </div>
+</app-footer>
