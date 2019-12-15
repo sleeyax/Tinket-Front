@@ -25,7 +25,7 @@
   </div>
 
   <div class="position-absolute w-100 content" [class.full-height]="infoShown">
-    <div class="player-controls py-3 px-5" *ngIf="!infoShown">
+    <div class="player-controls" *ngIf="!infoShown">
       <button (click)="restart()" class="player-button player-button--mute">
         <svg-icon src="../../../../assets/svg/restart.svg"></svg-icon>
       </button>
@@ -39,23 +39,20 @@
       </button>
     </div>
 
-    <div class="swipe-up text-center">
+    <div class="swipe-instructions text-center" [class.hidden]="infoShown">
       <svg-icon src="../../../../assets/svg/up.svg"></svg-icon>
-      <p>klik of swipe voor meer info</p>
+      <p>veeg omhoog voor meer info</p>
+    </div>
+
+    <div class="swipe-instructions text-center" [class.hidden]="!infoShown">
+      <p class="mb-0">video bekijken</p>
+      <svg-icon src="../../../../assets/svg/down.svg"></svg-icon>
     </div>
 
     <div (click)="revealContent()" class="detail bg-white shadow w-100">
       <div class="container">
         <h2>Word jij onze nieuwe productfotograaf?</h2>
         <p class="text-muted mb-0">Antwerpen, België</p>
-
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati possimus, sapiente molestiae laudantium nesciunt officia minus nobis vel nam sit. Obcaecati repellat totam facere eligendi accusamus nihil deserunt minima excepturi.
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati possimus, sapiente molestiae laudantium nesciunt officia minus nobis vel nam sit. Obcaecati repellat totam facere eligendi accusamus nihil deserunt minima excepturi.
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati possimus, sapiente molestiae laudantium nesciunt officia minus nobis vel nam sit. Obcaecati repellat totam facere eligendi accusamus nihil deserunt minima excepturi.
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati possimus, sapiente molestiae laudantium nesciunt officia minus nobis vel nam sit. Obcaecati repellat totam facere eligendi accusamus nihil deserunt minima excepturi.
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati possimus, sapiente molestiae laudantium nesciunt officia minus nobis vel nam sit. Obcaecati repellat totam facere eligendi accusamus nihil deserunt minima excepturi.
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati possimus, sapiente molestiae laudantium nesciunt officia minus nobis vel nam sit. Obcaecati repellat totam facere eligendi accusamus nihil deserunt minima excepturi.
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati possimus, sapiente molestiae laudantium nesciunt officia minus nobis vel nam sit. Obcaecati repellat totam facere eligendi accusamus nihil deserunt minima excepturi.
       </div>
     </div>
   </div>
