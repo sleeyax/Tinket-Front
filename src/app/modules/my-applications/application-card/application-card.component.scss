@@ -1,0 +1,32 @@
+.assignment-title {
+  font-size: 1.1em;
+}
+
+.assignment-card {
+  border-top: 4px solid #D38B49;
+
+  .status {
+    color: #D38B49;
+  }
+
+  &.open {
+    border-top-color: #6ADA9E;
+    .status {
+      color: #27AE65;
+    }
+  }
+
+  &.archived {
+    border-top-color: #DEE7ED;
+    .status {
+      color: #000;
+    }
+  }
+
+  &.selected {
+    border-top-color: #0294B5 !important;
+    .status {
+      color: #0294B5 !important;
+    }
+  }
+}
