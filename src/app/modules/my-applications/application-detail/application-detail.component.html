@@ -14,7 +14,7 @@
     <p class="status-description">{{ fullStatusDescription }}</p>
   </div>
 
-  <div class="container border-top pt-3">
+  <div *ngIf="!application.contacted" class="container border-top pt-3">
 
     <p class="my-3 text-muted small">
       <svg-icon src="../../../../assets/svg/location.svg"></svg-icon>
@@ -30,6 +30,12 @@
     <p class="my-3">
       {{ application.assignment.description }}
     </p>
+
+  </div>
+
+  <div *ngIf="application.contacted" class="container border-top pt-3">
+
+    <!-- HIER WESLEY 👌 -->
 
   </div>
 </div>
