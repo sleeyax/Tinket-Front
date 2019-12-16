@@ -11,7 +11,6 @@
   </form>
 </app-header>
 
-
 <div *ngIf="typeReview" class="container mt-3 mb-3">
   <div class="mt-3" *ngFor="let review of flaggedReviews">
     <app-mod-review-box [reviewedPersoon]="review.reviewed.firstname + ' ' + review.reviewed.lastname" [flaggedAt]="review.flaggedAt" (solveClicked)="solve($event)" (deleteClicked)="solve($event)"
@@ -19,6 +18,14 @@
     </app-mod-review-box>
   </div>
 </div>
+
+
+<div *ngIf="typeReview && flaggedReviews.length == 0" class="container mt-3 mb-3">
+  <div class="alert alert-warning" role="alert">
+    Geen reviews om te moderaten.
+  </div>
+</div>
+
 
 
 <div style="margin-bottom: 100px;">
