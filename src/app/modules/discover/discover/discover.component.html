@@ -80,12 +80,12 @@
 <app-footer>
   <div class="container py-4 border-top action-container"
     [class.d-none]="!infoShown">
-    <button *ngIf="!applied" (click)="apply()" class="btn btn-primary btn-block"
+    <button *ngIf="!applicationSuccessful && !hasApplied" (click)="apply()" class="btn btn-primary btn-block"
       [disabled]="applying">
       <span *ngIf="applying" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
       Ik ben geïnteresseerd
     </button>
-    <button *ngIf="applied" disabled class="btn btn-white shadow-sm border btn-block">
+    <button *ngIf="applicationSuccessful || hasApplied" disabled class="btn btn-white shadow-sm border btn-block">
       Je bent ingeschreven! 🥳
     </button>
   </div>

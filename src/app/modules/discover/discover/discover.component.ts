@@ -7,6 +7,7 @@ import { AuthenticationService } from '@app/core/services/authentication.service
 import { User } from '@app/shared/models/user';
 import { ToastService } from '@app/core/services/toast.service';
 import { ApplicationService } from '@app/core/services/application.service';
+import { Application } from '@app/shared/models/application';
 
 @Component({
   selector: 'app-discover',
@@ -16,7 +17,7 @@ import { ApplicationService } from '@app/core/services/application.service';
 })
 export class DiscoverComponent implements OnInit {
   applying = false;
-  applied = false;
+  applicationSuccessful = false;
   player : Plyr;
   hammerContent : Hammer;
   hammerDetail : Hammer;
@@ -25,6 +26,7 @@ export class DiscoverComponent implements OnInit {
   assignments : Assignment[];
   currentIndex = 0;
   flagged = false;
+  applications : Application[];
 
   constructor(
     private applicationService : ApplicationService,
@@ -37,6 +39,9 @@ export class DiscoverComponent implements OnInit {
 
     assignmentService.getUserRecommended(this.currentUser._id)
       .subscribe((recommended) => this.assignments = recommended);
+
+    this.applicationService.getMyApplications()
+      .subscribe((applications) => this.applications = applications);
   }
 
   get currentAssignment() : Assignment {
@@ -51,6 +56,13 @@ export class DiscoverComponent implements OnInit {
 
   get hasPrevSlide() : Boolean {
     return this.currentIndex > 0;
+  }
+
+  get hasApplied() : Boolean {
+    const application = this.applications.find((application) => {
+      return application.assignment._id === this.currentAssignment._id;
+    });
+    return application ? true : false;
   }
 
   next() {
@@ -95,7 +107,7 @@ export class DiscoverComponent implements OnInit {
     this.applicationService.applyForAssignment(this.currentAssignment._id)
       .subscribe(() => {
         this.applying = false;
-        this.applied = true;
+        this.applicationSuccessful = true;
       })
   }
 

@@ -4,7 +4,9 @@
   plaatsen.
 </app-header>
 
-<app-stars vraag="Je gemiddelde score" underline="true" clickAble="false" [rating]="avarageScore"></app-stars>
+<div class="score" [class.blurred]="reviews.length <= 0">
+  <app-stars vraag="Je gemiddelde score" underline="true" clickAble="false" [rating]="reviews.length <= 0 ? 5 : avarageScore"></app-stars>
+</div>
 
 <div class="container mt-5 mb-5">
   <ng-container *ngFor="let review of reviews">
