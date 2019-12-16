@@ -20,6 +20,10 @@ export class ReviewService {
       .subscribe((user) => this.currentUser = user);
   }
 
+  postReview(review){
+    return this.http.post(`${environment.apiUrl}/reviews`, review)
+  }
+
   getReviews(): Observable<Review[]> {
     return this.http.get<Review[]>(`${environment.apiUrl}/users/${this.currentUser._id}/reviews`);
   }

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MyApplicationsComponent } from './my-applications/my-applications.component';
-
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { SharedModule } from '@app/shared/shared.module';
 import { ApplicationDetailComponent } from './application-detail/application-detail.component';
 
@@ -12,7 +12,9 @@ import { ApplicationDetailComponent } from './application-detail/application-det
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class MyApplicationsModule { }
