@@ -61,7 +61,7 @@
   </div>
 </div>
 
-<app-footer *ngIf="application && !application.contacted || !application.assignment.archivedAt">
+<app-footer *ngIf="application && !application.contacted">
   <div class="container d-flex py-3 border-top">
     <button (click)="retract()" class="flex-grow-1 btn btn-danger" [disabled]="retracting">
       <span *ngIf="retracting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
