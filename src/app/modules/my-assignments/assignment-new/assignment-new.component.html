@@ -4,7 +4,7 @@
 </div>
 <form [formGroup]="newAssignmentForm" (ngSubmit)="onSubmit()">
   <div *ngIf="error" class="text-danger font-weight-bold mb-3 mb-0">{{error}}</div>
-  <div class="container pt-4" style="margin-bottom: 100px;">
+  <div class="container pt-4">
     <div class="form-group">
       <label class="small" for="title">Titel van de opdracht</label>
       <input type="text" formControlName="title" class="form-control form-control-lg text-black"
@@ -55,6 +55,11 @@
       </div>
     </div>
   </div>
+
+  <div class="container" style="margin-bottom: 100px;">
+    <app-uploader (uploaded)="checkUpload()"></app-uploader>
+  </div>
+
   <app-footer>
     <div class="container border-top py-3">
       <div class="d-flex">
