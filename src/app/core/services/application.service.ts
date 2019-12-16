@@ -36,6 +36,12 @@ export class ApplicationService {
     return this.http.post<Object>(`${environment.apiUrl}/users/${this.currentUser._id}/applications`, body);
   }
 
+  acceptApplication(applicationId): Observable<Object> {
+    return this.http.put<Object>(`${environment.apiUrl}/applications/${applicationId}`, {
+      contacted: true
+    });
+  }
+
   retractApplication(applicationId): Observable<Object> {
     return this.http.delete<Object>(`${environment.apiUrl}/applications/${applicationId}`);
   }

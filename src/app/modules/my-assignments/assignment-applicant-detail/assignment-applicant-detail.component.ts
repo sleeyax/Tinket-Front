@@ -6,6 +6,8 @@ import { AssignmentService } from '@app/core/services/assignment.service';
 import { ToastService } from '@app/core/services/toast.service';
 import * as moment from 'moment';
 import 'moment/locale/nl';
+import { ApplicationService } from '@app/core/services/application.service';
+import { Application } from '@app/shared/models/application';
 
 @Component({
   selector: 'app-assignment-applicant-detail',
@@ -19,25 +21,38 @@ export class AssignmentApplicantDetailComponent implements OnInit {
   age = "";
   location = "";
   currentAssignmentId;
+  selectedApplication : Application;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
     private assignmentService: AssignmentService,
+    private applicationService: ApplicationService,
     private toastService: ToastService,
     private userService: UserService) {
 
-    let userId = this.route.snapshot.paramMap.get("userId")
-    this.currentAssignmentId = this.route.snapshot.paramMap.get("id")
-    this.userService.getUserById(userId).subscribe(res => {
-      this.selectedUser = res
-      this.birthday = moment(this.selectedUser.makerProfile.dateOfBirth).format("LL");
-      this.age = this.calculateAge(this.selectedUser.makerProfile.dateOfBirth)
-      if (this.selectedUser.makerProfile.location.city == "" || this.selectedUser.makerProfile.location.postalCode == "" || this.selectedUser.makerProfile.location.country == "") {
-        this.location = "Geen locatie"
-      } else {
-        this.location = this.selectedUser.makerProfile.location.city + ", " + this.selectedUser.makerProfile.location.postalCode + ", " + this.selectedUser.makerProfile.location.country
-      }
-    })
+      this.currentAssignmentId = this.route.snapshot.paramMap.get("id");
+      const applicationId = this.route.snapshot.paramMap.get("applicationId");
+
+      this.applicationService.getApplication(applicationId)
+        .subscribe(res => {
+          this.selectedApplication = res;
+          this.selectedUser = res.maker;
+          this.birthday = moment(this.selectedUser.makerProfile.dateOfBirth).format("LL");
+          this.age = this.calculateAge(this.selectedUser.makerProfile.dateOfBirth);
+          if (this.selectedUser.makerProfile.location.city == "" || this.selectedUser.makerProfile.location.postalCode == "" || this.selectedUser.makerProfile.location.country == "") {
+            this.location = "Geen locatie"
+          } else {
+            this.location = this.selectedUser.makerProfile.location.city + ", " + this.selectedUser.makerProfile.location.postalCode + ", " + this.selectedUser.makerProfile.location.country
+          }
+        });
+    }
+
+  acceptUser(userId) {
+    this.applicationService.acceptApplication(this.selectedApplication._id)
+      .subscribe(() => {
+        this.selectedApplication.contacted = true;
+        this.toastService.toast('Opgelagen!');
+      });
   }
 
   calculateAge(birthday) {

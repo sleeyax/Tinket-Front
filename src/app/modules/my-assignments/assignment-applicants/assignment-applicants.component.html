@@ -5,7 +5,7 @@
 <div *ngIf="assignment" class="container border-top my-4 pt-4">
   <ul class="list-unstyled">
     <ng-container *ngFor="let application of applications">
-      <a [routerLink]="'/assignments/' + assignment._id + '/applicants/' + application.maker._id">
+      <a [routerLink]="'/assignments/' + assignment._id + '/applicants/' + application._id">
         <li class="d-flex mt-3">
           <img [src]="'https://api.adorable.io/avatars/285/' + application.maker._id" alt="Avatar"
             class="img-fluid rounded-circle" style="width: 40px;">
