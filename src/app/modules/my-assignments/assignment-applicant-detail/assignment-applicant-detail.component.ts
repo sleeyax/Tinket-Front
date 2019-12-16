@@ -81,6 +81,7 @@ export class AssignmentApplicantDetailComponent implements OnInit {
         this.submitted = false;
         this.loading = false;
         this.toastService.toast("Bedankt voor je feedback!")
+        this.review = false;
       },
         error => this.error = error)
     } else {
