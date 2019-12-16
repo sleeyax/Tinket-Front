@@ -1,0 +1,28 @@
+.application {
+
+  .status-description {
+    color: #565E61;
+  }
+
+  .status {
+    color: #D38B49;
+  }
+
+  &.open {
+   .status {
+      color: #27AE65;
+    }
+  }
+
+  &.archived {
+    .status {
+      color: #000;
+    }
+  }
+
+  &.selected {
+    .status {
+      color: #0294B5 !important;
+    }
+  }
+}

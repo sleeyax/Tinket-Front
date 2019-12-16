@@ -9,7 +9,7 @@
       [title]="application.assignment.title"
       [location]="application.assignment.location.city + ', ' + application.assignment.location.country"
       [routerLink]="'/applications/' + application._id"
-      [selected]="application.selected"
+      [selected]="application.contacted"
       [open]="application.assignment.open"
       [archived]="application.assignment.archivedAt">
       </app-application-card>
