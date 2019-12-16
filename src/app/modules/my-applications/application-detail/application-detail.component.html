@@ -1,11 +1,8 @@
-<app-header
-  [title]="application ? application.assignment.title : ''"
-  parentTitle="Mijn inschrijvingen"
+<app-header [title]="application ? application.assignment.title : ''" parentTitle="Mijn inschrijvingen"
   parentRouterLink="/applications">
 </app-header>
 
-<div class="application pt-3" *ngIf="application"
-  [class.open]="application && application.assignment.open"
+<div class="application pt-3" *ngIf="application" [class.open]="application && application.assignment.open"
   [class.selected]="application && application.contacted"
   [class.archived]="application && application.assignment.archivedAt">
 
@@ -34,13 +31,37 @@
   </div>
 
   <div *ngIf="application.contacted" class="container border-top pt-3">
-
-    <!-- HIER WESLEY 👌 -->
-
+    <p style="font-weight: 600;">Beoordeel {{ application.assignment.createdBy.companyProfile.name}}</p>
+    <app-stars (starClick)="vote($event)" vraag="Hoe fijn was je samenwerking?"></app-stars>
+    <form [formGroup]="inputForm" (ngSubmit)="onSubmit()" class="w-100">
+      <div *ngIf="error" class="text-danger font-weight-bold mb-3 mb-0">{{error}}</div>
+      <div class="form-group">
+        <label style="font-weight: 600;" class="small" for="message">Je bericht</label>
+        <textarea name="message" formControlName="message" rows="4" cols="20"
+          class="form-control text-black"></textarea>
+      </div>
+      <div class="row">
+        <div class="col-6 pr-3">
+          <button type="submit" class="reviewButton btn text-white border">
+            Toevoegen
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          </button>
+        </div>
+        <div class="col-6 pl-0">
+          <div class="form-group">
+            <span style="font-weight: 100; font-size: 12px;">
+              Review anoniem plaatsen?
+            </span>
+            <input formControlName="anonymous" class="tgl tgl-flip" id="cb5" type="checkbox" />
+            <label class="tgl-btn" data-tg-off="Nee" data-tg-on="Ja" for="cb5"></label>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
 
-<app-footer>
+<app-footer *ngIf="application && !application.contacted">
   <div class="container d-flex py-3 border-top">
     <button (click)="retract()" class="flex-grow-1 btn btn-danger" [disabled]="retracting">
       <span *ngIf="retracting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>

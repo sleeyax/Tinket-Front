@@ -6,9 +6,9 @@ export class Review {
         user: User;
     }
     score: Number;
-    _id: string;
     reviewed: string;
     description: string;
+    _id?: string;
     flaggedAt?: Date;
     flagResolvedAt?: Date;
     deletedAt?: Date;

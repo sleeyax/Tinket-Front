@@ -87,6 +87,8 @@ export class ProfileComponent implements OnInit {
         this.skillService.updateUserSkills(this.mySkillIds).subscribe(() => {
           this.getSkills()
         })
+      } else {
+        this.loadingSkills = false;
       }
     } else {
       this.loadingSkills = false;

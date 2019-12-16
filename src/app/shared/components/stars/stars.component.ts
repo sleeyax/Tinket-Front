@@ -21,7 +21,7 @@ export class StarsComponent implements OnInit {
   }
 
   onClick(rating: number): void {
-    if (this.clickAble == false) {
+    if (!this.clickAble) {
       this.rating = rating;
       this.starClick.emit({
         rating: rating
