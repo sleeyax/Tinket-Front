@@ -22,7 +22,7 @@ export class ModUserCreateComponent implements OnInit {
     private route: ActivatedRoute,
     private authenticationService: AuthenticationService,
     private userService: UserService) { }
-  private isAdmin = true;
+    private isAdmin = true;
 
   registerForm: FormGroup;
   loading = false;
@@ -31,6 +31,7 @@ export class ModUserCreateComponent implements OnInit {
 
   switchUserProfile() {
     this.isAdmin = this.f.userType.value;
+    console.log( this.f.userType.value);
   }
 
   ngOnInit() {
@@ -86,8 +87,9 @@ export class ModUserCreateComponent implements OnInit {
 
     console.log(this.isAdmin)
 
-    if (this.isAdmin) {
+    if (!this.isAdmin) {
       this.registerAdmin();
+      console.log("admin")
     } else {
       this.registrerUser();
     }
@@ -95,7 +97,7 @@ export class ModUserCreateComponent implements OnInit {
 
 
   registrerUser() {
-    this.authenticationService.register(
+    this.authenticationService.registerUser(
       this.f.name.value,
       this.f.lastname.value,
       this.f.email.value,
