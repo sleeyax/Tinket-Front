@@ -1,7 +1,7 @@
 <ng-template [ngIf]="selectedUser">
-  <app-header
-    [title]="selectedUser.firstname + ' ' + selectedUser.lastname"
-    underline="true" parentTitle="Inschrijvingen" [subtitle]="selectedUser.email" [parentRouterLink]="'/assignments/' + currentAssignmentId + '/applicants'">
+  <app-header [title]="selectedUser.firstname + ' ' + selectedUser.lastname" underline="true"
+    parentTitle="Inschrijvingen" [subtitle]="selectedUser.email"
+    [parentRouterLink]="'/assignments/' + currentAssignmentId + '/applicants'">
     <div class="row">
       <div class="col-4">
         <img style="border-radius: 100%;" src="https://api.adorable.io/avatars/75/{{selectedUser._id}}" alt="avatar">
@@ -13,7 +13,7 @@
 
   </app-header>
 
-  <div *ngIf="selectedUser" class="border-bottom py-4">
+  <div *ngIf="selectedUser && !review" class="border-bottom py-4">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-2">
@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <div *ngIf="selectedUser" class="border-bottom py-4">
+  <div *ngIf="selectedUser && !review" class="border-bottom py-4">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-2">
@@ -35,18 +35,49 @@
     </div>
   </div>
 
-  <div *ngIf="selectedUser" class="py-4">
+  <div *ngIf="selectedUser && !review" class="py-4">
     <div class="container">
       <p style="margin-bottom: 0; font-weight: 600;">Ervaring</p>
       <p style="margin-top: 10px;">
         {{selectedUser.makerProfile.experience == ''? 'Geen ervaring' : selectedUser.makerProfile.experience }}</p>
     </div>
   </div>
-  <app-footer>
+
+  <div *ngIf="review" class="container border-top pt-3">
+    <p style="font-weight: 600;">Beoordeel {{ selectedUser.firstname }} {{ selectedUser.lastname }}</p>
+    <app-stars (starClick)="vote($event)" vraag="Hoe fijn was je samenwerking?"></app-stars>
+    <form [formGroup]="inputForm" (ngSubmit)="onSubmit()" class="w-100">
+      <div *ngIf="error" class="text-danger font-weight-bold mb-3 mb-0">{{error}}</div>
+      <div class="form-group">
+        <label style="font-weight: 600;" class="small" for="message">Je bericht</label>
+        <textarea name="message" formControlName="message" rows="4" cols="20"
+          class="form-control text-black"></textarea>
+      </div>
+      <div class="row">
+        <div class="col-6 pr-3">
+          <button type="submit" class="reviewButton btn text-white border">
+            Toevoegen
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          </button>
+        </div>
+        <div class="col-6 pl-0">
+          <div class="form-group">
+            <span style="font-weight: 100; font-size: 12px;">
+              Review anoniem plaatsen?
+            </span>
+            <input formControlName="anonymous" class="tgl tgl-flip" id="cb5" type="checkbox" />
+            <label class="tgl-btn" data-tg-off="Nee" data-tg-on="Ja" for="cb5"></label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <app-footer *ngIf="!review">
     <div class="container border-top py-3">
       <div class="d-flex">
         <a (click)="deleteUser(selectedUser._id)" class="btn hireButton text-white mr-3">Aannemen</a>
-        <a (click)="goToReviews(selectedUser._id)" class="btn btn-white border flex-grow-1 shadow-sm font-weight-bold">
+        <a (click)="reviewF()" class="btn btn-white border flex-grow-1 shadow-sm font-weight-bold">
           Review
         </a>
       </div>
