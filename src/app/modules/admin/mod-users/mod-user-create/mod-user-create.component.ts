@@ -22,7 +22,7 @@ export class ModUserCreateComponent implements OnInit {
     private route: ActivatedRoute,
     private authenticationService: AuthenticationService,
     private userService: UserService) { }
-    private isAdmin = true;
+    public isAdmin = true;
 
   registerForm: FormGroup;
   loading = false;
