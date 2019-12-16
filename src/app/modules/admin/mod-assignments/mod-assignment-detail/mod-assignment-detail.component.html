@@ -38,9 +38,9 @@
 <app-footer>
   <div class="container border-top py-3">
     <div class="d-flex">
-      <button (click)="deleteAssignment()" *ngIf="assignment && assignment.flagResolvedAt && !assignment.deletedAt && !assignment.archivedAt" routerLink="edit"
+      <button (click)="deleteAssignment()" *ngIf="assignment && assignment.flagResolvedAt || !assignment.deletedAt" routerLink="edit"
         class="btn btn-danger mr-3">Afkeuren</button>
-      <button (click)="solveAssignment()" *ngIf="assignment && assignment.deletedAt  && !assignment.archivedAt" routerLink="applicants" class="btn btn-white border flex-grow-1 shadow-sm font-weight-bold">
+      <button (click)="solveAssignment()" *ngIf="assignment && !assignment.flagResolvedAt || assignment.deletedAt" routerLink="applicants" class="btn btn-white border flex-grow-1 shadow-sm font-weight-bold">
         Negeren
       </button>
     </div>
