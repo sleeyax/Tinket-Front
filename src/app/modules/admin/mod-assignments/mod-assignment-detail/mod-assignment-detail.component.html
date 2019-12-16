@@ -1,51 +1,48 @@
 <div class="border-bottom">
-        <app-header *ngIf="assignment"
-          [title]="assignment.title"
-          parentTitle="Beheer opdrachten"
-          parentRouterLink="/mod/assignments">
-      
-          <div *ngIf="assignment &&!assignment.archivedAt">
-            <label for="status" class="mt-4">Status</label>
-            <select (change)="changeStatus($event.target.value)" id="status" class="custom-select custom-select-lg mb-3">
-              <option value="1" [selected]="assignment.open">Open voor inschrijvingen</option>
-              <option value="0" [selected]="!assignment.open">Gesloten voor inschrijvingen</option>
-            </select>
-          </div>
-      
-          <div *ngIf="assignment && assignment.archivedAt"
-            class="alert alert-warning mt-4 mb-3" role="alert">
-            Deze opdracht is gearchiveerd.
-          </div>
-        </app-header>
-      </div>
-      
-      <div class="container" *ngIf="assignment">
-      
-        <p class="my-3 text-muted small">
-          <svg-icon src="../../../../assets/svg/location.svg"></svg-icon>
-          {{ assignment.location.city + ', ' + assignment.location.country }}
-        </p>
-      
-        <ul class="list-unstyled my-3">
-          <li class="rouned bg-light p-2 d-inline-block mr-2" *ngFor="let tag of assignment.requiredSkills">
-            {{ tag.name }}
-          </li>
-        </ul>
-      
-        <p class="my-3">
-          {{ assignment.description }}
-        </p>
-      
-      </div>
-      
-      <app-footer>
-        <div class="container border-top py-3">
-          <div class="d-flex">
-              <a *ngIf="assignment && !assignment.archivedAt" routerLink="edit" class="btn btn-primary mr-3">Bewerk</a>
-              <a routerLink="applicants" class="btn btn-white border flex-grow-1 shadow-sm font-weight-bold">
-                Bekijk inschrijvingen <svg-icon src="../../../../../assets/svg/forward.svg"></svg-icon>
-              </a>
-          </div>
-        </div>
-      </app-footer>
-      
+  <app-header *ngIf="assignment" [title]="assignment.title" parentTitle="Beheer opdrachten"
+    parentRouterLink="/mod/assignments">
+
+    <div *ngIf="assignment &&!assignment.archivedAt">
+      <label for="status" class="mt-4">Status</label>
+      <select (change)="changeStatus($event.target.value)" id="status" class="custom-select custom-select-lg mb-3">
+        <option value="1" [selected]="assignment.open">Open voor inschrijvingen</option>
+        <option value="0" [selected]="!assignment.open">Gesloten voor inschrijvingen</option>
+      </select>
+    </div>
+
+    <div *ngIf="assignment && assignment.archivedAt" class="alert alert-warning mt-4 mb-3" role="alert">
+      Deze opdracht is gearchiveerd.
+    </div>
+  </app-header>
+</div>
+
+<div class="container" *ngIf="assignment">
+
+  <p class="my-3 text-muted small">
+    <svg-icon src="../../../../assets/svg/location.svg"></svg-icon>
+    {{ assignment.location.city + ', ' + assignment.location.country }}
+  </p>
+
+  <ul class="list-unstyled my-3">
+    <li class="rouned bg-light p-2 d-inline-block mr-2" *ngFor="let tag of assignment.requiredSkills">
+      {{ tag.name }}
+    </li>
+  </ul>
+
+  <p class="my-3">
+    {{ assignment.description }}
+  </p>
+
+</div>
+
+<app-footer>
+  <div class="container border-top py-3">
+    <div class="d-flex">
+      <button (click)="deleteAssignment()" *ngIf="assignment && assignment.flagResolvedAt && !assignment.deletedAt && !assignment.archivedAt" routerLink="edit"
+        class="btn btn-danger mr-3">Afkeuren</button>
+      <button (click)="solveAssignment()" *ngIf="assignment && assignment.deletedAt  && !assignment.archivedAt" routerLink="applicants" class="btn btn-white border flex-grow-1 shadow-sm font-weight-bold">
+        Negeren
+      </button>
+    </div>
+  </div>
+</app-footer>

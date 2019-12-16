@@ -29,69 +29,30 @@ export class ModReviewsComponent implements OnInit {
   };
 
   getReviews() {
-    this.reviewService.getFlaggedReviews().subscribe(res => {this.flaggedReviews = res
-    console.log(res)
-    
-    });
-    this.reviewService.getSolvedReviews().subscribe(res => {this.solvedReviews = res
-    console.log(res);
-    
-    });
-
-   
+    this.reviewService.getFlaggedReviews().subscribe(res => this.flaggedReviews = res);
+    this.reviewService.getSolvedReviews().subscribe(res => this.solvedReviews = res);
   }
 
   onDelete(id) {
-      this.deleteCounter++;
-      if (this.deleteCounter == 2) {
-        this.reviewService.ignoreReview(id.reviewId).subscribe(() => {
-          this.toastService.toast("Review verwijderd!")
-          this.getReviews();
-          this.deleteCounter = 0
-        })
-      } else {
-        this.toastService.toast("Klik nogmaals om review alsnog te verwijderen")
-      }
-  
-      setTimeout(() => {
-        this.deleteCounter = 0;
-      }, 3000);
-    }
+    this.reviewService.ignoreReview(id.reviewId).subscribe(() => {
+      this.toastService.toast("Review verwijderd!")
+      this.getReviews();
+    })
+  }
 
-  solveCounter = 0;
-  deleteCounter = 0;
   solve(solve) {
     if (solve.solve) {
-      this.solveCounter++;
-      if (this.solveCounter == 2) {
-        
-        this.reviewService.solveReview(solve.reviewId).subscribe(() => {
-          this.toastService.toast("Flag opgelost!")
-          this.getReviews();
-          this.solveCounter = 0;
-        })
-      } else {
-        this.toastService.toast("Klik nogmaals om flag op te lossen!")
-      }
+      this.reviewService.solveReview(solve.reviewId).subscribe(() => {
+        this.toastService.toast("Flag opgelost!")
+        this.getReviews();
+      })
     }
     else if (solve.delete) {
-      this.deleteCounter++;
-      if (this.deleteCounter == 2) {
-        console.log(solve.reviewId)
-        this.reviewService.ignoreReview(solve.reviewId).subscribe(() => {
-          this.toastService.toast("Review verwijderd!")
-          this.getReviews();
-          this.deleteCounter = 0;
-        })
-      } else {
-        this.toastService.toast("Klik nogmaals om review te verwijderen!")
-      }
+      this.reviewService.ignoreReview(solve.reviewId).subscribe(() => {
+        this.toastService.toast("Review verwijderd!")
+        this.getReviews();
+      })
     }
-
-    setTimeout(() => {
-      this.deleteCounter = 0;
-      this.solveCounter = 0;
-    }, 3000);
   }
 
 

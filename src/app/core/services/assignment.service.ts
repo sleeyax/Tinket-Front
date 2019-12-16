@@ -45,15 +45,15 @@ export class AssignmentService {
     return this.http.get(`${environment.apiUrl}/assignments/${id}/flag`);
   }
 
-  solveAssignment(id: string){
+  solveAssignment(id: String){
     return this.http.get(`${environment.apiUrl}/assignments/${id}/flag/resolve`);
   }
 
-  ignoreAssignment(id: string){
+  ignoreAssignment(id: String){
     return this.http.get(`${environment.apiUrl}/assignments/${id}/flag/ignore`);
   }
 
-  undoIgnoredAssignment(id: string){
+  undoIgnoredAssignment(id: String){
     return this.http.get(`${environment.apiUrl}/assignments/${id}/flag/ignore/undo`);
   }
 

@@ -29,6 +29,30 @@ export class ModAssignmentDetailComponent implements OnInit {
         });
   }
 
+  deleteAssignment() {
+    this.assignmentService.ignoreAssignment(this.assignment._id).subscribe(() => {
+      this.toastService.toast("Opdracht verwijderd!");
+      this.router.navigate(['mod/assignments']);
+    })
+  }
+
+  solveAssignment() {
+
+    console.log(this.assignment);
+    if (this.assignment.deletedAt) {
+      console.log("undo")
+      this.assignmentService.undoIgnoredAssignment(this.assignment._id).subscribe(() => {
+        this.toastService.toast("Probleem genegeerd!");
+        this.router.navigate(['mod/assignments']);
+      })
+    } else{
+      this.assignmentService.solveAssignment(this.assignment._id).subscribe(() => {
+        this.toastService.toast("Probleem genegeerd!");
+        this.router.navigate(['mod/assignments']);
+      })
+    }
+  }
+
   changeStatus(newStatus) {
     const update = {
       ...this.assignment,

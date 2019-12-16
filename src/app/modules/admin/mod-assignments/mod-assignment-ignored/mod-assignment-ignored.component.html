@@ -1,0 +1,21 @@
+<app-header title="Afgekeurde opdrachten" fixed="true" parentTitle="Beheer opdrachten"
+  parentRouterLink="/mod/assignments">
+  Hier vindt u een lijst van al de afgekeurde opdrachten, het is hier ook mogelijk om een opdracht weer goed te keuren.
+</app-header>
+
+<div style="margin-top: 300px;" class="mb-5">
+  <div class="container">
+    <ng-container *ngFor="let assignment of deletedAssignments">
+      <app-application-card [routerLink]="'/mod/assignments/' + assignment._id" routerLinkActive="router-link-active"
+        [open]="assignment.open" [title]="assignment.title"
+        [location]="assignment.location.city + ', ' + assignment.location.country">
+      </app-application-card>
+    </ng-container>
+  </div>
+</div>
+
+<div class="container">
+  <div *ngIf="deletedAssignments && deletedAssignments.length == 0" class="alert alert-warning text-center" role="alert">
+    Er zijn geen afgekeurde opdrachten
+  </div>
+</div>

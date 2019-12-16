@@ -29,6 +29,7 @@ import { ModUserReviewsComponent } from './modules/admin/mod-users/mod-user-revi
 import { ModUserCreateComponent } from './modules/admin/mod-users/mod-user-create/mod-user-create.component';
 import { ModDeletedReviewsComponent } from './modules/admin/mod-reviews/mod-deleted-reviews/mod-deleted-reviews.component';
 import { ModAssignmentDetailComponent } from './modules/admin/mod-assignments/mod-assignment-detail/mod-assignment-detail.component';
+import { ModAssignmentIgnoredComponent } from './modules/admin/mod-assignments/mod-assignment-ignored/mod-assignment-ignored.component';
 
 const routes: Routes = [
   // Security
@@ -58,6 +59,7 @@ const routes: Routes = [
   { path: 'mod/reviews', component: ModReviewsComponent, canActivate: [AdminGuard]},
   { path: 'mod/reviews/ignored', component: ModDeletedReviewsComponent, canActivate: [AdminGuard]},
   { path: 'mod/assignments', component: ModAssignmentsComponent, canActivate: [AdminGuard]},
+  { path: 'mod/assignments/ignored', component: ModAssignmentIgnoredComponent, canActivate: [AdminGuard]},
   { path: 'mod/assignments/:id', component: ModAssignmentDetailComponent, canActivate: [AdminGuard]},
 
   { path: 'assignments/new', component: AssignmentNewComponent, canActivate: [AuthGuard, CompanyGuard]},
