@@ -1,0 +1,26 @@
+<form [formGroup]="uploadForm">
+  <label for="video">Videointroductie</label>
+  <div class="d-flex">
+    <div class="bg-light" style="height: 150px; width: 100px;">
+
+    </div>
+    <div class="flex-grow-1 pl-4 pt-3">
+
+      <p><b>{{ fileName || 'Kies een video' }}</b></p>
+
+      <button *ngIf="!pending && !complete" (click)="browse()" type="button" class="btn btn-primary">Upload een video</button>
+      <input class="d-none" id="video" type="file" name="video" (change)="onFileSelect($event)" />
+
+      <p *ngIf="pending" >
+        <span class="spinner-grow spinner-grow-sm" role="status"></span>
+        Uploaden...
+      </p>
+      <p *ngIf="complete">Upload compleet!</p>
+
+      <p *ngIf="complete" class="small pt-2">
+        <a (click)="browse()">Nieuwe upload</a>
+      </p>
+
+    </div>
+  </div>
+</form>
