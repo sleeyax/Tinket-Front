@@ -64,7 +64,7 @@ const routes: Routes = [
   { path: 'mod/assignments/ignored', component: ModAssignmentIgnoredComponent, canActivate: [AdminGuard]},
   { path: 'mod/assignments/:id', component: ModAssignmentDetailComponent, canActivate: [AdminGuard]},
 
-  { path: 'assignments/:id/applicants/:id', component: AssignmentApplicantDetailComponent, canActivate: [AuthGuard, CompanyGuard]},
+  { path: 'assignments/:id/applicants/:userId', component: AssignmentApplicantDetailComponent, canActivate: [AuthGuard, CompanyGuard]},
   { path: 'assignments/new', component: AssignmentNewComponent, canActivate: [AuthGuard, CompanyGuard]},
   { path: 'assignments/:id', component: AssignmentDetailComponent, canActivate: [AuthGuard, CompanyGuard]},
   { path: 'assignments/:id/edit', component: AssignmentEditComponent, canActivate: [AuthGuard, CompanyGuard]},
