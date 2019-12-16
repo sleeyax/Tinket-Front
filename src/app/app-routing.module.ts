@@ -28,6 +28,7 @@ import { ModUserDetailComponent } from './modules/admin/mod-users/mod-user-detai
 import { ModUserReviewsComponent } from './modules/admin/mod-users/mod-user-reviews/mod-user-reviews.component';
 import { ModUserCreateComponent } from './modules/admin/mod-users/mod-user-create/mod-user-create.component';
 import { ModDeletedReviewsComponent } from './modules/admin/mod-reviews/mod-deleted-reviews/mod-deleted-reviews.component';
+import { ApplicationDetailComponent } from './modules/my-applications/application-detail/application-detail.component';
 
 const routes: Routes = [
   // Security
@@ -43,6 +44,7 @@ const routes: Routes = [
 
   // Applications
   { path: 'applications', component: MyApplicationsComponent, canActivate: [AuthGuard, MakerGuard]},
+  { path: 'applications/:id', component: ApplicationDetailComponent, canActivate: [AuthGuard, MakerGuard]},
 
   // Assignments
   { path: 'assignments', component: MyAssignmentsComponent, canActivate: [AuthGuard, CompanyGuard]},

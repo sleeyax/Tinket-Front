@@ -8,7 +8,7 @@
     <app-application-card *ngFor="let application of applications"
       [title]="application.assignment.title"
       [location]="application.assignment.location.city + ', ' + application.assignment.location.country"
-      [routerLink]="'/application/' + application._id"
+      [routerLink]="'/applications/' + application._id"
       [selected]="application.selected"
       [open]="application.assignment.open"
       [archived]="application.assignment.archivedAt">
