@@ -46,11 +46,11 @@ export class MyReviewsComponent implements OnInit {
     this.deleteCounter++;
     if (this.deleteCounter == 2) {
       this.reviewService.flagReview(id.reviewId).subscribe(() => {
-        this.toastService.toast("Review geflagged!")
+        this.toastService.toast("Review gerapporteerd!")
         this.getReviews();
       })
     } else {
-      this.toastService.toast("Klik nogmaals om te flaggen")
+      this.toastService.toast("Klik nogmaals om review te rapporteren")
     }
 
     setTimeout(() => {

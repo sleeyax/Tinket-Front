@@ -9,5 +9,7 @@ export class Review {
     _id: string;
     reviewed: string;
     description: string;
-  }
-  
+    flaggedAt?: Date;
+    flagResolvedAt?: Date;
+    deletedAt?: Date;
+}

@@ -40,4 +40,34 @@ export class AssignmentService {
     return this.http.get<Assignment[]>(`${environment.apiUrl}/users/${this.currentUser._id}/assignments`);
   }
 
+
+  flagAssignment(id: String){
+    return this.http.get(`${environment.apiUrl}/assignments/${id}/flag`);
+  }
+
+  solveAssignment(id: String){
+    return this.http.get(`${environment.apiUrl}/assignments/${id}/flag/resolve`);
+  }
+
+  ignoreAssignment(id: String){
+    return this.http.get(`${environment.apiUrl}/assignments/${id}/flag/ignore`);
+  }
+
+  undoIgnoredAssignment(id: String){
+    return this.http.get(`${environment.apiUrl}/assignments/${id}/flag/ignore/undo`);
+  }
+
+
+  getFlaggedAssignments(): Observable<Assignment[]>{
+    return this.http.get<Assignment[]>(`${environment.apiUrl}/assignments/flaggedAt`);
+  }
+  
+  getSolvedAssignments(): Observable<Assignment[]>{
+    return this.http.get<Assignment[]>(`${environment.apiUrl}/assignments/flagResolvedAt`);
+  }
+  
+  getDeletedAssignments(): Observable<Assignment[]>{
+    return this.http.get<Assignment[]>(`${environment.apiUrl}/assignments/deletedAt`);
+  }
+
 }

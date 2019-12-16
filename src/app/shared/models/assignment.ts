@@ -16,4 +16,7 @@ export class Assignment {
     contacted: Boolean,
     user: User
   }];
+  flaggedAt?: Date;
+  flagResolvedAt?: Date;
+  deletedAt?: Date;
 }

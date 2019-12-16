@@ -5,6 +5,7 @@ import { Assignment } from '@app/shared/models/assignment';
 import { AssignmentService } from '@app/core/services/assignment.service';
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { User } from '@app/shared/models/user';
+import { ToastService } from '@app/core/services/toast.service';
 import { ApplicationService } from '@app/core/services/application.service';
 
 @Component({
@@ -28,7 +29,8 @@ export class DiscoverComponent implements OnInit {
   constructor(
     private applicationService : ApplicationService,
     private assignmentService : AssignmentService,
-    private authenticationService : AuthenticationService
+    private authenticationService : AuthenticationService,
+    private toastService: ToastService
   ) {
     authenticationService.currentUser
       .subscribe((user) => this.currentUser = user );
@@ -85,6 +87,7 @@ export class DiscoverComponent implements OnInit {
 
   flag() {
     this.flagged = true;
+    this.assignmentService.flagAssignment(this.currentAssignment._id).subscribe(() => this.toastService.toast("Opdracht gerapporteerd!"))
   }
 
   apply() {
