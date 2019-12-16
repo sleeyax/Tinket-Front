@@ -1,23 +1,22 @@
-<app-header
-  title="Inschrijvingen"
-  parentTitle="Mijn opdracht"
+<app-header *ngIf="assignment" title="Inschrijvingen" parentTitle="Mijn opdracht"
   [parentRouterLink]="'/assignments/' + assignment._id">
 </app-header>
 
-<div class="container border-top my-4 pt-4">
+<div *ngIf="assignment" class="container border-top my-4 pt-4">
+  <ul class="list-unstyled">
+    <ng-container *ngFor="let application of applications">
+      <a [routerLink]="'/applicants/' + application.maker._id">
+        <li class="d-flex mt-3">
+          <img [src]="'https://api.adorable.io/avatars/285/' + application.maker._id" alt="Avatar"
+            class="img-fluid rounded-circle" style="width: 40px;">
 
-  <!--<ul class="list-unstyled">
-    <a routerLink="" *ngFor="let application of assignment.applications">
-      <li class="d-flex">
-        <img src="https://api.adorable.io/avatars/285/bla" alt="Avatar"
-        class="img-fluid rounded-circle" style="width: 40px;">
-
-        <div class="col-10 flex-grow-1">
-          <p class="m-0 font-weight-bold">Jane Doe</p>
-          <p class="text-muted small m-0">Aangenomen</p>
-        </div>
-      </li>
-    </a>
-  </ul>-->
-
+          <div class="col-10 flex-grow-1">
+            <p class="m-0 text-black font-weight-bold">{{application.maker.firstname}} {{application.maker.lastname}}
+            </p>
+            <p class="text-muted small m-0">{{application.contacted? 'Aangenomen': 'Niet aangenomen'}}</p>
+          </div>
+        </li>
+      </a>
+    </ng-container>
+  </ul>
 </div>
