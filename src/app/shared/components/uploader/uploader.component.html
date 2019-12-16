@@ -1,5 +1,5 @@
 <form [formGroup]="uploadForm">
-  <label for="video">Videointroductie</label>
+  <label for="video" class="small">Videointroductie</label>
   <div class="d-flex">
     <div class="bg-light" style="height: 150px; width: 100px;">
 
@@ -9,7 +9,7 @@
       <p><b>{{ fileName || 'Kies een video' }}</b></p>
 
       <button *ngIf="!pending && !complete" (click)="browse()" type="button" class="btn btn-primary">Upload een video</button>
-      <input class="d-none" id="video" type="file" name="video" (change)="onFileSelect($event)" />
+      <input accept="video/mp4,video/x-m4v,video/*" class="d-none" id="video" type="file" name="video" (change)="onFileSelect($event)" />
 
       <p *ngIf="pending" >
         <span class="spinner-grow spinner-grow-sm" role="status"></span>

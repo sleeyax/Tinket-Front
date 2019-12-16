@@ -33,6 +33,7 @@ export class UploaderComponent implements OnInit {
   }
 
   onSubmit() {
+    this.uploaded.emit(null);
     this.pending = true;
     this.complete = false;
     const formData = new FormData();
@@ -49,15 +50,15 @@ export class UploaderComponent implements OnInit {
       this.uploadService.checkStatus(uploadId)
         .subscribe((status) => {
           if(status.pending) return this.awaitUploadComplete(uploadId);
-          this.singalUploadComplete(status.publicId);
+          this.singalUploadComplete(status.url);
         });
     }, 500);
   }
 
-  singalUploadComplete(publicId) {
+  singalUploadComplete(url) {
     this.complete = true;
     this.pending = false;
-    this.uploaded.emit(publicId);
+    this.uploaded.emit(url);
     this.toastService.toast('Uploaden gelukt!');
   }
 

@@ -16,7 +16,7 @@
 
   <div class="h-100 mx-4 video-container">
     <video poster="../../../../assets/poster.png" id="player">
-      <source src=""
+      <source [src]="currentAssignment ? currentAssignment.videoUrl || '' : ''"
         playsinline type="video/mp4" />
     </video>
   </div>

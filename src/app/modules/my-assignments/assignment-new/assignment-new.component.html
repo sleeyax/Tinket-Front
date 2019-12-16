@@ -57,7 +57,12 @@
   </div>
 
   <div class="container" style="margin-bottom: 100px;">
-    <app-uploader (uploaded)="checkUpload()"></app-uploader>
+    <app-uploader (uploaded)="setVideoPublicId($event)"></app-uploader>
+
+    <div *ngIf="submitted && videoUrl == null"
+      class="text-danger small text-right">
+      Upload een videointroductie
+    </div>
   </div>
 
   <app-footer>
