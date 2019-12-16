@@ -7,6 +7,7 @@ import { environment } from '@environments/environment';
 import { User } from '@app/shared/models/user';
 import { Assignment } from '@app/shared/models/assignment';
 import { AuthenticationService } from './authentication.service';
+import { Application } from '@app/shared/models/application';
 
 @Injectable({ providedIn: 'root' })
 export class AssignmentService {
@@ -22,6 +23,10 @@ export class AssignmentService {
 
   getAssignment(id): Observable<Assignment>{
     return this.http.get<Assignment>(`${environment.apiUrl}/assignments/${id}`);
+  }
+
+  getApplicationsFromAssignment(id): Observable<Application[]>{
+    return this.http.get<Application[]>(`${environment.apiUrl}/assignments/${id}/applications`);
   }
 
   getUserRecommended(userId): Observable<Assignment[]>{
