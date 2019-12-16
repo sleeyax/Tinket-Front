@@ -8,6 +8,8 @@ import * as moment from 'moment';
 import 'moment/locale/nl';
 import { ApplicationService } from '@app/core/services/application.service';
 import { Application } from '@app/shared/models/application';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ReviewService } from '@app/core/services/review.service';
 
 @Component({
   selector: 'app-assignment-applicant-detail',
@@ -21,6 +23,10 @@ export class AssignmentApplicantDetailComponent implements OnInit {
   age = "";
   location = "";
   currentAssignmentId;
+  review = false;
+  submitted = false;
+  loading = false;
+  error = ""
   selectedApplication : Application;
 
   constructor(private router: Router,
@@ -28,7 +34,9 @@ export class AssignmentApplicantDetailComponent implements OnInit {
     private assignmentService: AssignmentService,
     private applicationService: ApplicationService,
     private toastService: ToastService,
-    private userService: UserService) {
+    private reviewService : ReviewService,
+    private userService: UserService,
+    private formBuilder: FormBuilder) {
 
       this.currentAssignmentId = this.route.snapshot.paramMap.get("id");
       const applicationId = this.route.snapshot.paramMap.get("applicationId");
@@ -62,7 +70,45 @@ export class AssignmentApplicantDetailComponent implements OnInit {
     return String(Math.abs(ageDate.getUTCFullYear() - 1970) + " jaar");
   }
 
+  reviewF() {
+    this.review = true;
+  }
+
   ngOnInit() {
+    this.inputForm = this.formBuilder.group({
+      message: ['', [Validators.required]],
+      anonymous: [false, [Validators.required]]
+    });
+  }
+
+  inputForm: FormGroup;
+  score = 0;
+  onSubmit() {
+    this.submitted = true;
+    this.loading = true
+    if (this.inputForm.valid) {
+      const review = {
+        anonymous: this.f.anonymous.value,
+        score: this.score,
+        reviewed: this.selectedUser._id,
+        description: this.f.message.value,
+      }
+      this.reviewService.postReview(review).subscribe(() => {
+        this.submitted = false;
+        this.loading = false;
+        this.toastService.toast("Bedankt voor je feedback!")
+        this.review = false;
+      },
+        error => this.error = error)
+    } else {
+      this.submitted = false;
+      this.loading = false;
+    }
+  }
+  get f() { return this.inputForm.controls; }
+
+  vote(score) {
+    this.score = score.rating;
   }
 
 }
