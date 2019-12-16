@@ -23,6 +23,7 @@ export class AssignmentEditComponent implements OnInit {
   skills: Skill[] = []
   loading = false;
   submitted = false;
+  videoUrl : String = null;
 
 
   constructor(
@@ -40,6 +41,7 @@ export class AssignmentEditComponent implements OnInit {
       .subscribe(
         assignment => {
           this.assignment = assignment;
+          this.videoUrl = assignment.videoUrl;
           this.setValues();
         });
 
@@ -49,6 +51,11 @@ export class AssignmentEditComponent implements OnInit {
 
   // convenience getter for easy access to form fields
   get f() { return this.editAssignmentForm.controls; }
+
+  setVideoPublicId(url) {
+    this.videoUrl = url;
+    console.log(url);
+  }
 
   ngOnInit() {
     this.editAssignmentForm = this.formBuilder.group({
@@ -68,7 +75,7 @@ export class AssignmentEditComponent implements OnInit {
     const assignment: Assignment = {
       _id: this.assignment._id,
       title: this.f.title.value,
-      videoUrl: "videoPath",
+      videoUrl: this.videoUrl,
       description: this.f.description.value,
       requiredSkills: this.selectedSkills,
       location: {
