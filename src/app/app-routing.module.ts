@@ -76,9 +76,6 @@ const routes: Routes = [
   // Profile
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   { path: 'profile/change-password', component: PasswordComponent, canActivate: [AuthGuard]},
-
-  // Messages
-  { path: 'messages', component: LandingComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
