@@ -4,13 +4,11 @@
 
 <div style="margin-top: 300px;" class="mb-5">
   <div class="container" *ngFor="let review of deletedReviews">
-    <ng-container *ngIf="!typeReview">
-      <app-reviewbox [reviewedPersoon]="review.reviewed.firstname + ' ' + review.reviewed.lastname" (deleteClicked)="onDelete($event)" [reviewId]="review._id" unDeleteButton="true"
-        score="{{review.score}}"
-        userName="{{review.creator.anonymous ? 'Anoniem' : review.creator.user.firstname + ' ' + review.creator.user.lastname }}"
-        description="{{review.description}}">
-      </app-reviewbox>
-    </ng-container>
+    <app-reviewbox [reviewedPersoon]="review.reviewed.firstname + ' ' + review.reviewed.lastname" (deleteClicked)="onDelete($event)" [reviewId]="review._id" unDeleteButton="true"
+      score="{{review.score}}"
+      userName="{{review.creator.anonymous ? 'Anoniem' : review.creator.user.firstname + ' ' + review.creator.user.lastname }}"
+      description="{{review.description}}">
+    </app-reviewbox>
   </div>
 </div>
 
