@@ -1,7 +1,7 @@
 <ng-template [ngIf]="selectedUser">
   <app-header
-    [title]="isMaker ? selectedUser.firstname + ' ' + selectedUser.lastname : selectedUser.companyProfile.name"
-    underline="true" parentTitle="Beheer gebruikers" [subtitle]="selectedUser.email" parentRouterLink="/mod/users">
+    [title]="selectedUser.firstname + ' ' + selectedUser.lastname"
+    underline="true" parentTitle="Inschrijvingen" [subtitle]="selectedUser.email" [parentRouterLink]="'/assignments/' + currentAssignmentId + '/applicants'">
     <div class="row">
       <div class="col-4">
         <img style="border-radius: 100%;" src="https://api.adorable.io/avatars/75/{{selectedUser._id}}" alt="avatar">
@@ -13,7 +13,7 @@
 
   </app-header>
 
-  <div *ngIf="selectedUser && isMaker" class="border-bottom py-4">
+  <div *ngIf="selectedUser" class="border-bottom py-4">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-2">
@@ -35,40 +35,19 @@
     </div>
   </div>
 
-  <div *ngIf="selectedUser && isMaker" class="border-bottom py-4">
+  <div *ngIf="selectedUser" class="py-4">
     <div class="container">
       <p style="margin-bottom: 0; font-weight: 600;">Ervaring</p>
       <p style="margin-top: 10px;">
         {{selectedUser.makerProfile.experience == ''? 'Geen ervaring' : selectedUser.makerProfile.experience }}</p>
     </div>
   </div>
-
-  <div *ngIf="selectedUser" style="padding: 10px 0; margin-top: 15px; margin-bottom: 100px;">
-    <div class="container">
-      <p style="margin-bottom: 0; font-weight: 600;">Ontvangen reviews</p>
-      <ng-container *ngFor="let review of reviews">
-        <app-reviewbox (deleteClicked)="onDelete($event)" delete="true" [reviewId]="review._id" deleteButton="true"
-          score="{{review.score}}"
-          userName="{{review.creator.anonymous ? 'Anoniem' : review.creator.user.firstname + ' ' + review.creator.user.lastname }}"
-          description="{{review.description}}">
-        </app-reviewbox>
-      </ng-container>
-
-      <div *ngIf="reviews.length == 0" class="h4 text-weight-normal text-center text-black-50 my-5" role="alert">
-        <img class="img-fluid mx-auto d-block mb-3" style="max-width:120px;" src="../../../../../assets/svg/no-data.svg"
-          alt="Geen gegevens!">
-        <small> {{ selectedUser.firstname }} heeft nog geen reviews ontvangen! </small>
-      </div>
-
-    </div>
-  </div>
-
   <app-footer>
     <div class="container border-top py-3">
       <div class="d-flex">
-        <a (click)="deleteUser(selectedUser._id)" class="btn btn-danger text-white mr-3">Verwijder</a>
+        <a (click)="deleteUser(selectedUser._id)" class="btn hireButton text-white mr-3">Aannemen</a>
         <a (click)="goToReviews(selectedUser._id)" class="btn btn-white border flex-grow-1 shadow-sm font-weight-bold">
-          Gegeven reviews <svg-icon src="../../../../../assets/svg/forward.svg"></svg-icon>
+          Review
         </a>
       </div>
     </div>
