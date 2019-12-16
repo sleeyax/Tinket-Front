@@ -35,7 +35,7 @@ export class AuthenticationService {
   register(firstname: string, lastname: string, email: string, password: string) {
     return this.http.post<any>(`${environment.apiUrl}/users`, { firstname, lastname, email, password })
       .pipe(map(response => {
-        if (!this.currentUserValue.isAdmin) {
+        if (!this.currentUserValue || !this.currentUserValue.isAdmin) {
           this.storeUser(response.user, response.token)
         }
       }));
