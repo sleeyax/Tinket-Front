@@ -1,5 +1,5 @@
 <app-header
-  [title]="application.assignment.title"
+  [title]="application ? application.assignment.title : "
   parentTitle="Mijn inschrijvingen"
   parentRouterLink="/applications">
 </app-header>
