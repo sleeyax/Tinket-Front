@@ -41,6 +41,10 @@ export class AuthenticationService {
       }));
   }
 
+  registerUser(firstname: string, lastname: string, email: string, password: string) {
+    return this.http.post<any>(`${environment.apiUrl}/users`, { firstname, lastname, email, password })
+  }
+
   registerAdmin(firstname: string, lastname: string, email: string, password: string) {
     return this.http.post<any>(`${environment.apiUrl}/admins`, { firstname, lastname, email, password })
   }
