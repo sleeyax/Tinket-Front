@@ -24,4 +24,15 @@ export class ApplicationService {
   getMyApplications(): Observable<Application[]> {
     return this.http.get<Application[]>(`${environment.apiUrl}/users/${this.currentUser._id}/applications`);
   }
+
+  getApplication(id) : Observable<Application> {
+    return this.http.get<Application>(`${environment.apiUrl}/applications/${id}`);
+  }
+
+  applyForAssignment(assignmentId): Observable<Object> {
+    const body = {
+      assignment: assignmentId
+    };
+    return this.http.post<Object>(`${environment.apiUrl}/users/${this.currentUser._id}/applications`, body);
+  }
 }

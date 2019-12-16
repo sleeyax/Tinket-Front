@@ -1,0 +1,41 @@
+<app-header
+  [title]="application ? application.assignment.title : ''"
+  parentTitle="Mijn inschrijvingen"
+  parentRouterLink="/applications">
+</app-header>
+
+<div class="application pt-3" *ngIf="application"
+  [class.open]="application && application.assignment.open"
+  [class.selected]="application && application.contacted"
+  [class.archived]="application && application.assignment.archivedAt">
+
+  <div class="container">
+    <p class="status">{{ statusDescription }}</p>
+    <p class="status-description">{{ fullStatusDescription }}</p>
+  </div>
+
+  <div class="container border-top pt-3">
+
+    <p class="my-3 text-muted small">
+      <svg-icon src="../../../../assets/svg/location.svg"></svg-icon>
+      {{ application.assignment.location.city + ', ' + application.assignment.location.country }}
+    </p>
+
+    <ul class="list-unstyled my-3">
+      <li class="rouned bg-light p-2 d-inline-block mr-2" *ngFor="let tag of application.assignment.requiredSkills">
+        {{ tag.name }}
+      </li>
+    </ul>
+
+    <p class="my-3">
+      {{ application.assignment.description }}
+    </p>
+
+  </div>
+</div>
+
+<div *ngIf="!application" class="text-center my-5">
+  <div class="spinner-border text-primary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
