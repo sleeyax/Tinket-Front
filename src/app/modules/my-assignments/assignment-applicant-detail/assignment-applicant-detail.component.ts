@@ -20,10 +20,10 @@ export class AssignmentApplicantDetailComponent implements OnInit {
     private toastService: ToastService,
     private userService: UserService) {
 
-    let userId = this.route.snapshot.paramMap.get("id")
+    /*let userId = this.route.snapshot.paramMap.get("userId")
     this.userService.getUserById(userId).subscribe(res => {
       this.selectedUser = res
-    })
+    })*/
   }
 
   ngOnInit() {
