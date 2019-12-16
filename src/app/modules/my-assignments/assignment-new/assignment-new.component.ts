@@ -22,6 +22,8 @@ export class AssignmentNewComponent implements OnInit {
   skills: Skill[] = []
   loading = false;
   submitted = false;
+  videoUrl : String = null;
+
   constructor(
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
@@ -37,11 +39,16 @@ export class AssignmentNewComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() { return this.newAssignmentForm.controls; }
 
+  setVideoPublicId(url) {
+    this.videoUrl = url;
+    console.log(url);
+  }
+
   onSubmit() {
     var assignment: Assignment = {
       _id: '',
       title: this.f.title.value,
-      videoUrl: "videoPath",
+      videoUrl: this.videoUrl,
       description: this.f.description.value,
       requiredSkills: this.selectedSkills,
       location: {

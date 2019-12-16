@@ -59,6 +59,7 @@ export class DiscoverComponent implements OnInit {
   }
 
   get hasApplied() : Boolean {
+    if(!this.applications || !this.currentAssignment) return false;
     const application = this.applications.find((application) => {
       return application.assignment._id === this.currentAssignment._id;
     });
@@ -68,11 +69,15 @@ export class DiscoverComponent implements OnInit {
   next() {
     this.flagged = false;
     if(this.hasNextSlide) this.currentIndex++;
+    this.resetVideoSource();
+    this.player.play();
   }
 
   prev() {
     this.flagged = false;
     if(this.hasPrevSlide) this.currentIndex--;
+    this.resetVideoSource();
+    this.player.play();
   }
 
   restart() {
@@ -109,6 +114,22 @@ export class DiscoverComponent implements OnInit {
         this.applying = false;
         this.applicationSuccessful = true;
       })
+  }
+
+  resetVideoSource() {
+    if(!this.currentAssignment) return;
+    this.player.source = {
+      type: 'video',
+      title: 'Example title',
+      sources: [
+          {
+              src: this.currentAssignment.videoUrl || '',
+              type: 'video/mp4',
+              size: 720,
+          },
+      ],
+      poster: '../../../../assets/poster.png',
+    };
   }
 
   ngOnInit() {
