@@ -10,3 +10,20 @@
     </div>
   </form>
 </app-header>
+
+<div *ngIf="typeReview" class="container mt-3">
+  <ng-container *ngFor="let assignment of flaggedAssignments">
+    <app-application-card [routerLink]="'/mod/assignments/' + assignment._id" routerLinkActive="router-link-active"  [open]="assignment.open" [title]="assignment.title"
+      [location]="assignment.location.city + ', ' + assignment.location.country">
+    </app-application-card>
+  </ng-container>
+</div>
+
+
+<div *ngIf="!typeReview" class="container mt-3">
+  <ng-container *ngFor="let assignment of solvedAssignments">
+    <app-application-card [open]="assignment.open" [title]="assignment.title"
+      [location]="assignment.location.city + ', ' + assignment.location.country">
+    </app-application-card>
+  </ng-container>
+</div>

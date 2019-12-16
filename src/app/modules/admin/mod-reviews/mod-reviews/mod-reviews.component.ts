@@ -29,7 +29,10 @@ export class ModReviewsComponent implements OnInit {
   };
 
   getReviews() {
-    this.reviewService.getFlaggedReviews().subscribe(res => this.flaggedReviews = res);
+    this.reviewService.getFlaggedReviews().subscribe(res => {this.flaggedReviews = res
+    console.log(res)
+    
+    });
     this.reviewService.getSolvedReviews().subscribe(res => {this.solvedReviews = res
     console.log(res);
     

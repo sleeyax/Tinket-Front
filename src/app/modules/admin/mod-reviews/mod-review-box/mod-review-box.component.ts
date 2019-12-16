@@ -18,6 +18,7 @@ export class ModReviewBoxComponent implements OnInit {
   @Input() description: string;
   @Output() solveClicked: EventEmitter<any> = new EventEmitter<any>();
   @Output() deleteClicked: EventEmitter<any> = new EventEmitter<any>();
+  @Input() reviewedPersoon: string;
 
   datum: String;
 

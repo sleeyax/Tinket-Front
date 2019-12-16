@@ -14,8 +14,8 @@
 
 <div *ngIf="typeReview" class="container mt-3 mb-3">
   <div class="mt-3" *ngFor="let review of flaggedReviews">
-    <app-mod-review-box [flaggedAt]="review.flaggedAt" (solveClicked)="solve($event)" (deleteClicked)="solve($event)"
-      [reviewId]="review._id" userName="Wesley Janse" [score]="review.score" [description]="review.description">
+    <app-mod-review-box [reviewedPersoon]="review.reviewed.firstname + ' ' + review.reviewed.lastname" [flaggedAt]="review.flaggedAt" (solveClicked)="solve($event)" (deleteClicked)="solve($event)"
+      [reviewId]="review._id" [userName]="review.creator.user.firstname + ' ' + review.creator.user.lastname" [score]="review.score" [description]="review.description">
     </app-mod-review-box>
   </div>
 </div>
@@ -24,7 +24,7 @@
 <div style="margin-bottom: 100px;">
   <div class="container mt-3" *ngFor="let review of solvedReviews">
     <ng-container *ngIf="!typeReview">
-      <app-reviewbox (deleteClicked)="onDelete($event)" delete="true" [reviewId]="review._id" deleteButton="true"
+      <app-reviewbox [reviewedPersoon]="review.reviewed.firstname + ' ' + review.reviewed.lastname" (deleteClicked)="onDelete($event)" delete="true" [reviewId]="review._id" deleteButton="true"
         score="{{review.score}}"
         userName="{{review.creator.anonymous ? 'Anoniem' : review.creator.user.firstname + ' ' + review.creator.user.lastname }}"
         description="{{review.description}}">

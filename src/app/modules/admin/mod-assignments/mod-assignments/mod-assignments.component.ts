@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@app/core/services/authentication.service';
-import { ReviewService } from '@app/core/services/review.service';
 import { ToastService } from '@app/core/services/toast.service';
 import { UserService } from '@app/core/services/user.service';
+import { Assignment } from '@app/shared/models/assignment';
+import { AssignmentService } from '@app/core/services/assignment.service';
 
 @Component({
   selector: 'app-mod-assignments',
@@ -16,12 +17,22 @@ export class ModAssignmentsComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private reviewService: ReviewService,
+    private assignmentService: AssignmentService,
     private toastService: ToastService,
-    private userService: UserService) { }
+    private userService: UserService) {
+    this.assignmentService.getFlaggedAssignments().subscribe(res => {
+      this.flaggedAssignments = res
+      console.log(res)
+    })
+    this.assignmentService.getSolvedAssignments().subscribe(res => this.solvedAssignments = res)
+  }
+
+  solvedAssignments: Assignment[];
+  flaggedAssignments: Assignment[];
+
 
   inputForm: FormGroup;
-  typeReview: true;
+  typeReview = true;
   ngOnInit() {
     this.inputForm = this.formBuilder.group({
       reviewType: [false, [Validators.required]]
